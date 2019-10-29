@@ -1,19 +1,22 @@
 module.exports = {
   presets: [
-    ['@babel/env', {
+    ['@babel/preset-env', {
       corejs: 3,
       useBuiltIns: 'usage',
+      modules: false,
     }],
   ],
   plugins: [
-    ['@babel/plugin-transform-runtime', {
-      corejs: 3,
-      helpers: true,
-      regenerator: true,
-      useESModules: false,
-    }],
-    '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-proposal-object-rest-spread',
-    '@babel/plugin-proposal-export-default-from',
   ],
+  env: {
+    module: {
+      presets: [
+        ['@babel/preset-env', {
+          modules: false,
+        }],
+      ],
+      ignore: ['node_modules/**'],
+    },
+  },
 };

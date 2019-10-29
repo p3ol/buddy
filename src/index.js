@@ -22,7 +22,8 @@ const serialize = (data, { target, origin } = {}) => {
     return data;
   }
 
-  return Object.entries(data).reduce((res, [k, v]) => {
+  return Object.keys(data).reduce((res, k) => {
+    const v = data[k];
     res[k] = serialize(v, { target, origin });
     return res;
   }, {});
@@ -33,7 +34,9 @@ const unserialize = (data = {}, options = {}) => {
     return data;
   }
 
-  return Object.entries(data).reduce((res, [k, v]) => {
+  return Object.keys(data).reduce((res, k) => {
+    const v = data[k];
+
     if (v.bid && v.type === 'function') {
       res[k] = (...args) => {
         return new Promise((resolve, reject) => {
@@ -84,7 +87,7 @@ export const on = (name, cb, {
   origin = '*',
   pingBack = true,
 } = {}) => {
-  const handler = async e => {
+  const handler = e => {
     if (
       (origin && origin !== '*' && e.origin !== origin) ||
       (source && e.source !== source)
@@ -98,17 +101,17 @@ export const on = (name, cb, {
     } catch (e) {}
 
     if (event.name === name && event.bid) {
-      const result = await cb({
+      Promise.resolve(cb({
         bid: event.bid,
         name: event.name,
         source: e.source,
         origin: e.origin,
         data: unserialize(event.data, { source, origin }),
+      })).then(result => {
+        if (pingBack !== false) {
+          send(source, event.bid, result, { origin: e.origin });
+        }
       });
-
-      if (pingBack !== false) {
-        send(source, event.bid, result, { origin: e.origin });
-      }
     }
   };
 
