@@ -15,6 +15,7 @@ const defaultConfig = () => ({
     babel({
       exclude: 'node_modules/**',
       externalHelpers: true,
+      runtimeHelpers: true,
     }),
   ],
 });

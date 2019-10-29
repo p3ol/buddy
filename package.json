@@ -19,7 +19,8 @@
     "build": "yarn build:browser && yarn build:module",
     "prepack": "yarn build && yarn test",
     "test": "jest",
-    "changelog": "./node_modules/.bin/auto-changelog"
+    "changelog": "./node_modules/.bin/auto-changelog",
+    "serve": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js --hot --inline --open"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
@@ -27,19 +28,32 @@
     "@babel/plugin-proposal-export-default-from": "^7.5.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
+    "@babel/runtime-corejs3": "^7.6.3",
     "auto-changelog": "^1.16.1",
+    "babel-loader": "^8.0.6",
     "eslint": "^6.6.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "rollup": "^1.26.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^5.1.2"
+    "rollup-plugin-terser": "^5.1.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "core-js": "^3.3.5",
+    "uuid-browser": "^3.1.0"
   }
 }
