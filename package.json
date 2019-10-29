@@ -1,6 +1,6 @@
 {
   "name": "buddy",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.1",
   "description": "Dead simple cross-domain iframe messaging",
   "main": "dist/buddy.cjs.js",
   "repository": "https://github.com/p3ol/buddy.git",
@@ -53,7 +53,6 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
-    "core-js": "^3.3.5",
-    "uuid-browser": "^3.1.0"
+    "core-js": "^3.3.5"
   }
 }
