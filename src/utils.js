@@ -1,7 +1,7 @@
 export const uuid = () => {
   let time = window.performance.now() || Date.now();
 
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
     let rand = Math.random() * 16;
     rand = (time + rand) % 16 | 0;
     time = Math.floor(time / 16);
@@ -18,3 +18,6 @@ export const isArray = a =>
 
 export const isObject = o =>
   typeof o === 'object';
+
+export const extend = (s, t) =>
+  ({ ...s, ...t });
