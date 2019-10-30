@@ -1,6 +1,6 @@
 export const globalOptions = {
   timeout: 5000,
-  logLevel: 5,
+  logLevel: 1,
 };
 
 export const setGlobalOptions = options => {
