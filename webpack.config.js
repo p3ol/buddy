@@ -4,13 +4,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    parent: './tests/index.js',
-    child: './tests/child.js',
+    index: './examples/index.js',
+    child: './examples/child.js',
   },
   devtool: 'inline-source-map',
   mode: 'development',
   devServer: {
-    contentBase: './tests',
+    contentBase: './examples',
     port: 64000,
     host: 'localhost',
     historyApiFallback: true,
@@ -20,13 +20,13 @@ module.exports = {
       debug: true,
     }),
     new HtmlWebpackPlugin({
-      template: './tests/index.html',
-      chunks: ['parent'],
+      template: './examples/index.html',
+      chunks: ['index'],
       inject: true,
     }),
     new HtmlWebpackPlugin({
       filename: 'child.html',
-      template: './tests/child.html',
+      template: './examples/child.html',
       chunks: ['child'],
       inject: true,
     }),
