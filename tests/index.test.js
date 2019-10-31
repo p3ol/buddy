@@ -1,11 +1,12 @@
+import { setGlobalOptions, send } from 'buddy';
 import { expect } from 'chai';
-import sinon from 'sinon/pkg/sinon.js';
+import sinon from 'fixed-sinon';
 
 describe('Messaging', () => {
   let contentWindow;
 
   before((done) => {
-    window.buddy.setGlobalOptions({ logLevel: 5 });
+    setGlobalOptions({ logLevel: 5 });
 
     const frame = document.createElement('iframe');
     frame.src = '/base/tests/child.html';
@@ -17,9 +18,14 @@ describe('Messaging', () => {
     document.body.appendChild(frame);
   });
 
+  it('should set global options', () => {
+    setGlobalOptions({ logLevel: 0 });
+    expect(true).to.equal(true);
+  });
+
   it('should send data to an iframe and get a response', async () => {
-    const result = await window.buddy
-      .send(contentWindow, 'test:messaging', '', { origin: '*' });
+    const result = await send(contentWindow,
+      'test:messaging', '', { origin: '*' });
 
     expect(result).to.equal('response:messaging');
   });
@@ -29,8 +35,7 @@ describe('Messaging', () => {
     let error;
 
     try {
-      await window.buddy
-        .send(contentWindow, 'test:wrongWindow', '', { origin: '*' });
+      await send(contentWindow, 'test:wrongWindow', '', { origin: '*' });
     } catch (e) {
       error = e;
     }
@@ -42,8 +47,8 @@ describe('Messaging', () => {
   it('should serialize a method passed inside data sent to child', async () => {
     const callback = sinon.spy();
 
-    await window.buddy.send(contentWindow, 'test:serializeMethod',
-      { callback }, { origin: '*' });
+    await send(contentWindow,
+      'test:serializeMethod', { callback }, { origin: '*' });
 
     expect(callback.called).to.equal(true);
   });
@@ -51,7 +56,7 @@ describe('Messaging', () => {
   it('should allow child to get callback return value', async () => {
     const callback = sinon.spy(() => 'result from parent');
 
-    const result = await window.buddy.send(contentWindow,
+    const result = await send(contentWindow,
       'test:parentMethodReturnValue', { callback }, { origin: '*' });
 
     expect(callback.called).to.equal(true);
@@ -63,7 +68,7 @@ describe('Messaging', () => {
     let error;
 
     try {
-      await window.buddy.send(contentWindow,
+      await send(contentWindow,
         'test:thisDoesNotExistInChild', null, { origin: '*', timeout: 100 });
     } catch (e) {
       error = e;

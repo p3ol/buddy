@@ -1,18 +1,18 @@
-window.console = window.top.console;
+import { on } from 'buddy';
 
-window.buddy.on('test:messaging', e => {
+on('test:messaging', e => {
   return 'response:messaging';
 }, { source: window.parent });
 
-window.buddy.on('test:wrongWindow', e => {
+on('test:wrongWindow', e => {
   return 'response:wrongWindow';
 }, { source: window });
 
-window.buddy.on('test:serializeMethod', e => {
+on('test:serializeMethod', e => {
   e.data.callback();
 }, { source: window.parent });
 
-window.buddy.on('test:parentMethodReturnValue', async e => {
+on('test:parentMethodReturnValue', async e => {
   const result = await e.data.callback();
   return result;
 }, { source: window.parent });

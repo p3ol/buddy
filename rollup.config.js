@@ -62,8 +62,22 @@ const umdMinConfig = (config = defaultUMDConfig(true)) => ({
   },
 });
 
+const esmConfig = () => ({
+  input: 'src/index.js',
+  output: {
+    name: 'buddy',
+    format: 'esm',
+    file: 'dist/buddy.esm.js',
+    sourcemap: true,
+  },
+  plugins: [
+    eslint(),
+  ],
+});
+
 export default [
   libConfig(),
   umdConfig(),
   umdMinConfig(),
+  esmConfig(),
 ];
