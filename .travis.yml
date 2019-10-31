@@ -1,0 +1,13 @@
+sudo: required
+addons:
+    chrome: stable
+    firefox: latest
+language: node_js
+node_js:
+    - "8"
+    - "10"
+cache: yarn
+script:
+    - yarn test
+after_success:
+  - ./node_modules/.bin/codecov
