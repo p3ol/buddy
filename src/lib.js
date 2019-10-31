@@ -123,7 +123,7 @@ export const send = (target, name, data, options = {}) => {
         didTimeout = true;
         error(options,
           `Target window did not respond in time, aborting (event: ${name})`);
-        throw new Error('timeout');
+        reject(new Error('timeout'));
       }, timeout);
 
       const handler = on(event.bid, (e) => {
@@ -135,7 +135,7 @@ export const send = (target, name, data, options = {}) => {
           if (e.data && e.data.error) {
             error(options,
               `Error received from target window, aborting (event: ${name})`);
-            throw new Error(e.data.error);
+            return reject(new Error(e.data.error.toString()));
           }
 
           resolve(e.data);
@@ -174,6 +174,10 @@ export const on = (name, cb, options = {}) => {
       event = JSON.parse(e.data);
     } catch (e) {}
 
+    if (!event.name || event.name !== name) {
+      return;
+    }
+
     if (source && e.source !== source) {
       if (event.bid) {
         send(e.source, event.bid, { error: 'source' },
@@ -192,7 +196,7 @@ export const on = (name, cb, options = {}) => {
       return;
     }
 
-    if (event.name === name && event.bid) {
+    if (event.bid) {
       info(options,
         `Handling message from source window (event: ${name}) -->`, event);
 
