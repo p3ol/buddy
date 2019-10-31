@@ -6,7 +6,7 @@ module.exports = config => {
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: [
-      'jasmine',
+      'mocha',
     ],
 
     // list of files / patterns to load in the browser
@@ -58,11 +58,11 @@ module.exports = config => {
 
     // Which plugins to enable
     plugins: [
+      'karma-rollup-preprocessor',
       'karma-phantomjs-launcher',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
-      'karma-jasmine',
-      'karma-rollup-preprocessor',
+      'karma-mocha',
     ],
 
     // Continuous Integration mode
@@ -85,12 +85,26 @@ module.exports = config => {
           runtimeHelpers: true,
         }),
         require('rollup-plugin-node-resolve')(),
-        require('rollup-plugin-commonjs')(),
+        require('rollup-plugin-commonjs')({
+          namedExports: {
+            chai: ['expect'],
+          },
+        }),
       ],
       output: {
         format: 'iife',
         name: 'buddyTests',
         sourcemap: 'inline',
+      },
+      onwarn: (warning) => {
+        if (
+          warning.code === 'CIRCULAR_DEPENDENCY' &&
+          warning.importer.indexOf('node_modules/chai/lib') === 0
+        ) {
+          return;
+        }
+
+        return warning;
       },
     },
   });

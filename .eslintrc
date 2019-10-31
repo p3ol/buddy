@@ -1,12 +1,8 @@
 {
-  "extends": ["eslint:recommended", "standard", "plugin:jasmine/recommended"],
-  "plugins": [
-    "jasmine"
-  ],
+  "extends": ["eslint:recommended", "standard"],
   "env": {
     "browser": true,
-    "es6": true,
-    "jasmine": true
+    "es6": true
   },
   "rules": {
     "comma-dangle": [1, {
@@ -35,4 +31,21 @@
     "max-len": [1, { "code": 80, "tabWidth": 2 }],
     "quotes": [1, "single"]
   },
+  "overrides": [
+    {
+      "files": ["tests/**/*.js"],
+      "parser": "babel-eslint",
+      "env": {
+        "browser": true,
+        "es6": true,
+        "mocha": true
+      },
+      "plugins": [
+        "mocha"
+      ],
+      "rules": {
+        "no-unused-expressions": 0
+      }
+    }
+  ]
 }
