@@ -22,6 +22,10 @@ on('getInfos', async event => {
   // You can even pass methods to child window and retrieve its return value
   // using promises or async/await:'
   console.log(await event.data.someMethod());
+
+  // You can even send data back to parent, EVEN METHODS \o/
+  // Parent will only have to await `send()` method promise to get the result
+  return { someOtherMethod: () => 30 };
 }, { source: someParentWindow });
 
 // And send some message from parent window
