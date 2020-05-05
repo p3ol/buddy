@@ -1,3 +1,5 @@
+import 'core-js';
+
 import { setGlobalOptions, send } from 'buddy';
 import { expect } from 'chai';
 import sinon from 'fixed-sinon';

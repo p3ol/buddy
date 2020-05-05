@@ -1,83 +1,69 @@
-import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import { eslint } from 'rollup-plugin-eslint';
 import { terser } from 'rollup-plugin-terser';
 
-const defaultConfig = () => ({
-  input: 'src/index.js',
-  output: {
-    name: 'buddy',
-    sourcemap: true,
-  },
-  plugins: [
-    eslint(),
-    babel({
-      exclude: 'node_modules/**',
-      runtimeHelpers: true,
-    }),
-  ],
-});
+const isForIE = process.env.BABEL_ENV === 'ie';
+const input = './src/index.js';
+const output = `./dist${isForIE ? '/ie' : ''}/buddy`;
+const defaultExternals = [];
+const defaultGlobals = {};
 
-const defaultUMDConfig = (minified = false, config = defaultConfig()) => ({
-  ...config,
-  output: {
-    ...config.output,
-    format: 'umd',
-  },
-  plugins: [
-    ...config.plugins,
-    resolve(),
-    commonjs(),
-    minified ? terser() : null,
-  ],
-});
-
-/*
-  COMMONJS / MODULE CONFIG
-*/
-const libConfig = (config = defaultConfig()) => ({
-  ...config,
-  output: [
-    { file: 'dist/buddy.cjs.js', format: 'cjs' },
-  ],
-});
-
-/*
-  UMD CONFIG
-*/
-const umdConfig = (config = defaultUMDConfig()) => ({
-  ...config,
-  output: {
-    ...config.output,
-    file: 'dist/buddy.js',
-  },
-});
-
-const umdMinConfig = (config = defaultUMDConfig(true)) => ({
-  ...config,
-  output: {
-    ...config.output,
-    file: 'dist/buddy.min.js',
-  },
-});
-
-const esmConfig = () => ({
-  input: 'src/index.js',
-  output: {
-    name: 'buddy',
-    format: 'esm',
-    file: 'dist/buddy.esm.js',
-    sourcemap: true,
-  },
-  plugins: [
-    eslint(),
-  ],
-});
+const defaultPlugins = [
+  eslint(),
+  babel({
+    exclude: 'node_modules/**',
+    babelHelpers: 'runtime',
+  }),
+  resolve(),
+  commonjs(),
+];
 
 export default [
-  libConfig(),
-  umdConfig(),
-  umdMinConfig(),
-  esmConfig(),
+  // umd
+  {
+    input,
+    plugins: [
+      ...defaultPlugins,
+      terser(),
+    ],
+    external: defaultExternals,
+    output: {
+      file: `${output}.min.js`,
+      format: 'umd',
+      name: 'buddy',
+      sourcemap: true,
+      globals: defaultGlobals,
+    },
+  },
+
+  // cjs
+  {
+    input,
+    plugins: [
+      ...defaultPlugins,
+      terser(),
+    ],
+    external: defaultExternals,
+    output: {
+      file: `${output}.cjs.js`,
+      format: 'cjs',
+      sourcemap: true,
+    },
+  },
+
+  // esm
+  {
+    input,
+    plugins: [
+      ...defaultPlugins,
+    ],
+    external: defaultExternals,
+    output: {
+      file: `${output}.esm.js`,
+      format: 'esm',
+      sourcemap: true,
+    },
+  },
 ];

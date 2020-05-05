@@ -1,9 +1,14 @@
 const path = require('path');
+const babel = require('@rollup/plugin-babel').default;
+const resolve = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
+const alias = require('@rollup/plugin-alias');
 
 module.exports = config => {
   config.set({
     basePath: './',
     frameworks: [
+      // 'es6-shim',
       'mocha',
     ],
     files: [
@@ -41,17 +46,17 @@ module.exports = config => {
 
     rollupPreprocessor: {
       plugins: [
-        require('rollup-plugin-babel')({
-          exclude: /node_modules/,
-          runtimeHelpers: true,
+        babel({
+          exclude: 'node_modules/**',
+          babelHelpers: 'runtime',
         }),
-        require('rollup-plugin-node-resolve')(),
-        require('rollup-plugin-commonjs')({
+        resolve(),
+        commonjs({
           namedExports: {
             chai: ['expect'],
           },
         }),
-        require('@rollup/plugin-alias')({
+        alias({
           entries: {
             buddy: path.resolve('./src'),
             'fixed-sinon': path.resolve('./node_modules/sinon/pkg/sinon.js'),
