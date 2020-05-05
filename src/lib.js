@@ -81,7 +81,7 @@ const unserialize = (data, options = {}) => {
         });
       };
     } else if (isObject(v) && !isArray(v)) {
-      res[k] = unserialize(v, ...options);
+      res[k] = unserialize(v, { ...options });
     } else {
       res[k] = v;
     }
