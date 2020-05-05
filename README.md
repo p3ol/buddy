@@ -37,6 +37,18 @@ send(someChildWindow, 'getInfos', { infos: 'some string', someMethod: () => 25 }
 Buddy serializes all the primitive types (using `JSON.parse`) and even __methods__, using custom back & forth `Promise` logic.
 
 
+### IE Compatibility
+
+As part of a global effort to deprecate Internet Explorer, we decided not to include IE polyfills by default.
+You can still manually import a version containing all the necessary polyfills for IE >= 11:
+
+```javascript
+import * as entrepot from '@poool/buddy/dist/ie/buddy.esm.js';
+```
+
+Please note that this build will probably add more than 150kb to your final bundle.
+
+
 ## Configuration
 
 Global options can be updated using `setGlobalOptions` method:
@@ -119,6 +131,6 @@ This software is licensed under [MIT](https://github.com/p3ol/buddy/blob/master/
 Ugo_Stephant dackmin https://ugostephant.io code doc tools
 Contributors END -->
 <!-- Contributors table START -->
-| <img src="https://avatars.githubusercontent.com/dackmin?s=100" width="100" alt="Ugo Stephant" /><br />[<sub>Ugo Stephant</sub>](https://github.com/dackmin)<br />[💻](https://github.com/p3ol/junipero/commits?author=dackmin) [📖](https://github.com/p3ol/buddy/commits?author=dackmin) 🔧 |
+| <img src="https://avatars.githubusercontent.com/dackmin?s=100" width="100" alt="Ugo Stephant" /><br />[<sub>Ugo Stephant</sub>](https://github.com/dackmin)<br />[💻](https://github.com/p3ol/buddy/commits?author=dackmin) [📖](https://github.com/p3ol/buddy/commits?author=dackmin) 🔧 |
 | :---: |
 <!-- Contributors table END -->
