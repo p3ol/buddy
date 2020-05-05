@@ -12,6 +12,10 @@
   "jsnext:main": "dist/buddy.esm.js",
   "module": "dist/buddy.esm.js",
   "esnext": "dist/buddy.esm.js",
+  "engines": {
+    "node": ">=10",
+    "yarn": ">=1"
+  },
   "scripts": {
     "prebuild": "rm -rf ./dist || true",
     "build": "yarn build:default && yarn build:ie",
