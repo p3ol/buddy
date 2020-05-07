@@ -43,7 +43,7 @@ As part of a global effort to deprecate Internet Explorer, we decided not to inc
 You can still manually import a version containing all the necessary polyfills for IE >= 11:
 
 ```javascript
-import * as entrepot from '@poool/buddy/dist/ie/buddy.esm.js';
+import * as buddy from '@poool/buddy/dist/ie/buddy.esm.js';
 ```
 
 Please note that this build will probably add more than 150kb to your final bundle.
