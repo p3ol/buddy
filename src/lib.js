@@ -21,8 +21,6 @@ const serialize = (data, options = {}) => {
 
     const methodId = uuid();
     const handler = on(methodId, event => {
-      handler.off();
-
       send(target, methodId, data(...event.data.args), {
         origin,
         ...rest,
