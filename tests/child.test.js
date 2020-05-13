@@ -16,3 +16,8 @@ on('test:parentMethodReturnValue', async e => {
   const result = await e.data.callback();
   return result;
 }, { source: window.parent });
+
+on('test:parentMethodCalledTwice', async e => {
+  await e.data.callback();
+  await e.data.callback();
+}, { source: window.parent });
