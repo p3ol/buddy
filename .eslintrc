@@ -1,35 +1,8 @@
 {
-  "extends": ["eslint:recommended", "standard"],
+  "extends": ["@poool/eslint-config/common"],
   "env": {
     "browser": true,
     "es6": true
-  },
-  "rules": {
-    "comma-dangle": [1, {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "imports": "always-multiline",
-      "exports": "always-multiline",
-      "functions": "ignore"
-    }],
-    "semi": [1, "always"],
-    "no-unused-vars": 1,
-    "no-multiple-empty-lines": 0,
-    "eol-last": 0,
-    "no-trailing-spaces": [2, { "skipBlankLines": true }],
-    "no-console": 1,
-    "padded-blocks": 0,
-    "no-case-declarations": 0,
-    "spaced-comment": 0,
-    "space-before-function-paren": 0,
-    "object-property-newline": 0,
-    "new-cap": 0,
-    "no-useless-return": 0,
-    "no-empty": 0,
-    "require-atomic-updates": 0,
-    "standard/no-callback-literal": 0,
-    "max-len": [1, { "code": 80, "tabWidth": 2 }],
-    "quotes": [1, "single"]
   },
   "overrides": [
     {

@@ -170,7 +170,9 @@ export const on = (name, cb, options = {}) => {
     let event = {};
     try {
       event = JSON.parse(e.data);
-    } catch (e) {}
+    } catch (e) {
+      warn(options, 'Error parsing event data:', e);
+    }
 
     if (!event.name || event.name !== name) {
       return;
