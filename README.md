@@ -131,6 +131,6 @@ This software is licensed under [MIT](https://github.com/p3ol/buddy/blob/master/
 Ugo_Stephant dackmin https://ugostephant.io code doc tools
 Contributors END -->
 <!-- Contributors table START -->
-| <img src="https://avatars.githubusercontent.com/dackmin?s=100" width="100" alt="Ugo Stephant" /><br />[<sub>Ugo Stephant</sub>](https://github.com/dackmin)<br />[💻](https://github.com/p3ol/buddy/commits?author=dackmin) [📖](https://github.com/p3ol/buddy/commits?author=dackmin) 🔧 |
-| :---: |
+| <img src="https://avatars.githubusercontent.com/dackmin?s=100" width="100" alt="Ugo Stephant" /><br />[<sub>Ugo Stephant</sub>](https://github.com/dackmin)<br />[💻](https://github.com/p3ol/buddy/commits?author=dackmin) [📖](https://github.com/p3ol/buddy/commits?author=dackmin) 🔧 | <img src="https://avatars.githubusercontent.com/NicolasAuger?s=100" width="100" alt="Nicolas Auger" /><br />[<sub>Nicolas Auger</sub>](https://github.com/NicolasAuger)<br />[💻](https://github.com/p3ol/buddy/commits?author=NicolasAuger) |
+| :---: | :---: |
 <!-- Contributors table END -->
