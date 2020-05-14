@@ -82,7 +82,7 @@ describe('Messaging', () => {
 
   it('should allow to call a serialized function more than once', async () => {
     const callback = sinon.spy();
-    const result = await send(contentWindow,
+    await send(contentWindow,
       'test:parentMethodCalledTwice', { callback }, { origin: '*' });
 
     expect(callback.calledTwice).to.equal(true);
