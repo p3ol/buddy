@@ -55,7 +55,9 @@ const unserialize = (data, options = {}) => {
   return Object.keys(data).reduce((res, k) => {
     const v = data[k];
 
-    if (v.bid && v.type === 'function') {
+    if (!v) {
+      res[k] = v;
+    } else if (v.bid && v.type === 'function') {
       log(options, 'unserialize() -->', 'Unserializing method');
       res[k] = (...args) => {
         debug(options, `Calling serialized method (name: ${k})`);
