@@ -1,6 +1,6 @@
 const path = require('path');
 const babel = require('@rollup/plugin-babel').default;
-const resolve = require('@rollup/plugin-node-resolve');
+const resolve = require('@rollup/plugin-node-resolve').default;
 const commonjs = require('@rollup/plugin-commonjs');
 const alias = require('@rollup/plugin-alias');
 
