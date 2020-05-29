@@ -5,6 +5,9 @@
   "main": "dist/buddy.cjs.js",
   "repository": "https://github.com/p3ol/buddy.git",
   "author": "Ugo Stephant <ugo@poool.fr>",
+  "contributors": [
+    "Nicolas Auger <nicolas@poool.fr>"
+  ],
   "license": "MIT",
   "sideEffects": false,
   "unpkg": "dist/buddy.min.js",
