@@ -9,9 +9,9 @@
   "sideEffects": false,
   "unpkg": "dist/buddy.min.js",
   "cdn": "dist/buddy.min.js",
-  "jsnext:main": "dist/buddy.esm.js",
-  "module": "dist/buddy.esm.js",
-  "esnext": "dist/buddy.esm.js",
+  "jsnext:main": "dist/esm/index.js",
+  "module": "dist/esm/index.js",
+  "esnext": "src",
   "engines": {
     "node": ">=10",
     "yarn": ">=1"
