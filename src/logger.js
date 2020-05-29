@@ -4,8 +4,10 @@ import { extend } from './utils';
 /* eslint-disable no-console */
 const logger = (method, logLevel, options, ...args) => {
   options = extend(globalOptions, options);
-  options.logLevel >= logLevel &&
+
+  if (options.logLevel >= logLevel) {
     console[method]('[buddy]', `[${method}]`, ...args);
+  }
 };
 
 export const error = (options, ...args) =>
