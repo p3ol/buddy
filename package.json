@@ -63,7 +63,7 @@
     "karma-phantomjs-launcher": "1.0.4",
     "karma-rollup-preprocessor": "7.0.5",
     "mocha": "7.2.0",
-    "rollup": "2.12.1",
+    "rollup": "2.13.1",
     "rollup-plugin-eslint": "7.0.0",
     "rollup-plugin-terser": "6.1.0",
     "sinon": "9.0.2",
