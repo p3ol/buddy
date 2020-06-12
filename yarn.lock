@@ -1071,10 +1071,10 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
-"@poool/eslint-config@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-1.0.3.tgz#c9b249b542f9927b49659c8ee9bba201e3f51658"
-  integrity sha512-guRKFNXXar/XtRRPM9ZW18mvr1qiGDa5+k/pVQt9N12+SZsf6KApNB8VXWOlCBTgzTkaPUnujtJFivHJJp8j1A==
+"@poool/eslint-config@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-1.1.1.tgz#bbc3d345b61b8ee54f649e4a48a963f4538a8b9d"
+  integrity sha512-3jZvLGzKHjzcyaPoLaMF1DdKz8IXIBcoGZqkv1RPJzqb+A/UYu08h99SwxK4UYbxpdrKP1chvQNeYZAeaMy5sg==
 
 "@rollup/plugin-alias@3.1.1":
   version "3.1.1"
