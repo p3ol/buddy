@@ -62,7 +62,7 @@ const unserialize = (data, options = {}) => {
       res[k] = (...args) => {
         debug(options, `Calling serialized method (name: ${k})`);
 
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
           on(v.bid, (e) => {
             debug(options,
               `Receiving serialized method result (name: ${k}) -->`, e.data);

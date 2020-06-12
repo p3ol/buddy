@@ -1,10 +1,10 @@
 import { on } from 'buddy';
 
-on('test:messaging', e => {
+on('test:messaging', () => {
   return 'response:messaging';
 }, { source: window.parent });
 
-on('test:wrongWindow', e => {
+on('test:wrongWindow', () => {
   return 'response:wrongWindow';
 }, { source: window });
 
