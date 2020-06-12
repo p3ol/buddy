@@ -6,7 +6,7 @@ export const uuid = () => {
     rand = (time + rand) % 16 | 0;
     time = Math.floor(time / 16);
 
-    return (c === 'x' ? rand : (rand & 0x3 | 0x8)).toString(16);
+    return (c === 'x' ? rand : rand & 0x3 | 0x8).toString(16);
   });
 };
 
