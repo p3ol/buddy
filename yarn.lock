@@ -1071,15 +1071,15 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
-"@poool/eslint-config@1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-1.1.3.tgz#a8db117f6c27cefa9cffdb107e7f66654498f9fe"
-  integrity sha512-bskOCnVztbl45tUk4KnR234XTuKZ6HAe0tnuGIUfavfsOG3NH5WcQd8p8zHNc3SnvyczQ39X2T0mJd8pLZTFOw==
+"@poool/eslint-config@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-1.2.2.tgz#dd15d1059c073748af02b98c30a195016171235b"
+  integrity sha512-AEQ8Z+Tec6SN1LlKJ1d84w/hT5JMmIhDxy6HJ/KZPYlgt3CW6iIIivS9TX/Obqimbu2TWBz8ostVRVU5UpQuzA==
 
-"@poool/eslint-plugin@1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@poool/eslint-plugin/-/eslint-plugin-1.1.3.tgz#d7abb634b7ab5f84bec0c36fee8c512ae10a50c9"
-  integrity sha512-IzsOu6coEWAnJrD75fLhcY3LZqAP8+XWwhzVacTGbKEvaIuJIjhXVwNejHyRY8G6weGejrXyFOKiG/ZcBQDuCA==
+"@poool/eslint-plugin@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@poool/eslint-plugin/-/eslint-plugin-1.2.2.tgz#87c4c7ee1b871c4a8760f7191417957959f04dbd"
+  integrity sha512-avBFyddG/8kNnYi2fkNvjdu06L5PSE24KcCQq13Jgmd6vcZnSRb3Xwzlo+gkUDfFDbPGVoOowwDmoGyvkeowag==
   dependencies:
     eslint-rule-composer "0.3.0"
 

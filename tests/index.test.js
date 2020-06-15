@@ -7,7 +7,7 @@ import sinon from 'fixed-sinon';
 describe('Messaging', () => {
   let contentWindow;
 
-  before((done) => {
+  before(done => {
     setGlobalOptions({ logLevel: 5 });
 
     const frame = document.createElement('iframe');

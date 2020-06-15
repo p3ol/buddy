@@ -68,7 +68,7 @@ module.exports = config => {
         name: 'buddyTests',
         sourcemap: true,
       },
-      onwarn: (warning) => {
+      onwarn: warning => {
         if (
           warning.code === 'CIRCULAR_DEPENDENCY' &&
           warning.importer.indexOf('node_modules/chai/lib') === 0

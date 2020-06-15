@@ -63,7 +63,7 @@ const unserialize = (data, options = {}) => {
         debug(options, `Calling serialized method (name: ${k})`);
 
         return new Promise(resolve => {
-          on(v.bid, (e) => {
+          on(v.bid, e => {
             debug(options,
               `Receiving serialized method result (name: ${k}) -->`, e.data);
 
@@ -126,7 +126,7 @@ export const send = (target, name, data, options = {}) => {
         reject(new Error('timeout'));
       }, timeout);
 
-      const handler = on(event.bid, (e) => {
+      const handler = on(event.bid, e => {
         handler.off();
 
         if (!didTimeout) {
