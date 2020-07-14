@@ -31,9 +31,9 @@
     "lint": "./node_modules/.bin/eslint ."
   },
   "devDependencies": {
-    "@babel/cli": "7.10.4",
-    "@babel/core": "7.10.4",
-    "@babel/plugin-transform-runtime": "7.10.4",
+    "@babel/cli": "7.10.5",
+    "@babel/core": "7.10.5",
+    "@babel/plugin-transform-runtime": "7.10.5",
     "@babel/preset-env": "7.10.4",
     "@poool/eslint-config": "1.2.3",
     "@poool/eslint-plugin": "1.2.3",
