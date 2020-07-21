@@ -21,3 +21,8 @@ export const isObject = o =>
 
 export const extend = (s, t) =>
   ({ ...s, ...t });
+
+export const isPromise = p =>
+  !!p &&
+  (typeof p === 'object' || typeof p === 'function') &&
+  typeof p.then === 'function';

@@ -1,5 +1,12 @@
 import { globalOptions } from './options';
-import { uuid, isFunction, isArray, isObject, extend } from './utils';
+import {
+  extend,
+  isArray,
+  isFunction,
+  isObject,
+  isPromise,
+  uuid,
+} from './utils';
 import { log, debug, info, warn, error } from './logger';
 
 const serialize = (data, options = {}) => {
@@ -16,12 +23,26 @@ const serialize = (data, options = {}) => {
     return [...data.map(o => serialize(o, options))];
   }
 
+  if (isPromise(data)) {
+    log(options, 'serialize() -->', 'Serializing promise', data);
+
+    const methodId = uuid();
+    on(methodId, async () => {
+      send(target, methodId, await data, {
+        origin,
+        ...rest,
+        pingBack: false,
+      });
+    }, { source: target, ...rest, pingBack: false });
+    return { bid: methodId, type: 'promise' };
+  }
+
   if (isFunction(data)) {
     log(options, 'serialize() -->', 'Serializing method', data);
 
     const methodId = uuid();
-    on(methodId, event => {
-      send(target, methodId, data(...event.data.args), {
+    on(methodId, async event => {
+      send(target, methodId, await data(...event.data.args), {
         origin,
         ...rest,
         pingBack: false,
@@ -57,7 +78,7 @@ const unserialize = (data, options = {}) => {
 
     if (!v) {
       res[k] = v;
-    } else if (v.bid && v.type === 'function') {
+    } else if (v.bid && ['function', 'promise'].includes(v.type)) {
       log(options, 'unserialize() -->', 'Unserializing method');
       res[k] = (...args) => {
         debug(options, `Calling serialized method (name: ${k})`);
