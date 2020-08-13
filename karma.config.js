@@ -34,14 +34,11 @@ module.exports = config => {
       'src/**/*.js': ['webpack', 'coverage'],
       'tests/**/*.js': ['webpack'],
     },
-    reporters: ['coverage'],
-    coverageReporter: {
-      dir: 'coverage/',
-      reporters: [
-        { type: 'html' },
-        { type: 'lcovonly' },
-        { type: 'text-summary' },
-      ],
+    reporters: ['coverage', 'verbose'],
+    coverageIstanbulReporter: {
+      reports: ['html', 'lcovonly', 'text-summary'],
+      dir: path.join(__dirname, 'coverage'),
+      combineBrowserReports: true,
     },
     webpack: {
       module: {
