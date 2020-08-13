@@ -55,6 +55,17 @@ describe('Messaging', () => {
     expect(callback.called).to.equal(true);
   });
 
+  it('should serialize a promise passed inside data sent to ' +
+    'child', async () => {
+    const callback = Promise.resolve('promise result');
+
+    const result = await send(contentWindow,
+      'test:serializePromise', callback, { origin: '*' });
+
+    expect(result.bid).to.not.be.undefined;
+    expect(result.type).to.equal('promise');
+  });
+
   it('should allow child to get callback return value', async () => {
     const callback = sinon.spy(() => 'result from parent');
 

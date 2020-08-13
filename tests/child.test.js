@@ -12,6 +12,11 @@ on('test:serializeMethod', e => {
   e.data.callback();
 }, { source: window.parent });
 
+on('test:serializePromise', async e => {
+  const result = await e.data;
+  return result;
+}, { source: window.parent });
+
 on('test:parentMethodReturnValue', async e => {
   const result = await e.data.callback();
   return result;
