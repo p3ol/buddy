@@ -47,7 +47,6 @@ module.exports = config => {
       module: {
         rules: [{
           test: /\.js/,
-          include: path.resolve('./src'),
           exclude: /node_modules/,
           use: [
             { loader: 'babel-loader' },
