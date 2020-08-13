@@ -1,14 +1,10 @@
 const path = require('path');
-const babel = require('@rollup/plugin-babel').default;
-const resolve = require('@rollup/plugin-node-resolve').default;
-const commonjs = require('@rollup/plugin-commonjs');
-const alias = require('@rollup/plugin-alias');
+const webpack = require('webpack');
 
 module.exports = config => {
   config.set({
     basePath: './',
     frameworks: [
-      // 'es6-shim',
       'mocha',
     ],
     files: [
@@ -35,48 +31,43 @@ module.exports = config => {
     singleRun: true,
     colors: true,
     preprocessors: {
-      'src/**/*.js': ['rollup', 'karma-coverage-istanbul-instrumenter'],
-      'tests/**/*.js': ['rollup'],
+      'src/**/*.js': ['webpack', 'coverage'],
+      'tests/**/*.js': ['webpack'],
     },
-
-    reporters: ['coverage-istanbul'],
-    coverageIstanbulInstrumenter: {
-      produceSourceMap: true,
+    reporters: ['coverage'],
+    coverageReporter: {
+      dir: 'coverage/',
+      reporters: [
+        { type: 'html' },
+        { type: 'lcovonly' },
+        { type: 'text-summary' },
+      ],
     },
-
-    rollupPreprocessor: {
+    webpack: {
+      module: {
+        rules: [{
+          test: /\.js/,
+          include: path.resolve('./src'),
+          exclude: /node_modules/,
+          use: [
+            { loader: 'babel-loader' },
+            {
+              loader: 'istanbul-instrumenter-loader',
+              query: { esModules: true },
+            },
+          ],
+        }],
+      },
+      mode: 'production',
       plugins: [
-        babel({
-          exclude: 'node_modules/**',
-          babelHelpers: 'runtime',
-        }),
-        resolve(),
-        commonjs({
-          namedExports: {
-            chai: ['expect'],
-          },
-        }),
-        alias({
-          entries: {
-            buddy: path.resolve('./src'),
-            'fixed-sinon': path.resolve('./node_modules/sinon/pkg/sinon.js'),
-          },
+        new webpack.LoaderOptionsPlugin({
+          debug: false,
         }),
       ],
-      output: {
-        format: 'iife',
-        name: 'buddyTests',
-        sourcemap: true,
-      },
-      onwarn: warning => {
-        if (
-          warning.code === 'CIRCULAR_DEPENDENCY' &&
-          warning.importer.indexOf('node_modules/chai/lib') === 0
-        ) {
-          return;
-        }
-
-        return warning;
+      resolve: {
+        alias: {
+          'fixed-sinon': path.resolve('./node_modules/sinon/pkg/sinon.js'),
+        },
       },
     },
   });

@@ -1,4 +1,4 @@
-import { on } from 'buddy';
+import { on } from '../src';
 
 on('test:messaging', () => {
   return 'response:messaging';
