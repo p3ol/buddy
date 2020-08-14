@@ -9,7 +9,10 @@ import {
 } from './utils';
 import { log, debug, info, warn, error } from './logger';
 
-const serialize = (data, options = {}) => {
+const serialize = (
+  data,
+  /* istanbul ignore next: just in case */ options = {},
+) => {
   options = extend(globalOptions, options);
   const { target, origin, ...rest } = options;
 
@@ -63,7 +66,10 @@ const serialize = (data, options = {}) => {
   }, {});
 };
 
-const unserialize = (data, options = {}) => {
+const unserialize = (
+  data,
+  /* istanbul ignore next: just in case */ options = {},
+) => {
   options = extend(globalOptions, options);
   const { source, origin, ...rest } = options;
 
