@@ -7863,7 +7863,7 @@ ssri@^6.0.1:
   dependencies:
     figgy-pudding "^3.5.1"
 
-standard-changelog@^2.0.24:
+standard-changelog@2.0.24:
   version "2.0.24"
   resolved "https://registry.yarnpkg.com/standard-changelog/-/standard-changelog-2.0.24.tgz#a4a9e821942e26575ebb7562d8af4061f92a9825"
   integrity sha512-Tp0y5rkB8BKoURus4+fMcOXUpP1K2MrHAlMhMrBsz+25Evbn/72MdNN0IGVTctp7gioRXaeSb2HnfRY1PRaSyg==
@@ -7880,7 +7880,7 @@ standard-changelog@^2.0.24:
     sprintf-js "^1.1.1"
     tempfile "^3.0.0"
 
-standard-version@^9.0.0:
+standard-version@9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/standard-version/-/standard-version-9.0.0.tgz#814055add91eec8679a773768927f927183fc818"
   integrity sha512-eRR04IscMP3xW9MJTykwz13HFNYs8jS33AGuDiBKgfo5YrO0qX0Nxb4rjupVwT5HDYL/aR+MBEVLjlmVFmFEDQ==
