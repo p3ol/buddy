@@ -1,3 +1,16 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.0.1-beta.2](https://github.com/p3ol/buddy/compare/v0.0.1-beta.1...v0.0.1-beta.2) (2020-08-17)
+
+
+### Bug Fixes
+
+* fix karma config causing tests issues ([721e3a4](https://github.com/p3ol/buddy/commit/721e3a4144536a80a23d6966c925ebac6f400a5f))
+* fix linter errors ([e321956](https://github.com/p3ol/buddy/commit/e321956df605c280ea609c102de561202c4725df))
+* fix promise serializing ([c965d9e](https://github.com/p3ol/buddy/commit/c965d9e7c4e08e0c271680a104635136b72f1a48))
+
 ### Changelog
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
