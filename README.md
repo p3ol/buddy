@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/p3ol/buddy.svg?branch=master)](https://travis-ci.org/p3ol/buddy)
+![CI](https://github.com/p3ol/buddy/workflows/CI/badge.svg)
 
 # 🐕 Buddy
 
