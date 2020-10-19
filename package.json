@@ -26,7 +26,7 @@
     "build:ie": "BABEL_ENV='ie' ./node_modules/.bin/rollup -c",
     "test": "BABEL_ENV='tests' ./node_modules/.bin/karma start karma.config.js",
     "prepack": "yarn lint && yarn build && yarn test",
-    "serve": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js --hot --inline --open",
+    "serve": "./node_modules/.bin/webpack serve --config ./webpack.config.js",
     "lint": "./node_modules/.bin/eslint .",
     "changelog": "./node_modules/.bin/standard-changelog",
     "release": "./node_modules/.bin/standard-version && git push --follow-tags"
