@@ -1,16 +1,29 @@
 import { send } from '@poool/buddy';
 
-const frame = document.getElementById('child');
+const frame = document.querySelector('#child');
+
+const createElement = (id, content) => {
+  const elmt = document.createElement('div');
+  elmt.id = id;
+  elmt.innerText = content;
+  document.body.appendChild(elmt);
+};
 
 frame.onload = async () => {
-  const result = await send(frame.contentWindow, 'simpleMessage', {
-    text: 'I am thy father!',
-    testMethod: (...args) => {
-      document.getElementById('method-called').innerText = JSON.stringify(args);
-      return 'This is the result of a method passed from the parent to the ' +
-        'child (e.g serialized)';
-    },
-  });
+  createElement('messaging', await send(
+    frame.contentWindow,
+    'test:messaging',
+    '',
+    { origin: '*' },
+  ));
 
-  document.getElementById('response').innerText = JSON.stringify(result);
+  let wrongWindow;
+  try {
+    wrongWindow = await send(
+      frame.contentWindow, 'test:wrongWindow', '', { origin: '*' }
+    );
+  } catch (e) {
+    wrongWindow = e.message;
+  }
+  createElement('wrong-window', wrongWindow);
 };

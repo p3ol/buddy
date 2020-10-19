@@ -34,19 +34,19 @@ module.exports = {
         }],
       ],
     },
-    tests: {
-      presets: [
-        ['@babel/preset-env', {
-          corejs: 3,
-          useBuiltIns: 'entry',
-        }],
-      ],
-      plugins: [
-        ['@babel/plugin-transform-runtime', {
-          corejs: 3,
-          useESModules: false,
-        }],
-      ],
-    },
+    // tests: {
+    //   presets: [
+    //     ['@babel/preset-env', {
+    //       corejs: 3,
+    //       useBuiltIns: 'entry',
+    //     }],
+    //   ],
+    //   plugins: [
+    //     ['@babel/plugin-transform-runtime', {
+    //       corejs: 3,
+    //       useESModules: false,
+    //     }],
+    //   ],
+    // },
   },
 };

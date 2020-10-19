@@ -14,7 +14,7 @@ module.exports = {
     port: 64000,
     host: 'localhost',
     historyApiFallback: true,
-    open: true,
+    // open: true,
     hot: true,
   },
   plugins: [
