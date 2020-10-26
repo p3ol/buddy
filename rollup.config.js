@@ -32,22 +32,27 @@ export default formats.map(f => ({
   ],
   external: defaultExternals,
   output: {
-    ...(f === 'esm' ? {
-      dir: `${output}/esm`,
-      chunkFileNames: '[name].js',
-    } : {
-      file: `${output}/${name}.${f}.js`,
-    }),
+    ...(f === 'esm'
+      ? {
+          dir: `${output}/esm`,
+          chunkFileNames: '[name].js',
+        }
+      : {
+          file: `${output}/${name}.${f}.js`,
+        }
+    ),
     format: f,
     name,
     sourcemap: true,
     globals: defaultGlobals,
   },
-  ...(f === 'esm' ? {
-    manualChunks: id => {
-      return id.includes('node_modules')
-        ? 'vendor'
-        : path.parse(id).name;
-    },
-  } : {}),
+  ...(f === 'esm'
+    ? {
+        manualChunks: id => {
+          return id.includes('node_modules')
+            ? 'vendor'
+            : path.parse(id).name;
+        },
+      }
+    : {}),
 }));
