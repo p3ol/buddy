@@ -1004,10 +1004,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@eslint/eslintrc@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.2.0.tgz#bc7e3c4304d4c8720968ccaee793087dfb5fe6b4"
-  integrity sha512-+cIGPCBdLCzqxdtwppswP+zTsH9BOIGzAeKfBIbtb4gW/giMlfMwP0HUSFfhzh20f9u8uZ8hOp62+4GPquTbwQ==
+"@eslint/eslintrc@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.2.1.tgz#f72069c330461a06684d119384435e12a5d76e3c"
+  integrity sha512-XRUeBZ5zBWLYgSANMpThFddrZZkEbGHgUdt5UJjZfnlN9BGCiUBrf+nvbRupSjMvqzwnQN0qwCmOxITt1cfywA==
   dependencies:
     ajv "^6.12.4"
     debug "^4.1.1"
@@ -1032,15 +1032,15 @@
   dependencies:
     chokidar "2.1.8"
 
-"@poool/eslint-config@1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-1.2.3.tgz#721d1df18d128555e0d6d0b62415feb9a036e181"
-  integrity sha512-VRzL1LKGZiju1oN41oVAOLzUaI71sBUIBT1Ieu2iNXXNfiDg3mV0cLlqMKNzzQHQjwZAozdt/orkBKDx7Ds+2Q==
+"@poool/eslint-config@1.3.6":
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-1.3.6.tgz#507ae1357967833a96afae4e4b7e8e3c42884797"
+  integrity sha512-x+WiWmW8G8R8XQZ4dqiG2pMhpxgyQGmmd2vhxkx9K8brovlhVEsTGtAOXg63WVwPfHvRQdPtBJit6a44SW86yw==
 
-"@poool/eslint-plugin@1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@poool/eslint-plugin/-/eslint-plugin-1.2.3.tgz#4fbd3b97a23025217fb0115ce623f0d8ccdb262f"
-  integrity sha512-HJx0D4YSGDeKOQ+rsR+RxN0vAsaGjqywB9w8m7+x/4dE/Ry1BwN/rgCcxAHQuslSaZcGyM7DAbgrciPq2KMmvg==
+"@poool/eslint-plugin@1.3.3":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@poool/eslint-plugin/-/eslint-plugin-1.3.3.tgz#7a351ddc37738c620a236e70d63b41a6fb3dd7bf"
+  integrity sha512-tx5NjefJeB95r8HbQKiRfycDiQel1RqXAWPcs5XPdnxElqdUz+tAW0rEAviwtR0uhm5Iex8a4X0O+/5taZD/RQ==
   dependencies:
     eslint-rule-composer "0.3.0"
 
@@ -1059,10 +1059,10 @@
     "@babel/helper-module-imports" "^7.10.4"
     "@rollup/pluginutils" "^3.1.0"
 
-"@rollup/plugin-commonjs@15.1.0":
-  version "15.1.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-15.1.0.tgz#1e7d076c4f1b2abf7e65248570e555defc37c238"
-  integrity sha512-xCQqz4z/o0h2syQ7d9LskIMvBSH4PX5PjYdpSSvgS+pQik3WahkQVNWg3D8XJeYjZoVWnIUQYDghuEMRGrmQYQ==
+"@rollup/plugin-commonjs@16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-16.0.0.tgz#169004d56cd0f0a1d0f35915d31a036b0efe281f"
+  integrity sha512-LuNyypCP3msCGVQJ7ki8PqYdpjfEkE/xtFa5DqlF+7IBD0JsfMZ87C58heSwIMint58sAUZbt3ITqOmdQv/dXw==
   dependencies:
     "@rollup/pluginutils" "^3.1.0"
     commondir "^1.0.1"
@@ -3745,13 +3745,13 @@ eslint-visitor-keys@^2.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz#21fdc8fbcd9c795cc0321f0563702095751511a8"
   integrity sha512-QudtT6av5WXels9WjIM7qz1XD1cWGvX4gGXvp/zBn9nXG02D0utdU3Em2m/QjTnrsk6bBjmCygl3rmj118msQQ==
 
-eslint@7.12.0:
-  version "7.12.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.12.0.tgz#7b6a85f87a9adc239e979bb721cde5ce0dc27da6"
-  integrity sha512-n5pEU27DRxCSlOhJ2rO57GDLcNsxO0LPpAbpFdh7xmcDmjmlGUfoyrsB3I7yYdQXO5N3gkSTiDrPSPNFiiirXA==
+eslint@7.13.0:
+  version "7.13.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.13.0.tgz#7f180126c0dcdef327bfb54b211d7802decc08da"
+  integrity sha512-uCORMuOO8tUzJmsdRtrvcGq5qposf7Rw0LwkTJkoDbOycVQtQjmnhZSuLQnozLE4TmAzlMVV45eCHmQ1OpDKUQ==
   dependencies:
     "@babel/code-frame" "^7.0.0"
-    "@eslint/eslintrc" "^0.2.0"
+    "@eslint/eslintrc" "^0.2.1"
     ajv "^6.10.0"
     chalk "^4.0.0"
     cross-spawn "^7.0.2"
