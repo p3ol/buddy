@@ -1121,15 +1121,15 @@
     readdirp "^2.2.1"
     upath "^1.1.1"
 
-"@poool/eslint-config@1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-1.4.1.tgz#0a0ee9ff436593876df5e1483e4971d24b2be385"
-  integrity sha512-9wRety289n87xHtNHH1n/7Z5HPKEIsxoKoLlqdOh7JQxS43RjCFwPnPsK2tzPm0Glof+kUeDAdWp+3NRVMiqaA==
+"@poool/eslint-config@1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-1.4.2.tgz#b43fc40ced332e3082571c343b35f90b8ca79792"
+  integrity sha512-kyMuTU+FllyqgVfZbXbfA0sO7RRrVeBl18xAxTaVBwFA0ENGr0tqDZsDLIBt5e+9z7OQ4b2svMwuwJA1mwxkJg==
 
-"@poool/eslint-plugin@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@poool/eslint-plugin/-/eslint-plugin-1.4.0.tgz#eee0733969c7583fbd587d6aa145bfade4108d49"
-  integrity sha512-hJM/M/jbJ/pl44MzJGVIGCRwLgLycdOhyQruyuziemqIP7rEJ/jJDWntxaSajBbITbx4STY/nbJUgWx8VGCqrw==
+"@poool/eslint-plugin@1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@poool/eslint-plugin/-/eslint-plugin-1.4.2.tgz#6428be4c8331e2f0b36d6d2efd93d28b4525ce07"
+  integrity sha512-NvTglKmbNrakfI60NJisS//vFlRcgC1yB3N9rdeDQoYR7tM1n6S51UsHwcBSe6wXdp5jinEnqAJ1hDBnM4loFA==
   dependencies:
     eslint-rule-composer "0.3.0"
 
