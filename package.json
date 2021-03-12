@@ -46,7 +46,7 @@
     "@rollup/plugin-node-resolve": "11.1.1",
     "auto-changelog": "2.2.1",
     "babel-loader": "8.2.2",
-    "chai": "4.2.0",
+    "chai": "4.3.4",
     "eslint": "7.19.0",
     "eslint-config-standard": "16.0.2",
     "eslint-plugin-babel": "5.3.1",
