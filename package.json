@@ -74,7 +74,7 @@
     "sinon": "9.2.4",
     "standard-changelog": "2.0.27",
     "standard-version": "9.1.0",
-    "webpack": "5.20.0",
+    "webpack": "5.25.1",
     "webpack-cli": "4.5.0",
     "webpack-dev-server": "3.11.2"
   },
