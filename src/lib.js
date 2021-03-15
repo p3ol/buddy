@@ -188,7 +188,7 @@ export const send = (target, name, data, options = {}) => {
   });
 };
 
-export const on = (name, cb, options = {}) => {
+export const on = (name, fn, options = {}) => {
   options = extend(globalOptions, options);
   const { source, origin = '*', pingBack = true, ...rest } = options;
 
@@ -237,7 +237,7 @@ export const on = (name, cb, options = {}) => {
           `Output data could not be unserialized (event: ${name}) -->`, event);
       }
 
-      Promise.resolve(cb({
+      Promise.resolve(fn({
         bid: event.bid,
         name: event.name,
         source: e.source,

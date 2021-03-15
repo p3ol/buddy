@@ -3,7 +3,6 @@ module.exports = {
   overrides: [
     {
       files: ['tests/**/*.js'],
-      parser: 'babel-eslint',
       env: {
         browser: true,
         es6: true,
@@ -13,7 +12,7 @@ module.exports = {
         'mocha',
       ],
       rules: {
-        'babel/no-unused-expressions': 0,
+        '@babel/no-unused-expressions': 0,
       },
     },
   ],
