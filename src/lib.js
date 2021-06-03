@@ -81,7 +81,7 @@ const unserialize = (
 
   if (!data || !isObject(data)) {
     log(options, 'unserialize() -->',
-      'Data is nullish or doesn\'t need to be unserialized');
+      `Ignoring nullish or primitive data (type: ${typeof data}):`, data);
 
     return data;
   }
@@ -92,7 +92,7 @@ const unserialize = (
     if (!v) {
       res[k] = v;
     } else if (v.bid && ['function', 'promise'].includes(v.type)) {
-      log(options, 'unserialize() -->', 'Unserializing method');
+      log(options, 'unserialize() -->', 'Unserializing method:', k);
 
       res[k] = (...args) => {
         debug(options, `Calling serialized method (name: ${k})`);
@@ -116,8 +116,10 @@ const unserialize = (
         });
       };
     } else if (isObject(v) && !isArray(v)) {
+      log(options, 'unserialize() -->', 'Unserializing object:', v);
       res[k] = unserialize(v, { ...options });
     } else if (isObject(v) && isArray(v)) {
+      log(options, 'unserialize() -->', 'Unserializing array:', v);
       res[k] = [...v.map(v_ => unserialize(v_, { ...options }))];
     } else {
       res[k] = v;
