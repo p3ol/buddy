@@ -86,4 +86,13 @@ frame.onload = async () => {
   const targetCallback = sinon.spy();
   await sendExpectingError(null, 'test:noTarget', { callback: targetCallback });
   createElement('no-target', targetCallback.called);
+
+  // test:nestedArrayResponseFromChild
+  let nestedTest = null;
+  const doAction = sinon.spy(async (_, obj) => {
+    nestedTest = await obj.callback();
+  });
+  await send(contentWindow, 'test:nestedArrayResponseFromChild',
+    { callback: doAction });
+  createElement('nested-array-response-from-child', nestedTest);
 };
