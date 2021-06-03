@@ -46,3 +46,13 @@ on('test:noTarget', async e => {
 on('test:nestedArrayResponseFromChild', async e => {
   await e.data.callback('init', { callback: () => 'response from child' });
 }, { source: window.parent });
+
+on('test:primitiveTypes', e => {
+  return e.data;
+}, { source: window.parent });
+
+on('test:back-and-forth', async e => {
+  const res = await e.data.callback();
+
+  return JSON.stringify(res);
+}, { source: window.parent });

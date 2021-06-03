@@ -90,6 +90,23 @@ describe('buddy', () => {
       .toBe('response from child');
   });
 
+  it('should not alter primitive types', async () => {
+    expect(await getResult('#primitive-type-boolean'))
+      .toBe('true');
+    expect(await getResult('#primitive-type-int'))
+      .toBe('1');
+    expect(await getResult('#primitive-type-string'))
+      .toBe('"foo"');
+    expect(await getResult('#primitive-type-array'))
+      .toBe('["foo","bar"]');
+  });
+
+  it('should correctly un/serialize back-and-forth messaging ' +
+    'data', async () => {
+    expect(await getResult('#back-and-forth'))
+      .toBe('true');
+  });
+
   afterAll(async () => {
     try {
       const coverage = await page.coverage.stopJSCoverage();

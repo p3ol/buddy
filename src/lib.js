@@ -86,8 +86,11 @@ const unserialize = (
     return data;
   }
 
-  return (Array.isArray(data) ? data : Object.keys(data)).reduce((res, k) => {
-    const v = Array.isArray(data) ? k : data[k];
+  const isArray_ = isArray(data);
+
+  return (isArray_ ? data : Object.keys(data)).reduce((res, item, i) => {
+    const k = isArray_ ? i : item;
+    const v = isArray_ ? item : data[k];
 
     if (!v) {
       res[k] = v;
@@ -126,7 +129,7 @@ const unserialize = (
     }
 
     return res;
-  }, Array.isArray(data) ? [] : {});
+  }, isArray_ ? [] : {});
 };
 
 export const send = (target, name, data, options = {}) => {

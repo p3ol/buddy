@@ -93,6 +93,30 @@ const exec = async () => {
   await send(contentWindow, 'test:nestedArrayResponseFromChild',
     { callback: doAction });
   createElement('nested-array-response-from-child', nestedTest);
+
+  // test:primitiveTypes
+  const primitiveBool = await send(contentWindow,
+    'test:primitiveTypes', true);
+  createElement('primitive-type-boolean', primitiveBool);
+
+  const primitiveInt = await send(contentWindow,
+    'test:primitiveTypes', 1);
+  createElement('primitive-type-int', primitiveInt);
+
+  const primitiveString = await send(contentWindow,
+    'test:primitiveTypes', 'foo');
+  createElement('primitive-type-string', JSON.stringify(primitiveString));
+
+  const primitiveArray = await send(contentWindow,
+    'test:primitiveTypes', ['foo', 'bar']);
+  createElement('primitive-type-array', JSON.stringify(primitiveArray));
+
+  // test:back-and-forth
+  const backAndForth = sinon.spy(async () => true);
+  const backAndForthResult = await send(contentWindow, 'test:back-and-forth', {
+    callback: backAndForth,
+  });
+  createElement('back-and-forth', backAndForthResult);
 };
 
 if (frame.contentWindow) {
