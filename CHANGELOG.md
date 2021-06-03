@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-beta.5](https://github.com/p3ol/buddy/compare/v0.0.1-beta.4...v0.0.1-beta.5) (2021-06-03)
+
+
+### Bug Fixes
+
+* also unserialize array-like structures correctly ([a252d4a](https://github.com/p3ol/buddy/commit/a252d4a91d72a202d695e4568951c9f90764e437))
+* better logging ([c9cd583](https://github.com/p3ol/buddy/commit/c9cd583e72e0ae7c074aa8c3f804483f0bec22db))
+
 ### [0.0.1-beta.4](https://github.com/p3ol/buddy/compare/v0.0.1-beta.3...v0.0.1-beta.4) (2021-06-03)
 
 
