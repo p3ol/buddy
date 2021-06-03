@@ -20,11 +20,11 @@ module.exports = {
   target: 'web',
   devServer: {
     contentBase: './examples',
-    port: 64000,
+    port: process.env.TEST_PORT || 64000,
     host: 'localhost',
     historyApiFallback: true,
     ...(process.env.NODE_ENV === 'tests' ? {
-      writeToDisk: true,
+      liveReload: false,
     } : {
       hot: true,
       open: true,

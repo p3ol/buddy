@@ -47,7 +47,7 @@ module.exports = {
     },
   },
   overrides: [{
-    test: /.test.js$/,
+    include: /tests\//,
     presets: [
       ['@babel/preset-env', {
         corejs: 3,

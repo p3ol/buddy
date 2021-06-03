@@ -2,6 +2,8 @@ import puppeteer from 'puppeteer';
 import istanbul from 'puppeteer-to-istanbul';
 import devServer from 'jest-dev-server';
 
+import { findFreePort, sleep } from './utils.js';
+
 describe('buddy', () => {
   let browser, page;
 
@@ -15,16 +17,29 @@ describe('buddy', () => {
 
   beforeAll(async () => {
     jest.setTimeout(30000);
+
+    const port = await findFreePort();
+    process.env.TEST_PORT = port;
+
     await devServer.setup({
-      command: 'NODE_ENV=tests; BABEL_ENV=tests yarn serve',
-      port: 64000,
+      command: `NODE_ENV=tests; BABEL_ENV=tests; TEST_PORT=${port} yarn serve`,
+      port,
+      protocol: 'http',
       launchTimeout: 30000,
     });
 
-    browser = await puppeteer.launch();
+    await sleep(1000);
+
+    browser = await puppeteer.launch({ headless: false });
     page = await browser.newPage();
     await page.coverage.startJSCoverage();
-    await page.goto('http://localhost:64000');
+    await page.goto('http://localhost:' + port);
+  });
+
+  beforeEach(async () => {
+    if (!await page.$('#ready')) {
+      await page.reload();
+    }
   });
 
   it('should send data to an iframe and get a response', async () => {
