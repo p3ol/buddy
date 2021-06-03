@@ -40,7 +40,7 @@ on('test:parentMethodCalledTwice', async e => {
 }, { source: window.parent });
 
 on('test:noTarget', async e => {
-  await e.data.callback();
+  e.data.callback();
 }, { source: window.parent });
 
 on('test:nestedArrayResponseFromChild', async e => {

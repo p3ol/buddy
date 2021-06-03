@@ -75,14 +75,19 @@ describe('buddy', () => {
     expect(await getResult('#no-target')).toBe('false');
   });
 
-  it('should not send data to an iframe if target isnt set', async () => {
+  it('should be able to handle nested responses from child possibly ' +
+    'containing arrays/objects/methods/promises', async () => {
     expect(await getResult('#nested-array-response-from-child'))
       .toBe('response from child');
   });
 
   afterAll(async () => {
-    const coverage = await page.coverage.stopJSCoverage();
-    istanbul.write([...coverage]);
+    try {
+      const coverage = await page.coverage.stopJSCoverage();
+      istanbul.write([...coverage]);
+    } catch (e) {
+      console.error(e);
+    }
 
     await devServer.teardown();
     await browser.close();
