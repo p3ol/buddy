@@ -210,65 +210,61 @@ export const on = (name, fn, options = {}) => {
     let event = {};
 
     try {
-      event = JSON.parse(e.data);
-    } catch (e) {
-      warn(options, 'Error parsing event data:', e);
+      if (typeof e.data === 'string') {
+        event = JSON.parse(e.data);
+      }
+    } catch (err) {
+      warn(options, 'Error parsing event data:', err);
     }
 
-    if (!event.name || event.name !== name) {
+    if (!event.name || event.name !== name || !event.bid) {
       return;
     }
 
     if (source && e.source !== source) {
-      if (event.bid) {
-        send(e.source, event.bid, { error: 'source' },
-          { ...rest, origin: e.origin, pingBack: false });
-      }
+      send(e.source, event.bid, { error: 'source' },
+        { ...rest, origin: e.origin, pingBack: false });
 
       return;
     }
 
     if (origin && origin !== '*' && e.origin !== origin) {
-      if (event.bid) {
-        send(e.source, event.bid, { error: 'origin' },
-          { ...rest, origin: e.origin, pingBack: false });
-      }
+      send(e.source, event.bid, { error: 'origin' },
+        { ...rest, origin: e.origin, pingBack: false });
 
       return;
     }
 
-    if (event.bid) {
-      info(options,
-        `Handling message from source window (event: ${name}) -->`, event);
+    info(options,
+      `Handling message from source window (event: ${name}) -->`, event);
 
-      let unserializedData;
+    let unserializedData;
 
-      try {
-        unserializedData = unserialize(event.data, { source, origin, ...rest });
-      } catch (e) {
-        warn(options,
-          `Output data could not be unserialized (event: ${name}) -->`, event);
-      }
-
-      Promise.resolve(fn({
-        bid: event.bid,
-        name: event.name,
-        source: e.source,
-        origin: e.origin,
-        data: unserializedData,
-      })).then(result => {
-        if (pingBack !== false) {
-          debug(options,
-            `Sending back message result to source window (event: ${name})`);
-
-          send(source, event.bid, result, {
-            ...rest,
-            origin: e.origin,
-            pingBack: false,
-          });
-        }
-      });
+    try {
+      unserializedData = unserialize(event.data, { source, origin, ...rest });
+    } catch (e) {
+      warn(options,
+        `Output data could not be unserialized (event: ${name}) -->`, event);
     }
+
+    Promise.resolve(fn({
+      bid: event.bid,
+      name: event.name,
+      source: e.source,
+      origin: e.origin,
+      data: unserializedData,
+    })).then(result => {
+      if (pingBack !== false) {
+        debug(options,
+          `Sending back message result to source window (event: ${name})`);
+
+        send(source, event.bid, result, {
+          ...rest,
+          origin: e.origin,
+          pingBack: false,
+        });
+      }
+    });
   };
 
   window.addEventListener('message', handler, false);
