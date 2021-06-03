@@ -30,16 +30,10 @@ describe('buddy', () => {
 
     await sleep(1000);
 
-    browser = await puppeteer.launch({ headless: false });
+    browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.coverage.startJSCoverage();
     await page.goto('http://localhost:' + port);
-  });
-
-  beforeEach(async () => {
-    if (!await page.$('#ready')) {
-      await page.reload();
-    }
   });
 
   it('should send data to an iframe and get a response', async () => {

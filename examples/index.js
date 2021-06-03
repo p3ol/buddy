@@ -1,101 +1,102 @@
-import { send, setGlobalOptions } from '@poool/buddy';
+import { send } from '@poool/buddy';
 import sinon from 'fixed-sinon';
 
-window.addEventListener('DOMContentLoaded', () => {
+const createElement = (id, content) => {
+  const elmt = document.createElement('div');
+  elmt.id = id;
+  elmt.innerText = content;
+  document.body.appendChild(elmt);
+};
 
-  const frame = document.querySelector('#child');
+const sendExpectingError = async (...args) => {
+  let error;
 
-  const createElement = (id, content) => {
-    const elmt = document.createElement('div');
-    elmt.id = id;
-    elmt.innerText = content;
-    document.body.appendChild(elmt);
-  };
+  try {
+    error = await send(...args);
+  } catch (e) {
+    error = e.message;
+  }
 
-  const sendExpectingError = async (...args) => {
-    let error;
+  return error;
+};
 
-    try {
-      error = await send(...args);
-    } catch (e) {
-      error = e.message;
-    }
+const frame = document.querySelector('#child');
 
-    return error;
-  };
+const exec = async () => {
+  const contentWindow = frame.contentWindow;
 
-  frame.onload = async () => {
-    const contentWindow = frame.contentWindow;
+  // test:messaging
+  const messaging = await send(contentWindow, 'test:messaging', '');
+  createElement('messaging', messaging);
 
-    createElement('ready', 'ready');
+  // test:wrongWindow
+  const wrongWindow = await sendExpectingError(contentWindow,
+    'test:wrongWindow', '');
+  createElement('wrong-window', wrongWindow);
 
-    // test:messaging
-    const messaging = await send(contentWindow, 'test:messaging', '');
-    createElement('messaging', messaging);
+  // test:serializeArray
+  const serializeArray = await send(contentWindow, 'test:serializeArray',
+    [0, 1]);
+  createElement('serialize-array', JSON.stringify(serializeArray));
 
-    // test:wrongWindow
-    const wrongWindow = await sendExpectingError(contentWindow,
-      'test:wrongWindow', '');
-    createElement('wrong-window', wrongWindow);
+  // test:serializeMethod
+  const serializeMethod = sinon.spy();
+  await send(contentWindow, 'test:serializeMethod', { serializeMethod });
+  createElement('serialize-method', serializeMethod.called);
 
-    // test:serializeArray
-    const serializeArray = await send(contentWindow, 'test:serializeArray',
-      [0, 1]);
-    createElement('serialize-array', JSON.stringify(serializeArray));
+  // test:serializePromise
+  const serializePromise = new Promise(resolve => resolve('promise result'));
+  const promiseResult = await send(contentWindow, 'test:serializePromise',
+    { serializePromise });
+  createElement('serialize-promise', promiseResult);
 
-    // test:serializeMethod
-    const serializeMethod = sinon.spy();
-    await send(contentWindow, 'test:serializeMethod', { serializeMethod });
-    createElement('serialize-method', serializeMethod.called);
+  // test:unserializeFunctionsAndObjects
+  const unserializeFunction = x => x + 1;
+  const unserializeObject = { test: true };
+  const unserializedData = await send(
+    contentWindow,
+    'test:unserializeFunctionsAndObjects',
+    { unserializeFunction, unserializeObject },
+  );
+  createElement('unserialize-functions-objects', JSON.stringify({
+    unserializedFunction: await unserializedData.unserializeFunction(0),
+    unserializedObject: unserializedData.unserializeObject,
+  }));
 
-    // test:serializePromise
-    const serializePromise = new Promise(resolve => resolve('promise result'));
-    const promiseResult = await send(contentWindow, 'test:serializePromise',
-      { serializePromise });
-    createElement('serialize-promise', promiseResult);
+  // test:parentMethodReturnValue
+  const parentCallback = sinon.spy(() => 'result from parent');
+  const parentResult = await send(contentWindow,
+    'test:parentMethodReturnValue', { parentCallback });
+  createElement('parent-method-return-value', parentResult);
 
-    // test:unserializeFunctionsAndObjects
-    const unserializeFunction = x => x + 1;
-    const unserializeObject = { test: true };
-    const unserializedData = await send(
-      contentWindow,
-      'test:unserializeFunctionsAndObjects',
-      { unserializeFunction, unserializeObject },
-    );
-    createElement('unserialize-functions-objects', JSON.stringify({
-      unserializedFunction: await unserializedData.unserializeFunction(0),
-      unserializedObject: unserializedData.unserializeObject,
-    }));
+  // test:thisDoesNotExistInChild
+  const noHandler = await sendExpectingError(contentWindow,
+    'test:thisDoesNotExistInChild', '', { origin: '*', timeout: 100 });
+  createElement('this-does-not-exist-in-child', noHandler);
 
-    // test:parentMethodReturnValue
-    const parentCallback = sinon.spy(() => 'result from parent');
-    const parentResult = await send(contentWindow,
-      'test:parentMethodReturnValue', { parentCallback });
-    createElement('parent-method-return-value', parentResult);
+  // test:parentMethodCalledTwice
+  const parentCallback2 = sinon.spy();
+  await send(contentWindow, 'test:parentMethodCalledTwice',
+    { callback: parentCallback2 });
+  createElement('parent-method-called-twice', parentCallback2.calledTwice);
 
-    // test:thisDoesNotExistInChild
-    const noHandler = await sendExpectingError(contentWindow,
-      'test:thisDoesNotExistInChild', '', { origin: '*', timeout: 100 });
-    createElement('this-does-not-exist-in-child', noHandler);
+  // test:noTarget
+  const targetCallback = sinon.spy();
+  await sendExpectingError(null, 'test:noTarget', { callback: targetCallback });
+  createElement('no-target', targetCallback.called);
 
-    // test:parentMethodCalledTwice
-    const parentCallback2 = sinon.spy();
-    await send(contentWindow, 'test:parentMethodCalledTwice',
-      { callback: parentCallback2 });
-    createElement('parent-method-called-twice', parentCallback2.calledTwice);
+  // test:nestedArrayResponseFromChild
+  let nestedTest = null;
+  const doAction = sinon.spy(async (_, obj) => {
+    nestedTest = await obj.callback();
+  });
+  await send(contentWindow, 'test:nestedArrayResponseFromChild',
+    { callback: doAction });
+  createElement('nested-array-response-from-child', nestedTest);
+};
 
-    // test:noTarget
-    const targetCallback = sinon.spy();
-    await sendExpectingError(null, 'test:noTarget', { callback: targetCallback });
-    createElement('no-target', targetCallback.called);
-
-    // test:nestedArrayResponseFromChild
-    let nestedTest = null;
-    const doAction = sinon.spy(async (_, obj) => {
-      nestedTest = await obj.callback();
-    });
-    await send(contentWindow, 'test:nestedArrayResponseFromChild',
-      { callback: doAction });
-    createElement('nested-array-response-from-child', nestedTest);
-  };
-});
+if (frame.contentWindow) {
+  exec();
+} else {
+  frame.onload = exec;
+}
