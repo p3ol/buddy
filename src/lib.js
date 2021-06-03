@@ -86,8 +86,8 @@ const unserialize = (
     return data;
   }
 
-  return Object.keys(data).reduce((res, k) => {
-    const v = data[k];
+  return (Array.isArray(data) ? data : Object.keys(data)).reduce((res, k) => {
+    const v = Array.isArray(data) ? k : data[k];
 
     if (!v) {
       res[k] = v;
@@ -117,6 +117,8 @@ const unserialize = (
       };
     } else if (isObject(v) && !isArray(v)) {
       res[k] = unserialize(v, { ...options });
+    } else if (isObject(v) && isArray(v)) {
+      res[k] = [...v.map(v_ => unserialize(v_, { ...options }))];
     } else {
       res[k] = v;
     }
