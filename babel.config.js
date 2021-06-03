@@ -1,24 +1,26 @@
 module.exports = {
-  presets: [
-    ['@babel/preset-env', {
-      corejs: 3,
-      useBuiltIns: 'usage',
-      targets: {
-        browsers: [
-          'last 2 versions',
-          'not ie >= 0',
-          'not ie_mob >= 0',
-          'not dead',
-        ],
-      },
-    }],
-  ],
-  plugins: [
-    ['@babel/plugin-transform-runtime', {
-      corejs: 3,
-    }],
-  ],
   env: {
+    default: {
+      presets: [
+        ['@babel/preset-env', {
+          corejs: 3,
+          useBuiltIns: 'usage',
+          targets: {
+            browsers: [
+              'last 2 versions',
+              'not ie >= 0',
+              'not ie_mob >= 0',
+              'not dead',
+            ],
+          },
+        }],
+      ],
+      plugins: [
+        ['@babel/plugin-transform-runtime', {
+          corejs: 3,
+        }],
+      ],
+    },
     ie: {
       presets: [
         ['@babel/preset-env', {
@@ -33,20 +35,29 @@ module.exports = {
           },
         }],
       ],
+      plugins: [
+        ['@babel/plugin-transform-runtime', {
+          corejs: 3,
+        }],
+      ],
     },
-    // tests: {
-    //   presets: [
-    //     ['@babel/preset-env', {
-    //       corejs: 3,
-    //       useBuiltIns: 'entry',
-    //     }],
-    //   ],
-    //   plugins: [
-    //     ['@babel/plugin-transform-runtime', {
-    //       corejs: 3,
-    //       useESModules: false,
-    //     }],
-    //   ],
-    // },
+    tests: {
+      presets: [],
+      plugins: [],
+    },
   },
+  overrides: [{
+    test: /.test.js$/,
+    presets: [
+      ['@babel/preset-env', {
+        corejs: 3,
+        useBuiltIns: 'usage',
+      }],
+    ],
+    plugins: [
+      ['@babel/plugin-transform-runtime', {
+        corejs: 3,
+      }],
+    ],
+  }],
 };

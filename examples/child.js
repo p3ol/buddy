@@ -13,21 +13,24 @@ on('test:serializeArray', e => {
 }, { source: window.parent });
 
 on('test:serializeMethod', e => {
-  e.data.callback();
+  e.data.serializeMethod();
 }, { source: window.parent });
 
 on('test:serializePromise', async e => {
-  const result = await e.data.callback();
+  const result = await e.data.serializePromise();
+
   return result;
 }, { source: window.parent });
 
 on('test:unserializeFunctionsAndObjects', async e => {
   const result = await e.data;
+
   return result;
 }, { source: window.parent });
 
 on('test:parentMethodReturnValue', async e => {
-  const result = await e.data.callback();
+  const result = await e.data.parentCallback();
+
   return result;
 }, { source: window.parent });
 

@@ -1,5 +1,6 @@
-const webpack = require('webpack');
 const path = require('path');
+
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -7,15 +8,31 @@ module.exports = {
     index: './examples/index.js',
     child: './examples/child.js',
   },
-  devtool: 'inline-source-map',
-  mode: 'development',
+  devtool: 'source-map',
+  ...(process.env.NODE_ENV === 'tests' ? {
+    mode: 'production',
+    optimization: {
+      minimize: false,
+    },
+  } : {
+    mode: 'development',
+  }),
+  target: 'web',
   devServer: {
     contentBase: './examples',
     port: 64000,
     host: 'localhost',
     historyApiFallback: true,
-    // open: true,
-    hot: true,
+    ...(process.env.NODE_ENV === 'tests' ? {
+      writeToDisk: true,
+    } : {
+      hot: true,
+      open: true,
+    }),
+  },
+  output: {
+    path: path.join(__dirname, 'build'),
+    chunkFilename: '[name].js',
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
@@ -37,6 +54,7 @@ module.exports = {
     extensions: ['.js'],
     alias: {
       '@poool/buddy': path.resolve('./src'),
+      'fixed-sinon': require.resolve('sinon/pkg/sinon.js'),
     },
   },
   module: {

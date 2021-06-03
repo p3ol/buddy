@@ -4,13 +4,9 @@ module.exports = {
     {
       files: ['tests/**/*.js'],
       env: {
-        browser: true,
-        es6: true,
-        mocha: true,
+        jest: true,
       },
-      plugins: [
-        'mocha',
-      ],
+      plugins: [],
       rules: {
         '@babel/no-unused-expressions': 0,
       },
