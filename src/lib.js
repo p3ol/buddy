@@ -114,7 +114,7 @@ const unserialize = (
     }
 
     return res;
-  }, {});
+  }, Array.isArray(data) ? [] : {});
 };
 
 export const send = (target, name, data, options = {}) => {
