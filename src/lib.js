@@ -18,11 +18,13 @@ const serialize = (
 
   if (!data) {
     log(options, 'serialize() -->', 'Data is nullish, not serializing');
+
     return data;
   }
 
   if (isArray(data)) {
     log(options, 'serialize() -->', 'Serializing array', data);
+
     return [...data.map(o => serialize(o, options))];
   }
 
@@ -37,6 +39,7 @@ const serialize = (
         pingBack: false,
       });
     }, { source: target, ...rest, pingBack: false });
+
     return { bid: methodId, type: 'promise' };
   }
 
@@ -51,17 +54,20 @@ const serialize = (
         pingBack: false,
       });
     }, { source: target, ...rest, pingBack: false });
+
     return { bid: methodId, type: 'function' };
   }
 
   if (!isObject(data)) {
     log(options, 'serialize() -->', 'Serializing primitive type');
+
     return data;
   }
 
   return Object.keys(data).reduce((res, k) => {
     const v = data[k];
     res[k] = serialize(v, options);
+
     return res;
   }, {});
 };
@@ -76,6 +82,7 @@ const unserialize = (
   if (!data || !isObject(data)) {
     log(options, 'unserialize() -->',
       'Data is nullish or doesn\'t need to be unserialized');
+
     return data;
   }
 
@@ -86,6 +93,7 @@ const unserialize = (
       res[k] = v;
     } else if (v.bid && ['function', 'promise'].includes(v.type)) {
       log(options, 'unserialize() -->', 'Unserializing method');
+
       res[k] = (...args) => {
         debug(options, `Calling serialized method (name: ${k})`);
 
@@ -123,6 +131,7 @@ export const send = (target, name, data, options = {}) => {
 
   if (!target) {
     error(options, `Target window is not defined, aborting (event: ${name})`);
+
     return;
   }
 
@@ -162,6 +171,7 @@ export const send = (target, name, data, options = {}) => {
           if (e.data && e.data.error) {
             error(options,
               `Error received from target window, aborting (event: ${name})`);
+
             return reject(new Error(e.data.error.toString()));
           }
 
@@ -171,6 +181,7 @@ export const send = (target, name, data, options = {}) => {
     }
 
     let parsedData;
+
     try {
       parsedData = JSON.stringify(event);
     } catch (e) {
@@ -197,6 +208,7 @@ export const on = (name, fn, options = {}) => {
 
   const handler = e => {
     let event = {};
+
     try {
       event = JSON.parse(e.data);
     } catch (e) {
@@ -230,6 +242,7 @@ export const on = (name, fn, options = {}) => {
         `Handling message from source window (event: ${name}) -->`, event);
 
       let unserializedData;
+
       try {
         unserializedData = unserialize(event.data, { source, origin, ...rest });
       } catch (e) {
