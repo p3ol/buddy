@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-beta.7](https://github.com/p3ol/buddy/compare/v0.0.1-beta.6...v0.0.1-beta.7) (2021-06-24)
+
+
+### Bug Fixes
+
+* allow ping back to be sent to event source instead of provided source ([c880972](https://github.com/p3ol/buddy/commit/c8809727f9a6fe16799d50733f573d0e55ac036a))
+* **deps:** update dependency core-js to v3.14.0 ([bac28ae](https://github.com/p3ol/buddy/commit/bac28ae4ea5f887016ceea4758aae1b9a2c3eb11))
+* **deps:** update dependency core-js to v3.15.0 ([1697469](https://github.com/p3ol/buddy/commit/1697469e348879d76aca797ff8b5d3c7b03d3428))
+* **deps:** update dependency core-js to v3.15.1 ([c599081](https://github.com/p3ol/buddy/commit/c59908120207549b30b4a2dc1ad55b24cb4dad0c))
+
 ### [0.0.1-beta.6](https://github.com/p3ol/buddy/compare/v0.0.1-beta.5...v0.0.1-beta.6) (2021-06-03)
 
 
