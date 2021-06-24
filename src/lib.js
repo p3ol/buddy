@@ -265,7 +265,7 @@ export const on = (name, fn, options = {}) => {
         debug(options,
           `Sending back message result to source window (event: ${name})`);
 
-        send(source, event.bid, result, {
+        send(source || e.source, event.bid, result, {
           ...rest,
           origin: e.origin,
           pingBack: false,
