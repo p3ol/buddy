@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-rc.0](https://github.com/p3ol/buddy/compare/v0.0.1-beta.7...v0.0.1-rc.0) (2021-08-30)
+
+
+### Bug Fixes
+
+* correctly handle thrown errors ([29e2b3b](https://github.com/p3ol/buddy/commit/29e2b3b16eecc4db9788bf9d4e4b56e2d7875b5a))
+* **deps:** update dependency @babel/runtime-corejs3 to v7.15.3 ([b58e6e8](https://github.com/p3ol/buddy/commit/b58e6e827ab102e83f4559811f8ffe24bf3e4128))
+* **deps:** update dependency core-js to v3.15.2 ([1fc33ce](https://github.com/p3ol/buddy/commit/1fc33ced60d8553c0b9ab6d92cc992dab7d31900))
+* **deps:** update dependency core-js to v3.16.0 ([0704899](https://github.com/p3ol/buddy/commit/07048997b3ea7295a01fd0990fdef477fe986c54))
+* **deps:** update dependency core-js to v3.16.1 ([132e740](https://github.com/p3ol/buddy/commit/132e740b31e62d67986ab648ca4b59d970d07a63))
+* **deps:** update dependency core-js to v3.16.2 ([f933d5e](https://github.com/p3ol/buddy/commit/f933d5efdbc2251af470c0f301138be65be654ec))
+* **deps:** update dependency core-js to v3.16.3 ([4788af5](https://github.com/p3ol/buddy/commit/4788af50551b8d5346cd4470888ec8009cf35870))
+* **deps:** update dependency core-js to v3.16.4 ([f3c0dc0](https://github.com/p3ol/buddy/commit/f3c0dc06aa50ce3110037d371d00fcbf0f975fb5))
+
 ### [0.0.1-beta.7](https://github.com/p3ol/buddy/compare/v0.0.1-beta.6...v0.0.1-beta.7) (2021-06-24)
 
 
