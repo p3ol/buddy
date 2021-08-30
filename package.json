@@ -31,7 +31,8 @@
     "lint": "./node_modules/.bin/eslint .",
     "changelog": "./node_modules/.bin/standard-changelog",
     "release": "./node_modules/.bin/standard-version && git push --follow-tags",
-    "release:beta": "./node_modules/.bin/standard-version --prerelease beta && git push --follow-tags"
+    "release:beta": "./node_modules/.bin/standard-version --prerelease beta && git push --follow-tags",
+    "release:rc": "./node_modules/.bin/standard-version --prerelease rc && git push --follow-tags"
   },
   "devDependencies": {
     "@babel/cli": "7.14.8",
