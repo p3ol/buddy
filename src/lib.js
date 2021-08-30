@@ -129,7 +129,7 @@ const unserialize = (
     err.code = data.code;
     err.stack = data.stack;
 
-    return err;
+    throw err;
   } else if (data.bid && ['function', 'promise'].includes(data.type)) {
     log(options, 'unserialize() -->', 'Unserializing method:', options.key);
 
@@ -197,6 +197,8 @@ export const send = (target, name, data, options = {}) => {
     } catch (e) {
       warn(options,
         `Input data could not be serialized (event: ${name}) -->`, data, e);
+
+      return reject(e);
     }
 
     const event = {
@@ -244,6 +246,8 @@ export const send = (target, name, data, options = {}) => {
         event,
         e
       );
+
+      throw e;
     }
 
     info(options,
@@ -298,6 +302,7 @@ export const on = (name, fn, options = {}) => {
     } catch (e) {
       warn(options,
         `Output data could not be unserialized (event: ${name}) -->`, event);
+      unserializedData = e;
     }
 
     Promise.resolve(fn({

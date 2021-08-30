@@ -50,6 +50,12 @@ const exec = async () => {
     serializePromise);
   createElement('serialize-promise', promiseResult);
 
+  // test:serializeUnknown
+  const serializeUnknown = BigInt(9007199254740991);
+  const unknownResult = await sendExpectingError(contentWindow,
+    'test:serializeUnknown', serializeUnknown);
+  createElement('serialize-unknown', unknownResult);
+
   // test:unserializeFunctionsAndObjects
   const unserializeFunction = x => x + 1;
   const unserializeObject = { test: true };
@@ -125,6 +131,14 @@ const exec = async () => {
   const throwsResult = await sendExpectingError(contentWindow,
     'test:throw', { promiseThatThrows: throws });
   createElement('throw', throwsResult);
+
+  // test:throw
+  const throwsDeep = sinon.spy(async () => {
+    throw new Error('custom_deep_error');
+  });
+  const throwsDeepResult = await sendExpectingError(contentWindow,
+    'test:throw-deep', { promiseThatThrows: throwsDeep });
+  createElement('throw-deep', throwsDeepResult);
 };
 
 if (frame.contentWindow) {

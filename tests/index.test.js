@@ -58,6 +58,11 @@ describe('buddy', () => {
     expect(await getResult('#serialize-promise')).toBe('promise result');
   });
 
+  it('should not serialize unknown structures', async () => {
+    expect(await getResult('#serialize-unknown'))
+      .toBe('Do not know how to serialize a BigInt');
+  });
+
   it('should unserialize functions & objects', async () => {
     expect(await getResult('#unserialize-functions-objects'))
       .toBe(JSON.stringify({
@@ -110,6 +115,11 @@ describe('buddy', () => {
   it('should correctly handle thrown promises', async () => {
     expect(await getResult('#throw'))
       .toBe('custom_error');
+  });
+
+  it('should correctly handle thrown nested promises', async () => {
+    expect(await getResult('#throw-deep'))
+      .toBe('custom_deep_error');
   });
 
   afterAll(async () => {

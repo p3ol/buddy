@@ -22,6 +22,10 @@ on('test:serializePromise', async e => {
   return result;
 }, { source: window.parent });
 
+on('test:serializeUnknown', async e => {
+  return e.data;
+}, { source: window.parent });
+
 on('test:unserializeFunctionsAndObjects', async e => {
   const result = await e.data;
 
@@ -59,4 +63,8 @@ on('test:back-and-forth', async e => {
 
 on('test:throw', async e => {
   return await e.data.promiseThatThrows();
+}, { source: window.parent });
+
+on('test:throw-deep', async e => {
+  return Promise.all([e.data.promiseThatThrows()]);
 }, { source: window.parent });
