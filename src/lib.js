@@ -5,6 +5,7 @@ import {
   isFunction,
   isObject,
   isPromise,
+  isError,
   uuid,
 } from './utils';
 import { log, debug, info, warn, error } from './logger';
@@ -28,12 +29,34 @@ const serialize = (
     return [...data.map(o => serialize(o, options))];
   }
 
+  if (isError(data)) {
+    log(options,
+      'serialize() -->', 'Serializing error', data.name, data.message);
+
+    return {
+      bid: uuid(),
+      type: 'error',
+      name: data.name,
+      message: data.message,
+      stack: data.stack,
+      code: data.code,
+    };
+  }
+
   if (isPromise(data)) {
     log(options, 'serialize() -->', 'Serializing promise', data);
 
     const methodId = uuid();
     on(methodId, async () => {
-      send(target, methodId, await data, {
+      let res;
+
+      try {
+        res = await data;
+      } catch (e) {
+        res = e;
+      }
+
+      send(target, methodId, res, {
         origin,
         ...rest,
         pingBack: false,
@@ -48,7 +71,15 @@ const serialize = (
 
     const methodId = uuid();
     on(methodId, async event => {
-      send(target, methodId, await data(...event.data.args), {
+      let res;
+
+      try {
+        res = await data(...event.data.args);
+      } catch (e) {
+        res = e;
+      }
+
+      send(target, methodId, res, {
         origin,
         ...rest,
         pingBack: false,
@@ -88,42 +119,55 @@ const unserialize = (
 
   const isArray_ = isArray(data);
 
+  if (data.bid && data.type === 'error') {
+    log(options,
+      'unserialize() -->', 'Unserializing error:', data.name, data.message);
+
+    const err = new Error();
+    err.name = data.name;
+    err.message = data.message;
+    err.code = data.code;
+    err.stack = data.stack;
+
+    return err;
+  } else if (data.bid && ['function', 'promise'].includes(data.type)) {
+    log(options, 'unserialize() -->', 'Unserializing method:', options.key);
+
+    return (...args) => {
+      debug(options, `Calling serialized method (name: ${options.key})`);
+
+      return new Promise(resolve => {
+        on(data.bid, e => {
+          debug(options,
+            `Receiving serialized method result (name: ${options.key}) -->`,
+            e.data);
+
+          resolve(e.data);
+        }, { ...options, pingBack: false });
+
+        debug(options,
+          'Sending serialized method params to parent',
+          `(name: ${options.key}) -->`,
+          args.map(a => typeof a)
+        );
+
+        send(source, data.bid, {
+          args: serialize(args, { target: source, origin, ...rest }),
+        }, { target: source, origin, ...rest, pingBack: false });
+      });
+    };
+  }
+
   return (isArray_ ? data : Object.keys(data)).reduce((res, item, i) => {
     const k = isArray_ ? i : item;
     const v = isArray_ ? item : data[k];
 
-    if (!v) {
-      res[k] = v;
-    } else if (v.bid && ['function', 'promise'].includes(v.type)) {
-      log(options, 'unserialize() -->', 'Unserializing method:', k);
-
-      res[k] = (...args) => {
-        debug(options, `Calling serialized method (name: ${k})`);
-
-        return new Promise(resolve => {
-          on(v.bid, e => {
-            debug(options,
-              `Receiving serialized method result (name: ${k}) -->`, e.data);
-
-            resolve(e.data);
-          }, { ...options, pingBack: false });
-
-          debug(options,
-            `Sending serialized method params to parent (name: ${k}) -->`,
-            args.map(a => typeof a)
-          );
-
-          send(source, v.bid, {
-            args: serialize(args, { target: source, origin, ...rest }),
-          }, { target: source, origin, ...rest, pingBack: false });
-        });
-      };
-    } else if (isObject(v) && !isArray(v)) {
+    if (isObject(v) && !isArray(v)) {
       log(options, 'unserialize() -->', 'Unserializing object:', v);
-      res[k] = unserialize(v, { ...options });
+      res[k] = unserialize(v, { ...options, key: k });
     } else if (isObject(v) && isArray(v)) {
       log(options, 'unserialize() -->', 'Unserializing array:', v);
-      res[k] = [...v.map(v_ => unserialize(v_, { ...options }))];
+      res[k] = [...v.map(v_ => unserialize(v_, { ...options, key: k }))];
     } else {
       res[k] = v;
     }
@@ -180,6 +224,8 @@ export const send = (target, name, data, options = {}) => {
               `Error received from target window, aborting (event: ${name})`);
 
             return reject(new Error(e.data.error.toString()));
+          } else if (e.data && isError(e.data)) {
+            return reject(e.data);
           }
 
           resolve(e.data);

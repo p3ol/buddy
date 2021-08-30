@@ -26,3 +26,6 @@ export const isPromise = p =>
   !!p &&
   (typeof p === 'object' || typeof p === 'function') &&
   typeof p.then === 'function';
+
+export const isError = e =>
+  e instanceof Error;
