@@ -117,6 +117,14 @@ const exec = async () => {
     callback: backAndForth,
   });
   createElement('back-and-forth', backAndForthResult);
+
+  // test:throw
+  const throws = sinon.spy(async () => {
+    throw new Error('custom_error');
+  });
+  const throwsResult = await sendExpectingError(contentWindow,
+    'test:throw', { promiseThatThrows: throws });
+  createElement('throw', throwsResult);
 };
 
 if (frame.contentWindow) {

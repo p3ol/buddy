@@ -107,6 +107,11 @@ describe('buddy', () => {
       .toBe('true');
   });
 
+  it('should correctly handle thrown promises', async () => {
+    expect(await getResult('#throw'))
+      .toBe('custom_error');
+  });
+
   afterAll(async () => {
     try {
       const coverage = await page.coverage.stopJSCoverage();

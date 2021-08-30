@@ -56,3 +56,7 @@ on('test:back-and-forth', async e => {
 
   return JSON.stringify(res);
 }, { source: window.parent });
+
+on('test:throw', async e => {
+  return await e.data.promiseThatThrows();
+}, { source: window.parent });
