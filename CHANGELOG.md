@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-rc.1](https://github.com/p3ol/buddy/compare/v0.0.1-rc.0...v0.0.1-rc.1) (2021-08-30)
+
+
+### Bug Fixes
+
+* correctly handle nested thrown errors ([647e55a](https://github.com/p3ol/buddy/commit/647e55a08fb06a45b1443d86942a75406957ae99))
+
 ### [0.0.1-rc.0](https://github.com/p3ol/buddy/compare/v0.0.1-beta.7...v0.0.1-rc.0) (2021-08-30)
 
 
