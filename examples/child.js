@@ -17,7 +17,7 @@ on('test:serializeMethod', e => {
 }, { source: window.parent });
 
 on('test:serializePromise', async e => {
-  const result = await e.data.serializePromise();
+  const result = await e.data();
 
   return result;
 }, { source: window.parent });

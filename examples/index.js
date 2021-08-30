@@ -47,7 +47,7 @@ const exec = async () => {
   // test:serializePromise
   const serializePromise = new Promise(resolve => resolve('promise result'));
   const promiseResult = await send(contentWindow, 'test:serializePromise',
-    { serializePromise });
+    serializePromise);
   createElement('serialize-promise', promiseResult);
 
   // test:unserializeFunctionsAndObjects
