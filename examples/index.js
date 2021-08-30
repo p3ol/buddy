@@ -134,9 +134,11 @@ const exec = async () => {
 
   // test:throw
   const throwsDeep = sinon.spy(async () => {
-    throw new Error('custom_deep_error');
+    return Promise.all([
+      (async () => { throw new Error('custom_deep_error'); })(),
+    ]);
   });
-  const throwsDeepResult = await sendExpectingError(contentWindow,
+  const throwsDeepResult = await send(contentWindow,
     'test:throw-deep', { promiseThatThrows: throwsDeep });
   createElement('throw-deep', throwsDeepResult);
 };

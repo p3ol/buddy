@@ -62,9 +62,15 @@ on('test:back-and-forth', async e => {
 }, { source: window.parent });
 
 on('test:throw', async e => {
-  return await e.data.promiseThatThrows();
+  return e.data.promiseThatThrows();
 }, { source: window.parent });
 
 on('test:throw-deep', async e => {
-  return Promise.all([e.data.promiseThatThrows()]);
+  try {
+    await e.data.promiseThatThrows();
+
+    return 'success';
+  } catch (er) {
+    return er.message;
+  }
 }, { source: window.parent });

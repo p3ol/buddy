@@ -52,8 +52,8 @@ const serialize = (
 
       try {
         res = await data;
-      } catch (e) {
-        res = e;
+      } catch (er) {
+        res = er;
       }
 
       send(target, methodId, res, {
@@ -75,8 +75,8 @@ const serialize = (
 
       try {
         res = await data(...event.data.args);
-      } catch (e) {
-        res = e;
+      } catch (er) {
+        res = er;
       }
 
       send(target, methodId, res, {
@@ -136,14 +136,14 @@ const unserialize = (
     return (...args) => {
       debug(options, `Calling serialized method (name: ${options.key})`);
 
-      return new Promise(resolve => {
+      return new Promise((resolve, reject) => {
         on(data.bid, e => {
           debug(options,
             `Receiving serialized method result (name: ${options.key}) -->`,
             e.data);
 
           resolve(e.data);
-        }, { ...options, pingBack: false });
+        }, { ...options, onError: reject, pingBack: false });
 
         debug(options,
           'Sending serialized method params to parent',
@@ -232,7 +232,7 @@ export const send = (target, name, data, options = {}) => {
 
           resolve(e.data);
         }
-      }, { source: target, origin, ...rest, pingBack: false });
+      }, { source: target, origin, ...rest, onError: reject, pingBack: false });
     }
 
     let parsedData;
@@ -299,24 +299,40 @@ export const on = (name, fn, options = {}) => {
 
     try {
       unserializedData = unserialize(event.data, { source, origin, ...rest });
-    } catch (e) {
+    } catch (er) {
       warn(options,
         `Output data could not be unserialized (event: ${name}) -->`, event);
-      unserializedData = e;
+
+      if (options.onError) {
+        options.onError(er);
+
+        return;
+      }
     }
 
-    Promise.resolve(fn({
+    Promise.resolve((async () => fn({
       bid: event.bid,
       name: event.name,
       source: e.source,
       origin: e.origin,
       data: unserializedData,
-    })).then(result => {
+    }))()).then(result => {
       if (pingBack !== false) {
         debug(options,
           `Sending back message result to source window (event: ${name})`);
 
         send(source || e.source, event.bid, result, {
+          ...rest,
+          origin: e.origin,
+          pingBack: false,
+        });
+      }
+    }).catch(er => {
+      if (pingBack !== false) {
+        error(options,
+          `Sending back error to source window (event: ${name})`);
+
+        send(source || e.source, event.bid, er, {
           ...rest,
           origin: e.origin,
           pingBack: false,
