@@ -21,7 +21,6 @@ module.exports = {
   }),
   target: 'web',
   devServer: {
-    contentBase: './build',
     port: process.env.TEST_PORT || 64000,
     host: 'localhost',
     historyApiFallback: true,
