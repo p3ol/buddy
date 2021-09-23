@@ -60,7 +60,7 @@
     "html-webpack-plugin": "5.3.2",
     "istanbul-instrumenter-loader": "3.0.1",
     "jest": "26.6.3",
-    "jest-dev-server": "5.0.3",
+    "jest-dev-server": "6.0.0",
     "nyc": "15.1.0",
     "puppeteer": "10.2.0",
     "puppeteer-to-istanbul": "1.4.0",
