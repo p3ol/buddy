@@ -1677,10 +1677,10 @@
   dependencies:
     eslint-rule-composer "0.3.0"
 
-"@rollup/plugin-alias@3.1.5":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-alias/-/plugin-alias-3.1.5.tgz#73356a3a1eab2e1e2fd952f9f53cd89fc740d952"
-  integrity sha512-yzUaSvCC/LJPbl9rnzX3HN7vy0tq7EzHoEiQl1ofh4n5r2Rd5bj/+zcJgaGA76xbw95/JjWQyvHg9rOJp2y0oQ==
+"@rollup/plugin-alias@3.1.6":
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-alias/-/plugin-alias-3.1.6.tgz#5adc4079f2fb6a185d9f852f9e589c47edac9021"
+  integrity sha512-cN1LPc/nv8MUJOyj2X/7ETAbkvR+NvEkYIeEKxjBAbowLWGmNtmpVhV4uFoVaM5Y2t0H1sELT3mohRmSfSoffw==
   dependencies:
     slash "^3.0.0"
 
