@@ -7,7 +7,7 @@ module.exports = {
           useBuiltIns: 'usage',
           targets: {
             browsers: [
-              'last 2 versions',
+              '>=0.2%',
               'not ie >= 0',
               'not ie_mob >= 0',
               'not dead',
@@ -28,7 +28,7 @@ module.exports = {
           useBuiltIns: 'usage',
           targets: {
             browsers: [
-              'last 2 versions',
+              '>=0.2%',
               'ie >= 11',
               'not dead',
             ],
