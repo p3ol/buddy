@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/p3ol/buddy/compare/v1.0.0...v1.0.1) (2021-10-20)
+
+
+### Bug Fixes
+
+* fix browser compatibility ([bf0d3bd](https://github.com/p3ol/buddy/commit/bf0d3bd979ac35c83ef549d42bc0e10a9e2b8300))
+* **deps:** update dependency core-js to v3.18.2 ([cf02cec](https://github.com/p3ol/buddy/commit/cf02cec6de9314ced588e7dba6c4638ce6a32829))
+* **deps:** update dependency core-js to v3.18.3 ([473eeac](https://github.com/p3ol/buddy/commit/473eeac621dfa78486208459e86f29e48ca09cf3))
+
 ## [1.0.0](https://github.com/p3ol/buddy/compare/v0.0.1-rc.2...v1.0.0) (2021-09-29)
 
 
