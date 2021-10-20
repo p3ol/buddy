@@ -70,7 +70,7 @@
     "sinon": "11.1.2",
     "standard-changelog": "2.0.27",
     "standard-version": "9.3.2",
-    "webpack": "5.59.0",
+    "webpack": "5.59.1",
     "webpack-cli": "4.9.1",
     "webpack-dev-server": "4.3.1"
   },
