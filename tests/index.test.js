@@ -4,6 +4,8 @@ import devServer from 'jest-dev-server';
 
 import { findFreePort, sleep } from './utils.js';
 
+jest.setTimeout(30000);
+
 describe('buddy', () => {
   let browser, page;
 
@@ -16,8 +18,6 @@ describe('buddy', () => {
   };
 
   beforeAll(async () => {
-    jest.setTimeout(30000);
-
     const port = await findFreePort();
     process.env.TEST_PORT = port;
 
