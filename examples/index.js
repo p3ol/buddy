@@ -1,5 +1,5 @@
 import { send } from '@poool/buddy';
-import sinon from 'fixed-sinon';
+import sinon from 'sinon';
 
 const createElement = (id, content) => {
   const elmt = document.createElement('div');
