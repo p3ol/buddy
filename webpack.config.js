@@ -68,7 +68,6 @@ module.exports = {
     extensions: ['.js'],
     alias: {
       '@poool/buddy': path.resolve('./src'),
-      'fixed-sinon': require.resolve('sinon/pkg/sinon.js'),
     },
   },
   module: {
