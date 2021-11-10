@@ -56,7 +56,7 @@
     "eslint-plugin-import": "2.25.3",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.1.1",
-    "eslint-plugin-react": "7.26.1",
+    "eslint-plugin-react": "7.27.0",
     "html-webpack-plugin": "5.5.0",
     "istanbul-instrumenter-loader": "3.0.1",
     "jest": "27.3.1",
