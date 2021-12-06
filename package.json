@@ -76,6 +76,6 @@
   },
   "dependencies": {
     "@babel/runtime-corejs3": "7.16.3",
-    "core-js": "3.19.2"
+    "core-js": "3.19.3"
   }
 }
