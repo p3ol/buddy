@@ -1,0 +1,4 @@
+.github
+tests
+.npmrc
+renovate.json
