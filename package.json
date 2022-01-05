@@ -59,7 +59,7 @@
     "eslint-plugin-react": "7.28.0",
     "html-webpack-plugin": "5.5.0",
     "istanbul-instrumenter-loader": "3.0.1",
-    "jest": "27.4.6",
+    "jest": "27.4.7",
     "jest-dev-server": "6.0.3",
     "nyc": "15.1.0",
     "puppeteer": "13.0.1",
