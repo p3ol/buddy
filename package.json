@@ -63,7 +63,7 @@
     "jest": "28.1.1",
     "jest-dev-server": "6.0.3",
     "nyc": "15.1.0",
-    "puppeteer": "14.1.2",
+    "puppeteer": "14.3.0",
     "puppeteer-to-istanbul": "1.4.0",
     "rollup": "2.75.5",
     "rollup-plugin-eslint": "7.0.0",
