@@ -1995,15 +1995,15 @@
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.3.tgz#323d72dd25103d0c4fbdce89dadf574a787b1f9b"
   integrity sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ==
 
-"@poool/eslint-config@1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-1.5.2.tgz#2c451298301dffe61d3642d2488b7414aba53a5c"
-  integrity sha512-/LZuzVwJu/GuYR5nz6q40DTUwW6j/LLIMW0ArpJVVFGMChc8C5cxlW2G0uo5HIYeSzOmWWVa5S0fTY0F2ZdhqA==
+"@poool/eslint-config@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@poool/eslint-config/-/eslint-config-2.0.0.tgz#eafe61dd86c2d11010066b35167d66b1c83e4b6b"
+  integrity sha512-DY7gyCXQhVI7D1KXv3BH1t0E+ubZYxzALVkQ/kRzMq0shqimc87TgTs6NUBvLP3RfqPKdl8YLNe51KFUUvRCxQ==
 
-"@poool/eslint-plugin@1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@poool/eslint-plugin/-/eslint-plugin-1.5.2.tgz#4bd6c9eaefb43d5e2522db9e33809bf418b05ac0"
-  integrity sha512-qwv0cS1Id4z8GP7OoRGUOI1o4sTGdNjRZ/ncTnPvcDFy9sFUAZkYkJG/GRZx+a2plruPbeVMhpf5gwdOD2hehA==
+"@poool/eslint-plugin@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@poool/eslint-plugin/-/eslint-plugin-2.0.0.tgz#ed837340c64121c94ad20dfb5d897e2b863be862"
+  integrity sha512-qhR0vOh+6tiPbI7re3gG8bvR590Ut1ekOee9lksCL8LBq8601Ym+fniwyvR5osNSeVJ5BDwL0IHnZGYJtHdjCQ==
   dependencies:
     eslint-rule-composer "0.3.0"
 
