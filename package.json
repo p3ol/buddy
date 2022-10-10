@@ -46,7 +46,7 @@
     "@rollup/plugin-alias": "3.1.9",
     "@rollup/plugin-babel": "5.3.1",
     "@rollup/plugin-commonjs": "22.0.2",
-    "@rollup/plugin-node-resolve": "14.1.0",
+    "@rollup/plugin-node-resolve": "15.0.0",
     "auto-changelog": "2.4.0",
     "babel-jest": "29.1.2",
     "babel-loader": "8.2.5",
