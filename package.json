@@ -16,7 +16,7 @@
   "module": "dist/esm/index.js",
   "esnext": "src",
   "engines": {
-    "node": ">=12",
+    "node": ">=14",
     "yarn": ">=1"
   },
   "scripts": {
