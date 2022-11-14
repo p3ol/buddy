@@ -209,12 +209,13 @@ export const send = (target, name, data, options = {}) => {
     };
 
     if (pingBack) {
+      const timeoutErr = new Error('timeout');
       sendTimeout = setTimeout(() => {
         queueHandler && queueHandler.off();
         didTimeout = true;
         error(options,
           `Target window did not respond in time, aborting (event: ${name})`);
-        reject(new Error('timeout'));
+        reject(timeoutErr);
       }, timeout);
 
       const handler = on(event.bid, e => {
