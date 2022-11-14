@@ -36,11 +36,11 @@
   },
   "devDependencies": {
     "@babel/cli": "7.19.3",
-    "@babel/core": "7.19.6",
+    "@babel/core": "7.20.2",
     "@babel/eslint-parser": "7.19.1",
     "@babel/eslint-plugin": "7.19.1",
     "@babel/plugin-transform-runtime": "7.19.6",
-    "@babel/preset-env": "7.19.4",
+    "@babel/preset-env": "7.20.2",
     "@poool/eslint-config": "2.0.2",
     "@poool/eslint-plugin": "2.0.2",
     "@rollup/plugin-alias": "4.0.2",
@@ -49,7 +49,7 @@
     "@rollup/plugin-node-resolve": "15.0.1",
     "auto-changelog": "2.4.0",
     "babel-jest": "29.2.2",
-    "babel-loader": "8.2.5",
+    "babel-loader": "8.3.0",
     "eslint": "8.26.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-babel": "5.3.1",
@@ -76,7 +76,7 @@
     "webpack-dev-server": "4.11.1"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "7.19.6",
+    "@babel/runtime-corejs3": "7.20.1",
     "core-js": "3.26.1"
   }
 }
