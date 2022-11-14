@@ -61,7 +61,7 @@ const serialize = (
         ...rest,
         pingBack: false,
       });
-    }, { source: target, ...rest, pingBack: false });
+    }, { source: target, ...rest, pingBack: false, queue: false });
 
     return { bid: methodId, type: 'promise' };
   }
@@ -84,7 +84,7 @@ const serialize = (
         ...rest,
         pingBack: false,
       });
-    }, { source: target, ...rest, pingBack: false });
+    }, { source: target, ...rest, pingBack: false, queue: false });
 
     return { bid: methodId, type: 'function' };
   }
@@ -143,7 +143,7 @@ const unserialize = (
             e.data);
 
           resolve(e.data);
-        }, { ...options, onError: reject, pingBack: false });
+        }, { ...options, onError: reject, pingBack: false, queue: false });
 
         debug(options,
           'Sending serialized method params to parent',
@@ -153,7 +153,7 @@ const unserialize = (
 
         send(source, data.bid, {
           args: serialize(args, { target: source, origin, ...rest }),
-        }, { target: source, origin, ...rest, pingBack: false });
+        }, { target: source, origin, ...rest, pingBack: false, queue: false });
       });
     };
   }
@@ -187,6 +187,7 @@ export const send = (target, name, data, options = {}) => {
   }
 
   let sendTimeout;
+  let queueHandler;
   let didTimeout = false;
 
   return new Promise((resolve, reject) => {
@@ -209,6 +210,7 @@ export const send = (target, name, data, options = {}) => {
 
     if (pingBack) {
       sendTimeout = setTimeout(() => {
+        queueHandler && queueHandler.off();
         didTimeout = true;
         error(options,
           `Target window did not respond in time, aborting (event: ${name})`);
@@ -217,6 +219,7 @@ export const send = (target, name, data, options = {}) => {
 
       const handler = on(event.bid, e => {
         handler.off();
+        queueHandler && queueHandler.off();
 
         if (!didTimeout) {
           clearTimeout(sendTimeout);
@@ -252,6 +255,15 @@ export const send = (target, name, data, options = {}) => {
 
     info(options,
       `Sending message to target window (event: ${name}) -->`, parsedData);
+
+    if (options.queue) {
+      info(options, 'Queueing message in case target window is not ready');
+      queueHandler = on('target:loaded', () => {
+        queueHandler && queueHandler.off();
+        target.postMessage(parsedData, origin);
+      }, { source: target, origin, ...rest, queue: false, pingBack: false });
+    }
+
     target.postMessage(parsedData, origin);
   });
 };
@@ -280,14 +292,14 @@ export const on = (name, fn, options = {}) => {
 
     if (source && e.source !== source) {
       send(e.source, event.bid, { error: 'source' },
-        { ...rest, origin: e.origin, pingBack: false });
+        { ...rest, origin: e.origin, pingBack: false, queue: false });
 
       return;
     }
 
     if (origin && origin !== '*' && e.origin !== origin) {
       send(e.source, event.bid, { error: 'origin' },
-        { ...rest, origin: e.origin, pingBack: false });
+        { ...rest, origin: e.origin, pingBack: false, queue: false });
 
       return;
     }
@@ -325,6 +337,7 @@ export const on = (name, fn, options = {}) => {
           ...rest,
           origin: e.origin,
           pingBack: false,
+          queue: false,
         });
       }
     }).catch(er => {
@@ -336,12 +349,19 @@ export const on = (name, fn, options = {}) => {
           ...rest,
           origin: e.origin,
           pingBack: false,
+          queue: false,
         });
       }
     });
   };
 
   window.addEventListener('message', handler, false);
+
+  if (options.queue) {
+    send(source, 'target:loaded', {}, {
+      ...rest, pingBack: false, queue: false,
+    });
+  }
 
   return {
     off: () => {
