@@ -1,76 +1,80 @@
-import { on } from '@poool/buddy';
+import { on, setGlobalOptions } from '@poool/buddy';
 
-on('test:messaging', () => {
-  return 'response:messaging';
-}, { source: window.parent });
+setGlobalOptions({ queue: true });
 
-on('test:wrongWindow', () => {
-  return 'response:wrongWindow';
-}, { source: window });
+setTimeout(() => {
+  on('test:messaging', () => {
+    return 'response:messaging';
+  }, { source: window.parent });
 
-on('test:serializeArray', e => {
-  return e.data;
-}, { source: window.parent });
+  on('test:wrongWindow', () => {
+    return 'response:wrongWindow';
+  }, { source: window });
 
-on('test:serializeMethod', e => {
-  e.data.serializeMethod();
-}, { source: window.parent });
+  on('test:serializeArray', e => {
+    return e.data;
+  }, { source: window.parent });
 
-on('test:serializePromise', async e => {
-  const result = await e.data();
+  on('test:serializeMethod', e => {
+    e.data.serializeMethod();
+  }, { source: window.parent });
 
-  return result;
-}, { source: window.parent });
+  on('test:serializePromise', async e => {
+    const result = await e.data();
 
-on('test:serializeUnknown', async e => {
-  return e.data;
-}, { source: window.parent });
+    return result;
+  }, { source: window.parent });
 
-on('test:unserializeFunctionsAndObjects', async e => {
-  const result = await e.data;
+  on('test:serializeUnknown', async e => {
+    return e.data;
+  }, { source: window.parent });
 
-  return result;
-}, { source: window.parent });
+  on('test:unserializeFunctionsAndObjects', async e => {
+    const result = await e.data;
 
-on('test:parentMethodReturnValue', async e => {
-  const result = await e.data.parentCallback();
+    return result;
+  }, { source: window.parent });
 
-  return result;
-}, { source: window.parent });
+  on('test:parentMethodReturnValue', async e => {
+    const result = await e.data.parentCallback();
 
-on('test:parentMethodCalledTwice', async e => {
-  await e.data.callback();
-  await e.data.callback();
-}, { source: window.parent });
+    return result;
+  }, { source: window.parent });
 
-on('test:noTarget', async e => {
-  e.data.callback();
-}, { source: window.parent });
+  on('test:parentMethodCalledTwice', async e => {
+    await e.data.callback();
+    await e.data.callback();
+  }, { source: window.parent });
 
-on('test:nestedArrayResponseFromChild', async e => {
-  await e.data.callback('init', { callback: () => 'response from child' });
-}, { source: window.parent });
+  on('test:noTarget', async e => {
+    e.data.callback();
+  }, { source: window.parent });
 
-on('test:primitiveTypes', e => {
-  return e.data;
-}, { source: window.parent });
+  on('test:nestedArrayResponseFromChild', async e => {
+    await e.data.callback('init', { callback: () => 'response from child' });
+  }, { source: window.parent });
 
-on('test:back-and-forth', async e => {
-  const res = await e.data.callback();
+  on('test:primitiveTypes', e => {
+    return e.data;
+  }, { source: window.parent });
 
-  return JSON.stringify(res);
-}, { source: window.parent });
+  on('test:back-and-forth', async e => {
+    const res = await e.data.callback();
 
-on('test:throw', async e => {
-  return e.data.promiseThatThrows();
-}, { source: window.parent });
+    return JSON.stringify(res);
+  }, { source: window.parent });
 
-on('test:throw-deep', async e => {
-  try {
-    await e.data.promiseThatThrows();
+  on('test:throw', async e => {
+    return e.data.promiseThatThrows();
+  }, { source: window.parent });
 
-    return 'success';
-  } catch (er) {
-    return er.message;
-  }
-}, { source: window.parent });
+  on('test:throw-deep', async e => {
+    try {
+      await e.data.promiseThatThrows();
+
+      return 'success';
+    } catch (er) {
+      return er.message;
+    }
+  }, { source: window.parent });
+}, 100);

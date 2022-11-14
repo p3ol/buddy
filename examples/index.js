@@ -1,5 +1,7 @@
-import { send } from '@poool/buddy';
+import { send, setGlobalOptions } from '@poool/buddy';
 import sinon from 'sinon';
+
+setGlobalOptions({ queue: true });
 
 const createElement = (id, content) => {
   const elmt = document.createElement('div');
