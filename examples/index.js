@@ -1,7 +1,5 @@
-import { send, setGlobalOptions } from '@poool/buddy';
+import { send } from '@poool/buddy';
 import sinon from 'sinon';
-
-setGlobalOptions({ queue: true });
 
 const createElement = (id, content) => {
   const elmt = document.createElement('div');
@@ -143,6 +141,11 @@ const exec = async () => {
   const throwsDeepResult = await send(contentWindow,
     'test:throw-deep', { promiseThatThrows: throwsDeep });
   createElement('throw-deep', throwsDeepResult);
+
+  // test:delayed
+  const delayedResult = await send(contentWindow, 'test:delayed', {},
+    { queue: true });
+  createElement('delayed', delayedResult);
 };
 
 if (frame.contentWindow) {
