@@ -6,6 +6,7 @@ import {
   isObject,
   isPromise,
   isError,
+  isCustomError,
   uuid,
 } from './utils';
 import { log, debug, info, warn, error } from './logger';
@@ -52,8 +53,13 @@ const serialize = (
 
       try {
         res = await data;
-      } catch (er) {
-        res = er;
+      } catch (error) {
+        res = isError(error) || isCustomError(error) ? error : {
+          bid: methodId,
+          type: 'error',
+          name: 'CustomError',
+          error,
+        };
       }
 
       send(target, methodId, res, {
@@ -75,8 +81,13 @@ const serialize = (
 
       try {
         res = await data(...event.data.args);
-      } catch (er) {
-        res = er;
+      } catch (error) {
+        res = isError(error) || isCustomError(error) ? error : {
+          bid: methodId,
+          type: 'error',
+          name: 'CustomError',
+          error,
+        };
       }
 
       send(target, methodId, res, {
@@ -120,16 +131,22 @@ const unserialize = (
   const isArray_ = isArray(data);
 
   if (data.bid && data.type === 'error') {
-    log(options,
-      'unserialize() -->', 'Unserializing error:', data.name, data.message);
+    if (data.error) {
+      log(options, 'unserialize() -->', 'Unserializing error:', data.error);
 
-    const err = new Error();
-    err.name = data.name;
-    err.message = data.message;
-    err.code = data.code;
-    err.stack = data.stack;
+      throw data.error;
+    } else {
+      log(options,
+        'unserialize() -->', 'Unserializing error:', data.name, data.message);
 
-    throw err;
+      const err = new Error();
+      err.name = data.name;
+      err.message = data.message;
+      err.code = data.code;
+      err.stack = data.stack;
+
+      throw err;
+    }
   } else if (data.bid && ['function', 'promise'].includes(data.type)) {
     log(options, 'unserialize() -->', 'Unserializing method:', options.key);
 

@@ -122,6 +122,11 @@ describe('buddy', () => {
       .toBe('custom_deep_error');
   });
 
+  it('should correctly handle thrown custom error objects', async () => {
+    expect(await getResult('#throw-custom-error'))
+      .toBe('custom_error_object');
+  });
+
   afterAll(async () => {
     try {
       const coverage = await page.coverage.stopJSCoverage();

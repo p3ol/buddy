@@ -74,3 +74,7 @@ on('test:throw-deep', async e => {
     return er.message;
   }
 }, { source: window.parent });
+
+on('test:throw-custom-error', async e => {
+  return e.data.promiseThatThrows();
+}, { source: window.parent });
