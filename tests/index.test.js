@@ -122,6 +122,11 @@ describe('buddy', () => {
       .toBe('custom_deep_error');
   });
 
+  it('should correctly handle thrown custom error objects', async () => {
+    expect(await getResult('#throw-custom-error'))
+      .toBe('custom_error_object');
+  });
+
   it('should correctly handle delayed handlers', async () => {
     expect(await getResult('#delayed'))
       .toBe('response:delayed');

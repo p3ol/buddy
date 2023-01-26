@@ -132,7 +132,7 @@ const exec = async () => {
     'test:throw', { promiseThatThrows: throws });
   createElement('throw', throwsResult);
 
-  // test:throw
+  // test:throw-deep
   const throwsDeep = sinon.spy(async () => {
     return Promise.all([
       (async () => { throw new Error('custom_deep_error'); })(),
@@ -141,6 +141,15 @@ const exec = async () => {
   const throwsDeepResult = await send(contentWindow,
     'test:throw-deep', { promiseThatThrows: throwsDeep });
   createElement('throw-deep', throwsDeepResult);
+
+  // test:throw-custom-error
+  const throwsCustomError = sinon.spy(async () => {
+    const err = { foo: 'custom_error_object' };
+    throw err;
+  });
+  const throwsCustomErrorResult = await send(contentWindow,
+    'test:throw-custom-error', { promiseThatThrows: throwsCustomError });
+  createElement('throw-custom-error', throwsCustomErrorResult.foo);
 
   // test:delayed
   const delayedResult = await send(contentWindow, 'test:delayed', {},

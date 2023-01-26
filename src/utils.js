@@ -29,3 +29,6 @@ export const isPromise = p =>
 
 export const isError = e =>
   e instanceof Error;
+
+export const isCustomError = e =>
+  e.type === 'error' && e.bid;
