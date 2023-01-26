@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/p3ol/buddy/compare/v1.0.2...v1.1.0) (2022-11-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* require node 14
+
+### Features
+
+* require node 14 ([70a55ec](https://github.com/p3ol/buddy/commit/70a55ec780eb007b6fc5bf6c884331eed650a571))
+
+
+### Bug Fixes
+
+* **deps:** update dependency core-js to v3.20.0 ([cd9c896](https://github.com/p3ol/buddy/commit/cd9c896d7de46eb0610f3eb6d44dd324c2b0258b))
+* **deps:** update dependency core-js to v3.20.1 ([f5b9401](https://github.com/p3ol/buddy/commit/f5b9401f5c741df5e5f502c8e7f3dab50668b00d))
+* **deps:** update dependency core-js to v3.20.2 ([4e1a750](https://github.com/p3ol/buddy/commit/4e1a750188fee26b86118842a1d9c2b30f658ef2))
+* **deps:** update dependency core-js to v3.20.3 ([10b1a80](https://github.com/p3ol/buddy/commit/10b1a809d7ff2f1a5766c07415673a2b1556b851))
+* **deps:** update dependency core-js to v3.21.0 ([6efbcbb](https://github.com/p3ol/buddy/commit/6efbcbb23bdc4f9a0828622d6587f78132add673))
+* **deps:** update dependency core-js to v3.21.1 ([c407154](https://github.com/p3ol/buddy/commit/c4071541f718d56d89793883fb1bf2fe4c380af0))
+* **deps:** update dependency core-js to v3.22.1 ([d4d3acf](https://github.com/p3ol/buddy/commit/d4d3acf49022d21e3a4e028be1db22bea31a1a24))
+* **deps:** update dependency core-js to v3.22.2 ([a5cbb0a](https://github.com/p3ol/buddy/commit/a5cbb0a30add9ebe38dccf380776e2f8f680ad09))
+* **deps:** update dependency core-js to v3.22.3 ([2991572](https://github.com/p3ol/buddy/commit/299157258f41b2e9e7241bebbeb715ab23dfdfb1))
+* **deps:** update dependency core-js to v3.22.4 ([547ec63](https://github.com/p3ol/buddy/commit/547ec63aebd3ad8b534b1b2239e08724d6760918))
+* **deps:** update dependency core-js to v3.22.5 ([ea65eb9](https://github.com/p3ol/buddy/commit/ea65eb964ab082444179f357e57240de638ea677))
+* **deps:** update dependency core-js to v3.22.6 ([afc075e](https://github.com/p3ol/buddy/commit/afc075eaef2c872b3a3983e11d4759e5711d0a76))
+* **deps:** update dependency core-js to v3.22.7 ([c73614f](https://github.com/p3ol/buddy/commit/c73614f264d1ffebde2842d610f7d4bace529bbc))
+* **deps:** update dependency core-js to v3.22.8 ([c8824e2](https://github.com/p3ol/buddy/commit/c8824e2680c214af312fe1a66ee3f9f122c07c6d))
+* **deps:** update dependency core-js to v3.23.1 ([61f8dd0](https://github.com/p3ol/buddy/commit/61f8dd077af7c2aa80a3c7511fb801e16117eb0f))
+* **deps:** update dependency core-js to v3.23.2 ([052e93d](https://github.com/p3ol/buddy/commit/052e93d04e58261ad6c96b4e005408eb7c377298))
+* **deps:** update dependency core-js to v3.23.3 ([d2fc1de](https://github.com/p3ol/buddy/commit/d2fc1dea10cefe0ab1ec4e5e89e0144524833cc3))
+* **deps:** update dependency core-js to v3.23.4 ([c53c049](https://github.com/p3ol/buddy/commit/c53c04912d01bd0d9dba95a372312acdfcc2832c))
+* **deps:** update dependency core-js to v3.23.5 ([d8568b1](https://github.com/p3ol/buddy/commit/d8568b19c9db038df2f72e52e2a3c61560590f2f))
+* **deps:** update dependency core-js to v3.24.0 ([2f70ba4](https://github.com/p3ol/buddy/commit/2f70ba4e5c72d92f9d0c02473e88028939d1e02a))
+* **deps:** update dependency core-js to v3.24.1 ([e3e1aab](https://github.com/p3ol/buddy/commit/e3e1aab5e6b1153f4d9c0f9035d0165d809c6aad))
+* **deps:** update dependency core-js to v3.25.2 ([fc9a472](https://github.com/p3ol/buddy/commit/fc9a47297bdb9b6175b70cd4147cde66810d9550))
+* **deps:** update dependency core-js to v3.25.3 ([2c99627](https://github.com/p3ol/buddy/commit/2c99627f6dc9ddbaf6040352b10733d327687498))
+* **deps:** update dependency core-js to v3.25.4 ([29b2f0a](https://github.com/p3ol/buddy/commit/29b2f0ab4e09b07881b9a05e0a24df0271bfda35))
+* **deps:** update dependency core-js to v3.25.5 ([d0b21c7](https://github.com/p3ol/buddy/commit/d0b21c720ddf12f12a1b49e10df671b7c9cbcc00))
+* **deps:** update dependency core-js to v3.26.0 ([cc93c05](https://github.com/p3ol/buddy/commit/cc93c051912c2fde531cd65cd29c019ebd395285))
+* **deps:** update dependency core-js to v3.26.1 ([115203a](https://github.com/p3ol/buddy/commit/115203a2ef2a8f1d3e8c75c1efeca519a0d57075))
+* rollup 3 compat ([9227900](https://github.com/p3ol/buddy/commit/9227900450e44c9706d5ad4dce05c7fbcae13505))
+
 ### [1.0.2](https://github.com/p3ol/buddy/compare/v1.0.1...v1.0.2) (2021-12-07)
 
 

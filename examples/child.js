@@ -78,3 +78,9 @@ on('test:throw-deep', async e => {
 on('test:throw-custom-error', async e => {
   return e.data.promiseThatThrows();
 }, { source: window.parent });
+
+setTimeout(() => {
+  on('test:delayed', () => {
+    return 'response:delayed';
+  }, { queue: true, source: window.parent });
+}, 100);

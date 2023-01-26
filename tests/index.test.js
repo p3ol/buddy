@@ -127,6 +127,11 @@ describe('buddy', () => {
       .toBe('custom_error_object');
   });
 
+  it('should correctly handle delayed handlers', async () => {
+    expect(await getResult('#delayed'))
+      .toBe('response:delayed');
+  });
+
   afterAll(async () => {
     try {
       const coverage = await page.coverage.stopJSCoverage();

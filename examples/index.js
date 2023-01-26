@@ -150,6 +150,11 @@ const exec = async () => {
   const throwsCustomErrorResult = await send(contentWindow,
     'test:throw-custom-error', { promiseThatThrows: throwsCustomError });
   createElement('throw-custom-error', throwsCustomErrorResult.foo);
+
+  // test:delayed
+  const delayedResult = await send(contentWindow, 'test:delayed', {},
+    { queue: true });
+  createElement('delayed', delayedResult);
 };
 
 if (frame.contentWindow) {
