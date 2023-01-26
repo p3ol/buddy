@@ -141,6 +141,11 @@ const exec = async () => {
   const throwsDeepResult = await send(contentWindow,
     'test:throw-deep', { promiseThatThrows: throwsDeep });
   createElement('throw-deep', throwsDeepResult);
+
+  // test:delayed
+  const delayedResult = await send(contentWindow, 'test:delayed', {},
+    { queue: true });
+  createElement('delayed', delayedResult);
 };
 
 if (frame.contentWindow) {

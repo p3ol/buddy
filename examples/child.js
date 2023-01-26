@@ -74,3 +74,9 @@ on('test:throw-deep', async e => {
     return er.message;
   }
 }, { source: window.parent });
+
+setTimeout(() => {
+  on('test:delayed', () => {
+    return 'response:delayed';
+  }, { queue: true, source: window.parent });
+}, 100);
