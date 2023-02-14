@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/p3ol/buddy/compare/v1.1.0...v1.2.0) (2023-02-14)
+
+
+### Features
+
+* allow to queue messages when target is allegedly not ready ([41fd12e](https://github.com/p3ol/buddy/commit/41fd12edabf36b64a05b76c3796ced513c57f417))
+* allow to throw custom objects instead of error instances ([3141736](https://github.com/p3ol/buddy/commit/3141736de3137ad10379ea82504b09c6436bb238))
+
+
+### Bug Fixes
+
+* better timeout error stack ([fa887db](https://github.com/p3ol/buddy/commit/fa887dbc9c7124fb9afb6d649d86592487d08781))
+* **deps:** update dependency core-js to v3.27.2 ([e601ac2](https://github.com/p3ol/buddy/commit/e601ac2c1773d72f56313b01fffc4f960a611a62))
+* **deps:** update dependency core-js to v3.28.0 ([29ad5d9](https://github.com/p3ol/buddy/commit/29ad5d951da2ba8f54fdf06e55e5dd5b307d1ad6))
+
 ## [1.1.0](https://github.com/p3ol/buddy/compare/v1.0.2...v1.1.0) (2022-11-15)
 
 
