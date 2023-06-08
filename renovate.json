@@ -3,11 +3,21 @@
     "config:base"
   ],
   "packageRules": [{
-    "updateTypes": ["patch", "pin"],
-    "depTypeList": ["devDependencies", "dependencies"],
+    "matchUpdateTypes": ["patch", "pin"],
+    "matchDepTypes": ["devDependencies", "dependencies"],
     "automerge": true
   }, {
-    "packagePatterns": ["^@poool/eslint"],
+    "matchManagers": ["github-actions"],
+    "reviewers": ["yannispgs"]
+  }, {
+    "matchUpdateTypes": ["minor","major"],
+    "matchDepTypes": ["dependencies"],
+    "semanticCommitType": "feat"
+  }, {
+    "matchDepTypes": ["devDependencies"],
+    "prPriority": -1
+  }, {
+    "matchPackagePatterns": ["^@poool/eslint"],
     "groupName": "poool eslint monorepo"
   }]
 }
