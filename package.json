@@ -35,12 +35,12 @@
     "release:rc": "./node_modules/.bin/standard-version --prerelease rc && git push --follow-tags"
   },
   "devDependencies": {
-    "@babel/cli": "7.21.5",
-    "@babel/core": "7.21.8",
-    "@babel/eslint-parser": "7.21.8",
-    "@babel/eslint-plugin": "7.19.1",
-    "@babel/plugin-transform-runtime": "7.21.4",
-    "@babel/preset-env": "7.21.5",
+    "@babel/cli": "7.22.9",
+    "@babel/core": "7.22.9",
+    "@babel/eslint-parser": "7.22.9",
+    "@babel/eslint-plugin": "7.22.5",
+    "@babel/plugin-transform-runtime": "7.22.9",
+    "@babel/preset-env": "7.22.9",
     "@poool/eslint-config": "2.0.2",
     "@poool/eslint-plugin": "2.0.2",
     "@rollup/plugin-alias": "5.0.0",
@@ -76,7 +76,7 @@
     "webpack-dev-server": "4.15.1"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "7.21.5",
+    "@babel/runtime-corejs3": "7.22.6",
     "core-js": "3.31.0"
   }
 }
