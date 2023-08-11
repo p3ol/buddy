@@ -7,7 +7,7 @@ import { findFreePort, sleep } from './utils.js';
 jest.setTimeout(30000);
 
 describe('buddy', () => {
-  let browser, page;
+  let server, browser, page;
 
   const getResult = async name => {
     await page.waitForSelector(name);
@@ -21,8 +21,9 @@ describe('buddy', () => {
     const port = await findFreePort();
     process.env.TEST_PORT = port;
 
-    await devServer.setup({
+    server = await devServer.setup({
       command: `NODE_ENV=tests; BABEL_ENV=tests; TEST_PORT=${port} yarn serve`,
+      host: 'localhost',
       port,
       protocol: 'http',
       launchTimeout: 30000,
@@ -30,7 +31,9 @@ describe('buddy', () => {
 
     await sleep(1000);
 
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({
+      headless: 'new',
+    });
     page = await browser.newPage();
     await page.coverage.startJSCoverage();
     await page.goto('http://localhost:' + port);
@@ -140,7 +143,7 @@ describe('buddy', () => {
       console.error(e);
     }
 
-    await devServer.teardown();
+    await devServer.teardown(server);
     await browser.close();
   });
 });
