@@ -1,13 +1,12 @@
-import path from 'path';
+import path from 'node:path';
 
 import babel from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 
-const isForIE = process.env.BABEL_ENV === 'ie';
 const input = './src/index.js';
-const output = `./dist${isForIE ? '/ie' : ''}`;
+const output = './dist';
 const name = 'buddy';
 const formats = ['umd', 'cjs', 'esm'];
 
@@ -16,7 +15,7 @@ const defaultGlobals = {};
 
 const defaultPlugins = [
   babel({
-    exclude: 'node_modules/**',
+    exclude: /node_modules/,
     babelHelpers: 'runtime',
   }),
   resolve(),

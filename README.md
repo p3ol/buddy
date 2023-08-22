@@ -36,19 +36,6 @@ send(someChildWindow, 'getInfos', { infos: 'some string', someMethod: () => 25 }
 
 Buddy serializes all the primitive types (using `JSON.parse`) and even __methods__, using custom back & forth `Promise` logic.
 
-
-### IE Compatibility
-
-As part of a global effort to deprecate Internet Explorer, we decided not to include IE polyfills by default.
-You can still manually import a version containing all the necessary polyfills for IE >= 11:
-
-```javascript
-import * as buddy from '@poool/buddy/dist/ie/buddy.esm.js';
-```
-
-Please note that this build will probably add more than 150kb to your final bundle.
-
-
 ## Configuration
 
 Global options can be updated using `setGlobalOptions` method:
