@@ -6,10 +6,6 @@ module.exports = {
       env: {
         jest: true,
       },
-      plugins: [],
-      rules: {
-        '@babel/no-unused-expressions': 0,
-      },
     },
   ],
 };
