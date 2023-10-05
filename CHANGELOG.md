@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/p3ol/buddy/compare/v1.2.0...v2.0.0) (2023-10-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove IE compat
+
+### Features
+
+* add types definitions ([79fe4ec](https://github.com/p3ol/buddy/commit/79fe4ece65023fb24c085d7679941ed5e88be1cd))
+* **deps:** update dependency core-js to v3.31.0 ([34032fd](https://github.com/p3ol/buddy/commit/34032fd6ef41bb2df7d44b57715aef621c650902))
+* **deps:** update dependency core-js to v3.32.0 ([7d9fe76](https://github.com/p3ol/buddy/commit/7d9fe760a432b0ade5108ae8548a8e182950e2a0))
+* **deps:** update dependency core-js to v3.33.0 ([751a432](https://github.com/p3ol/buddy/commit/751a4324d7db8430f3fd3d5d935283c7e27c6603))
+* remove IE compat ([72c8d52](https://github.com/p3ol/buddy/commit/72c8d525e0603e0265a83042e2c387f78220cbcb))
+
+
+### Bug Fixes
+
+* **ci:** use yarn cache for node libraries ([ea33323](https://github.com/p3ol/buddy/commit/ea333235d5f6dbe6db8f7c104d4e3c3e3e9fd4b4))
+* **deps:** update dependency core-js to v3.30.1 ([975b3c7](https://github.com/p3ol/buddy/commit/975b3c7f5b99f414334d48de5825632625400385))
+* **deps:** update dependency core-js to v3.30.2 ([62ae52b](https://github.com/p3ol/buddy/commit/62ae52bebbf59d4610ab350479e8638dcd53ee11))
+* **deps:** update dependency core-js to v3.32.1 ([36d84e7](https://github.com/p3ol/buddy/commit/36d84e7677d3a464e1a80e912901d14fd5da01e7))
+* **deps:** update dependency core-js to v3.32.2 ([bbad7f5](https://github.com/p3ol/buddy/commit/bbad7f564e5b1ccd7a57302f06c76314485a04ff))
+* **renovate:** improve config for PRs and commits ([6a3fd46](https://github.com/p3ol/buddy/commit/6a3fd4669661b0e69aa25c1a0d64ada5caa9edfe))
+
 ## [1.2.0](https://github.com/p3ol/buddy/compare/v1.1.0...v1.2.0) (2023-02-14)
 
 
