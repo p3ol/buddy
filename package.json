@@ -15,6 +15,7 @@
   "jsnext:main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "esnext": "src",
+  "types": "dist/buddy.d.ts",
   "engines": {
     "node": ">=14",
     "yarn": ">=1"
