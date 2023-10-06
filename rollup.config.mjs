@@ -1,10 +1,10 @@
 import path from 'node:path';
 
-import babel from '@rollup/plugin-babel';
+import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import terser from '@rollup/plugin-terser';
 import dts from 'rollup-plugin-dts';
+import swc from '@rollup/plugin-swc';
 
 const input = './src/index.js';
 const output = './dist';
@@ -15,12 +15,18 @@ const defaultExternals = [];
 const defaultGlobals = {};
 
 const defaultPlugins = [
-  babel({
-    exclude: /node_modules/,
-    babelHelpers: 'runtime',
-  }),
   resolve(),
   commonjs(),
+  swc({
+    swc: {
+      jsc: {
+        target: null,
+      },
+      env: {
+        targets: '>=0.2% and not dead',
+      },
+    },
+  }),
   terser(),
 ];
 
