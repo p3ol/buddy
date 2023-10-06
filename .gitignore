@@ -64,3 +64,14 @@ dist
 build
 
 .DS_Store
+
+# Yarn 3
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+.rollup.cache

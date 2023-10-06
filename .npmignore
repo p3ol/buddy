@@ -2,3 +2,4 @@
 tests
 .npmrc
 renovate.json
+.yarn
