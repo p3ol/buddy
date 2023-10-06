@@ -1,0 +1,72 @@
+export declare interface BuddyGlobalOptions {
+  /**
+   * Message expiration time, after which an error will be thrown.
+   * @default 5000
+   */
+  timeout?: number;
+
+  /**
+   * Either `0` (disabled), `1` (error), `2` (warn), `3` (info), `4` (debug),
+   * `5` (log)
+   * @default 1
+   */
+  logLevel?: number;
+
+  /**
+   * If `true`, messages will be queued until the target window is ready
+   * to receive them.
+   * Needs to also be set inside the target window to trigger a ready event.
+   * @default false
+   */
+  queue?: boolean;
+}
+
+export declare interface BuddyOptions extends BuddyGlobalOptions {
+  /**
+   * The target window to send messages to.
+   * @default window.parent
+   */
+  target?: Window;
+
+  /**
+   * The allowed origin of the target window.
+   * @default *
+   */
+  origin?: string;
+
+  /**
+   * The source window to receive messages from.
+   * @default window
+   */
+  source?: Window;
+
+  /**
+   * A unique identifier used in deep recursive serialization
+   * @internal
+   */
+  key?: string;
+
+  /**
+   * Whether sender should await a response from
+   * receiver or not.
+   * @default false
+   * @internal
+   */
+  pingBack?: boolean;
+
+  /**
+   * Callback to be called when a message produces an error
+   * (even when unserializing data)
+   */
+  onError?: (error: Error) => void;
+}
+
+export const globalOptions: BuddyGlobalOptions = {
+  timeout: 5000,
+  logLevel: 5,
+  queue: false,
+};
+
+export const setGlobalOptions = (options: BuddyGlobalOptions) => {
+  Object.assign(globalOptions, options);
+};

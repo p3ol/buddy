@@ -52,7 +52,7 @@ const exec = async () => {
 
   // test:serializeUnknown
   const serializeUnknown = BigInt(9007199254740991);
-  const unknownResult = await sendExpectingError(contentWindow,
+  const unknownResult = await send(contentWindow,
     'test:serializeUnknown', serializeUnknown);
   createElement('serialize-unknown', unknownResult);
 

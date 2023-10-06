@@ -8,6 +8,7 @@
     "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
+    "lib": ["esnext", "dom"],
     "moduleResolution": "bundler",
     "target": "ES5",
     "resolveJsonModule": true,

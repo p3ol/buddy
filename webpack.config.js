@@ -65,17 +65,17 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.ts'],
     alias: {
       '@poool/buddy': path.resolve('./src'),
     },
   },
   module: {
     rules: [{
-      test: /\.js/,
+      test: /\.(j|t)sx?$/,
       exclude: /node_modules/,
       use: [{
-        loader: 'babel-loader',
+        loader: 'swc-loader',
       }],
     }],
   },
