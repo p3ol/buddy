@@ -943,7 +943,7 @@ __metadata:
     puppeteer: 21.3.8
     puppeteer-to-istanbul: 1.4.0
     rollup: 3.29.4
-    rollup-plugin-dts: 6.0.2
+    rollup-plugin-dts: 6.1.0
     sinon: 16.1.0
     standard-version: 9.5.0
     swc-loader: 0.2.3
@@ -7226,7 +7226,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.3":
+"magic-string@npm:^0.30.4":
   version: 0.30.4
   resolution: "magic-string@npm:0.30.4"
   dependencies:
@@ -8838,19 +8838,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-dts@npm:6.0.2":
-  version: 6.0.2
-  resolution: "rollup-plugin-dts@npm:6.0.2"
+"rollup-plugin-dts@npm:6.1.0":
+  version: 6.1.0
+  resolution: "rollup-plugin-dts@npm:6.1.0"
   dependencies:
     "@babel/code-frame": ^7.22.13
-    magic-string: ^0.30.3
+    magic-string: ^0.30.4
   peerDependencies:
-    rollup: ^3.25
+    rollup: ^3.29.4 || ^4
     typescript: ^4.5 || ^5.0
   dependenciesMeta:
     "@babel/code-frame":
       optional: true
-  checksum: 0f36a4a485f958c9f510900499453b223962d8305a944352f05f391411c7a1350b2468e9ef134bc83ff1a5f98bcca553e238f8c99c138305d257e238e1a21b3f
+  checksum: a90f8e975e4515734c84fa17e0feaf8fdd9ed9368722c3908687875903a393cba4d07d9934bae9b91a0c1b6c63ac1ef0ccd7363d3e6e4dc10eabca3540be9f11
   languageName: node
   linkType: hard
 

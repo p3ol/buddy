@@ -59,7 +59,7 @@
     "puppeteer": "21.3.8",
     "puppeteer-to-istanbul": "1.4.0",
     "rollup": "3.29.4",
-    "rollup-plugin-dts": "6.0.2",
+    "rollup-plugin-dts": "6.1.0",
     "sinon": "16.1.0",
     "standard-version": "9.5.0",
     "swc-loader": "0.2.3",
