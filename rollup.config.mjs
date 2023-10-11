@@ -18,7 +18,6 @@ const defaultGlobals = {};
 
 const defaultPlugins = [
   commonjs(),
-  terser(),
 ];
 
 export default [
@@ -39,6 +38,7 @@ export default [
         },
       }),
       ...defaultPlugins,
+      terser(),
     ],
     external: defaultExternals,
     output: {
@@ -64,7 +64,7 @@ export default [
   {
     input,
     output: {
-      file: `${output}/buddy.d.ts`,
+      file: `${output}/${name}.d.ts`,
       format: 'esm',
       inlineDynamicImports: true,
     },
@@ -89,14 +89,14 @@ export default [
       ...defaultPlugins,
       {
         writeBundle () {
-          fs.unlinkSync(`${output}/buddy.d.ts`);
+          fs.unlinkSync(`${output}/${name}.d.ts`);
         },
       },
     ],
   },
   {
     input: `${output}/types/index.d.ts`,
-    output: [{ file: `${output}/buddy.d.ts`, format: 'es' }],
+    output: [{ file: `${output}/${name}.d.ts`, format: 'es' }],
     external: defaultExternals,
     plugins: [
       resolve({
