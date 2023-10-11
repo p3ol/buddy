@@ -92,3 +92,10 @@ export declare interface BuddyOffSwitch {
 
 export declare type BuddyHandler = (event?: BuddyEvent) =>
   BuddySerializedData | Promise<BuddySerializedData> | void | Promise<void>;
+
+export declare interface BuddySerializer {
+  serializable: (data: any) => boolean;
+  serialize: (data: any) => BuddySerializedData;
+  unserializable: (data: BuddySerializedData) => boolean;
+  unserialize: (data: BuddySerializedData) => any;
+}

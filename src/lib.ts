@@ -13,6 +13,7 @@ import type {
   BuddySerializablePrimitive,
   BuddySerializedDate,
   BuddySerializedObject,
+  BuddySerializer,
 } from './types';
 import type { BuddyOptions } from './options';
 import { extendGlobalOptions } from './options';
@@ -26,7 +27,7 @@ import {
   isBuddyError,
   isPrimitive,
   isDate,
-  uuid,
+  bid,
   isSet,
   isBuddyDate,
   isBuddyFunction,
@@ -34,14 +35,22 @@ import {
 } from './utils';
 import { log, debug, info, warn, error } from './logger';
 
-const serialize = (
+export const serialize = (
   data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {},
-  const { target, origin, ...rest } = options;
 ): BuddySerializedData => {
   options = extendGlobalOptions(options);
+  const { target, origin, serializers, ...rest } = options;
 
-  if (isPrimitive(data) || isBuddy(data)) {
+  const serializer: BuddySerializer = serializers
+    .find(s => s.serializable?.(data));
+
+  if (serializer) {
+    log(options, 'serialize() -->', 'Serializing with custom serializer',
+      serializer);
+
+    return serializer.serialize(data);
+  } else if (isPrimitive(data) || isBuddy(data)) {
     log(options, 'serialize() -->',
       'Data is primitive or already serialized, no need to (re)serialize',
       'Data:', data, 'Type:', typeof data);
@@ -61,7 +70,7 @@ const serialize = (
       'serialize() -->', 'Serializing error', err.name, err.message);
 
     return {
-      bid: uuid(),
+      bid: bid(),
       type: 'error',
       name: err.name,
       message: err.message,
@@ -72,14 +81,14 @@ const serialize = (
     log(options, 'serialize() -->', 'Serializing date', data);
 
     return {
-      bid: uuid(),
+      bid: bid(),
       type: 'date',
       value: (data as Date).toISOString(),
     } as BuddySerializedDate;
   } else if (isPromise(data)) {
     log(options, 'serialize() -->', 'Serializing promise', data);
 
-    const methodId = uuid();
+    const methodId = bid();
     on(methodId, async () => {
       let res;
 
@@ -107,7 +116,7 @@ const serialize = (
 
     log(options, 'serialize() -->', 'Serializing function', data);
 
-    const methodId = uuid();
+    const methodId = bid();
     on(methodId, async (event: BuddyEvent) => {
       let res;
 
@@ -148,12 +157,22 @@ const serialize = (
   }
 };
 
-const unserialize = (
+export const unserialize = (
   data: BuddySerializedData,
   options: BuddyOptions = {},
 ): BuddySerializableData => {
   options = extendGlobalOptions(options);
-  const { source, origin, ...rest } = options;
+  const { source, origin, serializers, ...rest } = options;
+
+  const serializer: BuddySerializer = serializers
+    .find(s => s.unserializable?.(data));
+
+  if (serializer) {
+    log(options, 'unserialize() -->', 'Unserializing with custom serializer',
+      serializer);
+
+    return serializer.unserialize(data);
+  }
 
   if (isPrimitive(data)) {
     log(options, 'unserialize() -->',
@@ -272,7 +291,7 @@ export const send = (
 
     const event = {
       name,
-      bid: uuid(),
+      bid: bid(),
       data: serializedData,
     };
 

@@ -1,4 +1,4 @@
-import { on } from '@poool/buddy';
+import { on, isBuddy, bid } from '@poool/buddy';
 
 on('test:messaging', () => {
   return 'response:messaging';
@@ -25,6 +25,21 @@ on('test:serializePromise', async e => {
 on('test:serializeUnknown', async e => {
   return e.data;
 }, { source: window.parent });
+
+on('test:serializeCustom', async e => {
+  return e.data instanceof Map && e.data.get('foo') === 'bar'
+    ? BigInt(9007199254740991)
+    : null;
+}, {
+  source: window.parent,
+  serializers: [{
+    unserializable: d => isBuddy(d) && d.type === 'map',
+    unserialize: d => new Map(d.entries),
+  }, {
+    serializable: d => typeof d === 'bigint',
+    serialize: d => ({ bid: bid(), type: 'bigint', value: d.toString() }),
+  }],
+});
 
 on('test:unserializeFunctionsAndObjects', async e => {
   const result = await e.data;

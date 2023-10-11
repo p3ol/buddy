@@ -1,3 +1,5 @@
+import type { BuddySerializer } from './types';
+
 export declare interface BuddyGlobalOptions {
   /**
    * Message expiration time, after which an error will be thrown.
@@ -19,6 +21,12 @@ export declare interface BuddyGlobalOptions {
    * @default false
    */
   queue?: boolean;
+
+  /**
+   * List of custom serializers to use.
+   * @default []
+   */
+  serializers?: BuddySerializer[];
 }
 
 export declare interface BuddyOptions extends BuddyGlobalOptions {
@@ -39,6 +47,12 @@ export declare interface BuddyOptions extends BuddyGlobalOptions {
    * @default window
    */
   source?: Window;
+
+  /**
+   * List of custom serializers to use.
+   * @default []
+   */
+  serializers?: BuddySerializer[];
 
   /**
    * A unique identifier used in deep recursive serialization
@@ -65,6 +79,7 @@ export const globalOptions: BuddyGlobalOptions = {
   timeout: 5000,
   logLevel: 5,
   queue: false,
+  serializers: [],
 };
 
 export const setGlobalOptions = (options: BuddyGlobalOptions) => {
@@ -74,4 +89,8 @@ export const setGlobalOptions = (options: BuddyGlobalOptions) => {
 export const extendGlobalOptions = (options: BuddyOptions): BuddyOptions => ({
   ...globalOptions,
   ...options,
+  serializers: [
+    ...globalOptions.serializers,
+    ...(options.serializers || []),
+  ],
 });

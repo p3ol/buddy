@@ -66,6 +66,11 @@ describe('buddy', () => {
       .toBe('[object Object]');
   });
 
+  it('should allow to serialize custom structures', async () => {
+    expect(await getResult('#serialize-custom'))
+      .toBe('bigint');
+  });
+
   it('should unserialize functions & objects', async () => {
     expect(await getResult('#unserialize-functions-objects'))
       .toBe(JSON.stringify({

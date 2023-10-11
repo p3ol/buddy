@@ -1,5 +1,5 @@
-import { BuddyGlobalOptions, globalOptions } from './options';
-import { extend } from './utils';
+import type { BuddyGlobalOptions } from './options';
+import { extendGlobalOptions } from './options';
 
 const logger = (
   method: 'error' | 'warn' | 'info' | 'debug' | 'log',
@@ -7,7 +7,7 @@ const logger = (
   options: BuddyGlobalOptions,
   ...args: any[]
 ) => {
-  options = extend(globalOptions, options);
+  options = extendGlobalOptions(options);
 
   if (options.logLevel >= logLevel) {
     // eslint-disable-next-line no-console

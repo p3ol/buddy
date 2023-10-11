@@ -67,6 +67,13 @@ Either `0` (disabled), `1` (error), `2` (warn), `3` (info), `4` (debug), `5` (lo
 If `true`, messages will be queued until the target window is ready to receive them.
 Needs to also be set inside the target window to trigger a ready event.
 
+#### serializers
+- Type: `Array<BuddySerializer>`
+- Default: `[]`
+
+Custom serializers to use to serialize/unserialize data.
+See [serializers](#serializers) section for more details.
+
 ## Documentation
 
 ### on(name, callback, options)
@@ -89,8 +96,29 @@ Needs to also be set inside the target window to trigger a ready event.
   * `pingBack` {`Boolean`} Mostly used internally. Whether sender should await a response from receiver or not. `true` (default) or `false`
   * `...globalOptions`
 
+## Custom serializers
+
+Buddy uses `JSON.parse` to send pre-serialized data to `.postMessage`, allowing to automatically serialize primitive data like numbers or strings, and uses
+internal serializers to pre-serialize more complex data like `Date`, `Error` or even `Function` and `Promise` objects.
+
+Although it cannot cover all the possible use cases, you can add your own serializers to handle custom data types.
+A serializer is a simple object with four methods: `serializable`, `serialize`, `unserializable` and `unserialize`.
+
+```javascript
+// Creating a custom serializer for Map objects
+const mapSerializer = {
+  serializable: data => data instanceof Map,
+  serialize: data => ({ type: 'map', entries: Array.from(data.entries()) }),
+  unserializable: data => data.type === 'map' && data.entries,
+  unserialize: data => new Map(data.entries),
+};
+```
+
+⚠️ A custom serializer's `serializable`/`unserializable` methods returning true for any data will override all the other serializers, even internal ones, so be careful to only match the data you specifically want to serialize.
 
 ## Contributing
+
+[![](https://contrib.rocks/image?repo=p3ol/buddy)](https://github.com/p3ol/buddy/graphs/contributors)
 
 Please check the [CONTRIBUTING.md](https://github.com/p3ol/buddy/blob/master/CONTRIBUTING.md) doc for contribution guidelines.
 
@@ -117,13 +145,3 @@ yarn test
 ## License
 
 This software is licensed under [MIT](https://github.com/p3ol/buddy/blob/master/LICENSE).
-
-## Contributors
-
-<!-- Contributors START
-Ugo_Stephant dackmin https://ugostephant.io code doc tools
-Contributors END -->
-<!-- Contributors table START -->
-| <img src="https://avatars.githubusercontent.com/dackmin?s=100" width="100" alt="Ugo Stephant" /><br />[<sub>Ugo Stephant</sub>](https://github.com/dackmin)<br />[💻](https://github.com/p3ol/buddy/commits?author=dackmin) [📖](https://github.com/p3ol/buddy/commits?author=dackmin) 🔧 | <img src="https://avatars.githubusercontent.com/NicolasAuger?s=100" width="100" alt="Nicolas Auger" /><br />[<sub>Nicolas Auger</sub>](https://github.com/NicolasAuger)<br />[💻](https://github.com/p3ol/buddy/commits?author=NicolasAuger) |
-| :---: | :---: |
-<!-- Contributors table END -->

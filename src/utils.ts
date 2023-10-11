@@ -1,7 +1,7 @@
 /**
  * Generate a UUID (way dumber than RFC4122, but good enough for our purposes)
  */
-export const uuid = (): string => {
+export const bid = (): string => {
   let time = window.performance.now() || Date.now();
 
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -12,9 +12,6 @@ export const uuid = (): string => {
     return (c === 'x' ? rand : rand & 0x3 | 0x8).toString(16);
   });
 };
-
-export const extend = (s: object, t: object) =>
-  ({ ...s, ...t });
 
 export const isPrimitive = (p: any) =>
   typeof p === 'string' ||
