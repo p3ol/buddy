@@ -1,4 +1,4 @@
-import { send } from '@poool/buddy';
+import { send, isBuddy, bid } from '@poool/buddy';
 import sinon from 'sinon';
 
 const createElement = (id, content) => {
@@ -52,9 +52,26 @@ const exec = async () => {
 
   // test:serializeUnknown
   const serializeUnknown = BigInt(9007199254740991);
-  const unknownResult = await sendExpectingError(contentWindow,
+  const unknownResult = await send(contentWindow,
     'test:serializeUnknown', serializeUnknown);
   createElement('serialize-unknown', unknownResult);
+
+  // test:serializeCustom
+  const serializeCustom = new Map();
+  serializeCustom.set('foo', 'bar');
+  const customResult = await send(contentWindow,
+    'test:serializeCustom', serializeCustom, {
+      serializers: [{
+        serializable: d => d instanceof Map,
+        serialize: d => ({
+          bid: bid(), type: 'map', entries: Array.from(d.entries()),
+        }),
+      }, {
+        unserializable: d => isBuddy(d) && d.type === 'bigint',
+        unserialize: d => BigInt(d.value),
+      }],
+    });
+  createElement('serialize-custom', typeof customResult);
 
   // test:unserializeFunctionsAndObjects
   const unserializeFunction = x => x + 1;

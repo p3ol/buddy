@@ -1,6 +1,6 @@
 module.exports = {
   clearMocks: true,
   transform: {
-    '^.+\\.js$': 'babel-jest',
+    '^.+\\.(t|j)sx?$': '@swc/jest',
   },
 };

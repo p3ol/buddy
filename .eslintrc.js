@@ -1,5 +1,9 @@
+const OFF = 0;
+const ERROR = 1;
+
 module.exports = {
   extends: ['@poool/eslint-config'],
+  parser: '@typescript-eslint/parser',
   overrides: [{
     files: ['tests/**/*.js'],
     env: {
@@ -7,10 +11,16 @@ module.exports = {
     },
   }, {
     files: ['src/**/*.{ts,tsx}'],
-    extends: ['plugin:@typescript-eslint/recommended'],
-    parser: '@typescript-eslint/parser',
+    extends: ['@poool/eslint-config',
+      'plugin:@typescript-eslint/recommended'],
+    plugins: ['@typescript-eslint'],
     rules: {
-      '@typescript-eslint/no-explicit-any': 0,
+      '@typescript-eslint/no-explicit-any': OFF,
+      '@typescript-eslint/ban-types': [ERROR, {
+        types: {
+          Function: false,
+        },
+      }],
     },
   }],
 };

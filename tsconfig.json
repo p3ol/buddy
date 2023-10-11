@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "lib": ["esnext", "dom"],
+    "moduleResolution": "bundler",
+    "target": "ES5",
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

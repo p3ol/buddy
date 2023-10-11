@@ -63,7 +63,12 @@ describe('buddy', () => {
 
   it('should not serialize unknown structures', async () => {
     expect(await getResult('#serialize-unknown'))
-      .toBe('Do not know how to serialize a BigInt');
+      .toBe('[object Object]');
+  });
+
+  it('should allow to serialize custom structures', async () => {
+    expect(await getResult('#serialize-custom'))
+      .toBe('bigint');
   });
 
   it('should unserialize functions & objects', async () => {
