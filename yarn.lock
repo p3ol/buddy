@@ -919,7 +919,6 @@ __metadata:
     "@babel/eslint-plugin": 7.22.10
     "@poool/eslint-config": 3.0.1
     "@poool/eslint-plugin": 3.0.0
-    "@rollup/plugin-alias": 5.0.1
     "@rollup/plugin-commonjs": 25.0.5
     "@rollup/plugin-node-resolve": 15.2.3
     "@rollup/plugin-swc": 0.2.1
@@ -929,7 +928,6 @@ __metadata:
     "@swc/jest": 0.2.29
     "@typescript-eslint/eslint-plugin": 6.7.5
     "@typescript-eslint/parser": 6.7.5
-    auto-changelog: 2.4.0
     eslint: 8.51.0
     eslint-config-standard: 17.1.0
     eslint-plugin-import: 2.28.1
@@ -997,20 +995,6 @@ __metadata:
   bin:
     browsers: lib/cjs/main-cli.js
   checksum: fb7cf7773a1aed4e34ce0952dbf9609a164e624d4f8e1f342b816fe3e983888d7a7b2fbafc963559e96cb5bca0d75fb9c81f2097f9b1f5478a0f1cc7cbc12dff
-  languageName: node
-  linkType: hard
-
-"@rollup/plugin-alias@npm:5.0.1":
-  version: 5.0.1
-  resolution: "@rollup/plugin-alias@npm:5.0.1"
-  dependencies:
-    slash: ^4.0.0
-  peerDependencies:
-    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-  peerDependenciesMeta:
-    rollup:
-      optional: true
-  checksum: dab5bba16a0425c8412ece858df677c9f792bb0c5a7789c1677ee34b03533c1cda407191fcc40f3e93eb5f992cd8ed0e980e49dad3e38346547a2723b0f56fa1
   languageName: node
   linkType: hard
 
@@ -2463,21 +2447,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"auto-changelog@npm:2.4.0":
-  version: 2.4.0
-  resolution: "auto-changelog@npm:2.4.0"
-  dependencies:
-    commander: ^7.2.0
-    handlebars: ^4.7.7
-    node-fetch: ^2.6.1
-    parse-github-url: ^1.0.2
-    semver: ^7.3.5
-  bin:
-    auto-changelog: src/index.js
-  checksum: 554270a24b4bd2c7485d8529f1f66db9b11bcaada959b06c4af57b135eff197dfb393d8009c1f609d46d33e413d25fb50bc264c376d346cdf41486a8b675768b
-  languageName: node
-  linkType: hard
-
 "available-typed-arrays@npm:^1.0.5":
   version: 1.0.5
   resolution: "available-typed-arrays@npm:1.0.5"
@@ -3208,13 +3177,6 @@ __metadata:
   version: 5.1.0
   resolution: "commander@npm:5.1.0"
   checksum: 0b7fec1712fbcc6230fcb161d8d73b4730fa91a21dc089515489402ad78810547683f058e2a9835929c212fead1d6a6ade70db28bbb03edbc2829a9ab7d69447
-  languageName: node
-  linkType: hard
-
-"commander@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "commander@npm:7.2.0"
-  checksum: 53501cbeee61d5157546c0bef0fedb6cdfc763a882136284bed9a07225f09a14b82d2a84e7637edfd1a679fb35ed9502fd58ef1d091e6287f60d790147f68ddc
   languageName: node
   linkType: hard
 
@@ -7661,7 +7623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12":
+"node-fetch@npm:^2.6.12":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:
@@ -8128,15 +8090,6 @@ __metadata:
   dependencies:
     callsites: ^3.0.0
   checksum: 6ba8b255145cae9470cf5551eb74be2d22281587af787a2626683a6c20fbb464978784661478dd2a3f1dad74d1e802d403e1b03c1a31fab310259eec8ac560ff
-  languageName: node
-  linkType: hard
-
-"parse-github-url@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "parse-github-url@npm:1.0.2"
-  bin:
-    parse-github-url: ./cli.js
-  checksum: a19b8bc6f8908a24cb63a10ff90cd39cec0745615a272ec686803684653be34eb3e638e31a66c8ee3a9568082ff686eaf010181688000a6274c86a23e9220f2f
   languageName: node
   linkType: hard
 
@@ -9178,13 +9131,6 @@ __metadata:
   version: 3.0.0
   resolution: "slash@npm:3.0.0"
   checksum: 94a93fff615f25a999ad4b83c9d5e257a7280c90a32a7cb8b4a87996e4babf322e469c42b7f649fd5796edd8687652f3fb452a86dc97a816f01113183393f11c
-  languageName: node
-  linkType: hard
-
-"slash@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "slash@npm:4.0.0"
-  checksum: da8e4af73712253acd21b7853b7e0dbba776b786e82b010a5bfc8b5051a1db38ed8aba8e1e8f400dd2c9f373be91eb1c42b66e91abb407ff42b10feece5e1d2d
   languageName: node
   linkType: hard
 
