@@ -98,7 +98,7 @@ See [serializers](#serializers) section for more details.
 
 ## Custom serializers
 
-Buddy uses `JSON.parse` to send pre-serialized data to `.postMessage`, allowing to automatically serialize primitive data like numbers or strings, and uses
+Buddy uses `JSON.stringify` to send pre-serialized data to `.postMessage` (and `JSON.parse` to deserialize), allowing to automatically serialize primitive data like numbers or strings, and uses
 internal serializers to pre-serialize more complex data like `Date`, `Error` or even `Function` and `Promise` objects.
 
 Although it cannot cover all the possible use cases, you can add your own serializers to handle custom data types.
