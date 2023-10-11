@@ -70,3 +70,8 @@ export const globalOptions: BuddyGlobalOptions = {
 export const setGlobalOptions = (options: BuddyGlobalOptions) => {
   Object.assign(globalOptions, options);
 };
+
+export const extendGlobalOptions = (options: BuddyOptions): BuddyOptions => ({
+  ...globalOptions,
+  ...options,
+});

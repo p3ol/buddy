@@ -2,19 +2,6 @@ export declare interface CustomError extends Error {
   code?: string | number;
 }
 
-export declare interface BuddyMessage {
-  bid: string;
-  type: string;
-}
-
-export declare interface BuddyPromise extends BuddyMessage {
-  type: 'promise';
-}
-
-export declare interface BuddyFunction extends BuddyMessage {
-  type: 'function';
-}
-
 export declare interface BuddyError {
   bid: string;
   type: 'error';
@@ -25,47 +12,83 @@ export declare interface BuddyError {
   error?: Record<string, any>;
 }
 
-export type BuddyPrimitiveData =
+// Serializables
+export declare type BuddySerializablePrimitive =
   | string
   | number
   | boolean
-  | Date
   | null
   | undefined;
 
-export type BuddySerializableData =
-  | BuddyPrimitiveData
-  | BuddySerializableData[]
+export declare type BuddySerializableComplex =
+  | Date
   | Function
   | Promise<any>
-  | Error
+  | Error;
+
+export declare type BuddySerializableCustom =
   | CustomError;
 
-export type BuddyData =
-  | BuddySerializableData
-  | BuddySerializableData[]
-  | BuddyError
-  | Record<
-    string, BuddySerializableData | BuddySerializableData[] | BuddyError
-  >;
-
-export interface BuddyFunctionData {
-  args: BuddyData[];
+export declare interface BuddySerializableObject {
+  // eslint-disable-next-line no-use-before-define
+  [key: string]: BuddySerializableData;
 }
 
-export interface BuddyEvent {
+// eslint-disable-next-line no-use-before-define
+export declare type BuddySerializableArray = Array<BuddySerializableData>;
+
+export declare type BuddySerializableData =
+  | BuddySerializablePrimitive
+  | BuddySerializableComplex
+  | BuddySerializableCustom
+  | BuddySerializableObject
+  | BuddySerializableArray;
+
+// Serialized
+export declare interface BuddySerializedComplex {
+  bid: string;
+  type: string;
+  [key: string]: any;
+}
+
+export declare interface BuddySerializedDate extends BuddySerializedComplex {
+  type: 'date';
+  value: string;
+}
+
+export declare interface BuddySerializedObject {
+  // eslint-disable-next-line no-use-before-define
+  [key: string]: BuddySerializedData;
+}
+
+// eslint-disable-next-line no-use-before-define
+export declare type BuddySerializedArray = Array<BuddySerializedData>;
+
+export declare type BuddySerializedData =
+  | BuddySerializablePrimitive
+  | BuddySerializedComplex
+  | BuddySerializedArray
+  | BuddySerializedObject
+  | BuddyError;
+
+export declare interface BuddyFunctionData {
+  args: BuddySerializedData[];
+}
+
+export declare interface BuddyEvent {
   bid: string;
   name: string;
   source: Window;
   origin: string;
-  data: BuddyData | BuddyFunctionData;
+  data: BuddySerializableData | BuddyFunctionData;
 }
 
-export interface BuddyOffSwitch {
+export declare interface BuddyOffSwitch {
   /**
    * Allows to stop listening to the event
    */
   off: () => void;
 }
 
-export type BuddyHandler = (event: BuddyEvent) => BuddyData | void;
+export declare type BuddyHandler = (event?: BuddyEvent) =>
+  BuddySerializedData | Promise<BuddySerializedData> | void | Promise<void>;

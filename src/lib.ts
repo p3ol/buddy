@@ -5,63 +5,77 @@ import type {
   BuddyFunctionData,
   BuddyOffSwitch,
   BuddyHandler,
+  BuddySerializableData,
+  BuddySerializedData,
+  BuddySerializableArray,
+  BuddySerializedArray,
+  BuddySerializedComplex,
+  BuddySerializablePrimitive,
+  BuddySerializedDate,
+  BuddySerializedObject,
 } from './types';
 import type { BuddyOptions } from './options';
-import { globalOptions } from './options';
+import { extendGlobalOptions } from './options';
 import {
-  extend,
   isArray,
   isFunction,
   isObject,
   isPromise,
   isError,
+  isBuddy,
   isBuddyError,
   isPrimitive,
   isDate,
   uuid,
   isSet,
+  isBuddyDate,
+  isBuddyFunction,
+  isBuddyPromise,
 } from './utils';
 import { log, debug, info, warn, error } from './logger';
 
 const serialize = (
-  data: any,
+  data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {},
-): any => {
-  options = extend(globalOptions, options);
   const { target, origin, ...rest } = options;
+): BuddySerializedData => {
+  options = extendGlobalOptions(options);
 
-  if (isPrimitive(data) || data.bid) {
+  if (isPrimitive(data) || isBuddy(data)) {
     log(options, 'serialize() -->',
       'Data is primitive or already serialized, no need to (re)serialize',
       'Data:', data, 'Type:', typeof data);
 
-    return data;
+    return data as BuddySerializedData;
   } else if (isArray(data) || isSet(data)) {
     log(options, 'serialize() -->', 'Serializing array', data);
 
     return [
-      ...Array.from(data).map((o: any) => serialize(o, options)),
-    ];
+      ...Array.from(data as BuddySerializableArray)
+        .map((o: any) => serialize(o, options)),
+    ] as BuddySerializedArray;
   } else if (isError(data)) {
+    const err = data as CustomError;
+
     log(options,
-      'serialize() -->', 'Serializing error', data.name, data.message);
+      'serialize() -->', 'Serializing error', err.name, err.message);
 
     return {
       bid: uuid(),
       type: 'error',
-      name: data.name,
-      message: data.message,
-      stack: data.stack,
-      code: data.code,
-    };
+      name: err.name,
+      message: err.message,
+      stack: err.stack,
+      code: err.code,
+    } as BuddyError;
   } else if (isDate(data)) {
     log(options, 'serialize() -->', 'Serializing date', data);
 
     return {
       bid: uuid(),
       type: 'date',
-      value: data.toISOString(),
-    };
+      value: (data as Date).toISOString(),
+    } as BuddySerializedDate;
   } else if (isPromise(data)) {
     log(options, 'serialize() -->', 'Serializing promise', data);
 
@@ -87,16 +101,18 @@ const serialize = (
       });
     }, { source: target, ...rest, pingBack: false, queue: false });
 
-    return { bid: methodId, type: 'promise' };
+    return { bid: methodId, type: 'promise' } as BuddySerializedComplex;
   } else if (isFunction(data)) {
-    log(options, 'serialize() -->', 'Serializing method', data);
+    const fn = data as Function;
+
+    log(options, 'serialize() -->', 'Serializing function', data);
 
     const methodId = uuid();
     on(methodId, async (event: BuddyEvent) => {
       let res;
 
       try {
-        res = await data(...(event.data as BuddyFunctionData).args);
+        res = await fn(...(event.data as BuddyFunctionData).args);
       } catch (error) {
         res = isError(error) || isBuddyError(error) ? error : {
           bid: methodId,
@@ -113,12 +129,12 @@ const serialize = (
       });
     }, { source: target, ...rest, pingBack: false, queue: false });
 
-    return { bid: methodId, type: 'function' };
+    return { bid: methodId, type: 'function' } as BuddySerializedComplex;
   } else if (isObject(data)) {
     return Object
       .keys(data)
       .reduce((res: Record<string, any>, k: string) => {
-        const v = data[k];
+        const v = (data as Record<string, any>)[k];
         res[k] = serialize(v, options);
 
         return res;
@@ -133,22 +149,22 @@ const serialize = (
 };
 
 const unserialize = (
-  data: any,
+  data: BuddySerializedData,
   options: BuddyOptions = {},
-): any => {
-  options = extend(globalOptions, options);
+): BuddySerializableData => {
+  options = extendGlobalOptions(options);
   const { source, origin, ...rest } = options;
 
   if (isPrimitive(data)) {
     log(options, 'unserialize() -->',
       `Ignoring nullish or primitive data (type: ${typeof data}):`, data);
 
-    return data;
+    return data as BuddySerializablePrimitive;
   }
 
   const isArray_ = isArray(data);
 
-  if (data.bid && data.type === 'error') {
+  if (isBuddyError(data)) {
     const d = data as BuddyError;
 
     if (d.error) {
@@ -167,18 +183,20 @@ const unserialize = (
 
       throw err;
     }
-  } else if (data.bid && data.type === 'date') {
-    log(options, 'unserialize() -->', 'Unserializing date:', data.value);
+  } else if (isBuddyDate(data)) {
+    const d = data as BuddySerializedDate;
+    log(options, 'unserialize() -->', 'Unserializing date:', d.value);
 
-    return new Date(data.value);
-  } else if (data.bid && ['function', 'promise'].includes(data.type)) {
+    return new Date(d.value);
+  } else if (isBuddyFunction(data) || isBuddyPromise(data)) {
+    const fn = data as BuddySerializedComplex;
     log(options, 'unserialize() -->', 'Unserializing method:', options.key);
 
     return (...args: any[]) => {
       debug(options, `Calling serialized method (name: ${options.key})`);
 
       return new Promise((resolve, reject) => {
-        on(data.bid, (e: BuddyEvent) => {
+        on(fn.bid, (e: BuddyEvent) => {
           debug(options,
             `Receiving serialized method result (name: ${options.key}) -->`,
             e.data);
@@ -192,7 +210,7 @@ const unserialize = (
           args.map(a => typeof a)
         );
 
-        send(source, data.bid, {
+        send(source, fn.bid, {
           args: serialize(args, { target: source, origin, ...rest }),
         }, { target: source, origin, ...rest, pingBack: false, queue: false });
       });
@@ -201,11 +219,11 @@ const unserialize = (
 
   log(options, 'unserialize() -->', 'Unserializing object-like:', data);
 
-  return (isArray_ ? data : Object.keys(data)).reduce((
+  return (isArray_ ? data as BuddySerializedArray : Object.keys(data)).reduce((
     res: any, item: any, i: number
   ) => {
     const k = isArray_ ? i : item;
-    const v = isArray_ ? item : data[k];
+    const v = isArray_ ? item : (data as BuddySerializedObject)[k];
 
     if (isObject(v) && !isArray(v)) {
       log(options, 'unserialize() -->', 'Unserializing object:', v);
@@ -224,10 +242,10 @@ const unserialize = (
 export const send = (
   target: Window,
   name: string,
-  data: any,
+  data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {}
-) => {
-  options = extend(globalOptions, options);
+): Promise<BuddySerializableData> => {
+  options = extendGlobalOptions(options);
   const { origin = '*', timeout = 5000, pingBack = true, ...rest } = options;
 
   if (!target) {
@@ -268,7 +286,7 @@ export const send = (
         reject(timeoutErr);
       }, timeout);
 
-      const handler = on(event.bid, e => {
+      const handler = on(event.bid, (e: BuddyEvent) => {
         handler.off();
         queueHandler && queueHandler.off();
 
@@ -284,7 +302,7 @@ export const send = (
             return reject(e.data);
           }
 
-          resolve(e.data);
+          resolve(e.data as BuddySerializableData);
         }
       }, { source: target, origin, ...rest, onError: reject, pingBack: false });
     }
@@ -324,7 +342,7 @@ export const on = (
   fn: BuddyHandler,
   options: BuddyOptions = {}
 ) => {
-  options = extend(globalOptions, options);
+  options = extendGlobalOptions(options);
   const { source, origin = '*', pingBack = true, ...rest } = options;
 
   debug(options,
@@ -365,7 +383,8 @@ export const on = (
     let unserializedData;
 
     try {
-      unserializedData = unserialize(event.data, { source, origin, ...rest });
+      unserializedData = unserialize(event.data as BuddySerializedData,
+        { source, origin, ...rest });
     } catch (er) {
       warn(options,
         `Output data could not be unserialized (event: ${name}) -->`, event);
@@ -377,37 +396,39 @@ export const on = (
       }
     }
 
-    Promise.resolve((async () => fn({
+    Promise.resolve(fn({
       bid: event.bid,
       name: event.name,
       source: e.source as Window,
       origin: e.origin,
       data: unserializedData,
-    }))()).then(result => {
-      if (pingBack !== false) {
-        debug(options,
-          `Sending back message result to source window (event: ${name})`);
+    }) as Promise<BuddySerializableData>)
+      .then((result: BuddySerializableData) => {
+        if (pingBack !== false) {
+          debug(options,
+            `Sending back message result to source window (event: ${name})`);
 
-        send(source || e.source as Window, event.bid, result, {
-          ...rest,
-          origin: e.origin,
-          pingBack: false,
-          queue: false,
-        });
-      }
-    }).catch(er => {
-      if (pingBack !== false) {
-        error(options,
-          `Sending back error to source window (event: ${name})`);
+          send(source || e.source as Window, event.bid, result, {
+            ...rest,
+            origin: e.origin,
+            pingBack: false,
+            queue: false,
+          });
+        }
+      })
+      .catch(er => {
+        if (pingBack !== false) {
+          error(options,
+            `Sending back error to source window (event: ${name})`);
 
-        send(source || e.source as Window, event.bid, er, {
-          ...rest,
-          origin: e.origin,
-          pingBack: false,
-          queue: false,
-        });
-      }
-    });
+          send(source || e.source as Window, event.bid, er, {
+            ...rest,
+            origin: e.origin,
+            pingBack: false,
+            queue: false,
+          });
+        }
+      });
   };
 
   window.addEventListener('message', handler, false);

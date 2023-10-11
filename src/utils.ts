@@ -44,5 +44,17 @@ export const isPromise = (p: any) =>
 export const isError = (e: any) =>
   e instanceof Error;
 
+export const isBuddy = (b: any) =>
+  b && b.bid && b.type;
+
 export const isBuddyError = (e: any) =>
-  e.type === 'error' && e.bid;
+  isBuddy(e) && e.type === 'error';
+
+export const isBuddyDate = (d: any) =>
+  isBuddy(d) && d.type === 'date';
+
+export const isBuddyFunction = (f: any) =>
+  isBuddy(f) && f.type === 'function';
+
+export const isBuddyPromise = (p: any) =>
+  isBuddy(p) && p.type === 'promise';
