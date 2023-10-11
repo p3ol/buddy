@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/p3ol/buddy/compare/v2.0.0...v3.0.0) (2023-10-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* require node 16
+* rewrite everything with typescript
+* replace babel with swc
+
+### Features
+
+* add custom serializers ([6935ae6](https://github.com/p3ol/buddy/commit/6935ae60cd73f90eb94f866c413cb775c41a508c))
+* better recursive serialized typings ([44eab60](https://github.com/p3ol/buddy/commit/44eab6096fe2dde9ac7a368791146ad9fe1a869f))
+* replace babel with swc ([2d16934](https://github.com/p3ol/buddy/commit/2d16934e68ec23f1ae5ea2cd93341f58354b4137))
+* require node 16 ([4c5e76d](https://github.com/p3ol/buddy/commit/4c5e76d72891f2f3d9baa098996590d08f9fd0a6))
+* rewrite everything with typescript ([b45c3dd](https://github.com/p3ol/buddy/commit/b45c3dd9c5dc642b552aa335f78503c8f61f71a5))
+
 ## [2.0.0](https://github.com/p3ol/buddy/compare/v1.2.0...v2.0.0) (2023-10-05)
 
 
