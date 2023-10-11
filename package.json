@@ -17,8 +17,7 @@
   "esnext": "src",
   "types": "dist/buddy.d.ts",
   "engines": {
-    "node": ">=14",
-    "yarn": ">=1"
+    "node": ">=16"
   },
   "scripts": {
     "clean": "rm -rf ./dist || true",
