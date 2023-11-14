@@ -54,7 +54,7 @@
     "nyc": "15.1.0",
     "puppeteer": "21.3.8",
     "puppeteer-to-istanbul": "1.4.0",
-    "rollup": "3.29.4",
+    "rollup": "4.4.1",
     "rollup-plugin-dts": "6.1.0",
     "sinon": "16.1.0",
     "standard-version": "9.5.0",
