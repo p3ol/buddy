@@ -56,7 +56,7 @@
     "puppeteer-to-istanbul": "1.4.0",
     "rollup": "4.4.1",
     "rollup-plugin-dts": "6.1.0",
-    "sinon": "16.1.3",
+    "sinon": "17.0.1",
     "standard-version": "9.5.0",
     "swc-loader": "0.2.3",
     "tslib": "2.6.2",
