@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/p3ol/buddy/compare/v3.0.0...v3.0.1) (2023-11-17)
+
+
+### Bug Fixes
+
+* wrong logLevel default value ([775396d](https://github.com/p3ol/buddy/commit/775396d4446578669b5ae31ef7d1d2fc7352e2b8))
+
 ## [3.0.0](https://github.com/p3ol/buddy/compare/v2.0.0...v3.0.0) (2023-10-11)
 
 
