@@ -1,23 +1,17 @@
 {
   "extends": [
-    "config:base"
+    "github>p3ol/renovate-presets//presets/base#v1.0.0"
   ],
   "packageRules": [{
     "matchUpdateTypes": ["patch", "pin"],
     "matchDepTypes": ["devDependencies", "dependencies"],
     "automerge": true
-  }, {
-    "matchManagers": ["github-actions"],
-    "reviewers": ["yannispgs"]
-  }, {
-    "matchUpdateTypes": ["minor","major"],
-    "matchDepTypes": ["dependencies"],
-    "semanticCommitType": "feat"
-  }, {
-    "matchDepTypes": ["devDependencies"],
-    "prPriority": -1
-  }, {
-    "matchPackagePatterns": ["^@poool/eslint"],
-    "groupName": "poool eslint monorepo"
+  }],
+  "hostRules": [{
+    "matchHost": "https://api.github.com/repos/p3ol/renovate-presets/contents/presets/",
+    "hostType": "github",
+    "encrypted": {
+      "token": "wcFMA/xDdHCJBTolARAAjDg4/edujl34chxmeSL+H4TPNaCgKbib1gXUrIm8WFW86HTh8qweun77QelPag/6xYxHo1trB0m+t2JwiUuHYvrTsm/nB6hpbhc+KsOhXFgPodPnfqtlg7LT6JfcwCzWpfxoEnwzdpUoYmyd/jUWWx4JFYnb/8nJ6Zop2d9AIA8le8UzT87+uzGzTNgmrldmKNC2qzS2UQSyzunB4qDgd0uFU677Ajg9PcRT/Gw5mPMnIkHVmZVjj75CuIhbdMezhzgWBIOP9bBu3Ln1xWDiH5Rq2YjgxGOdAnL2wa3g4eCLJHC0OG2Mkxdutf2t8yToz7PpcO0juFTr1X6iCjQinvWPoD17d5v408kzXIVMryhRK7qMrpqCYkdoUTZg3+Wm39ZMXgRemY7n5uReDXyDX2pE59DMZ/tzExgg0YqeuCcts2Uq2Kv/Gng82eEF8o506slU8sXgQc0XUwCi8EfKdhqf6SQh7HueYzTeJ2+c0EKdjkoFUn7Jknc+JWXi3k87N/pKV9ZhAtwFPZeB2VPtXDs4428wBcBRlwid55GfGhG5uiwPonVUSZ0AKppz3GEA4gW0O8RLgwZPgqlhveNRlymLJ47p5pjvoI3iGHSsrxNn1xqtIOBvaIYxODthWjlc+EWUxYmQ1Q22fcWk79iHeNNqC9JI4hz4vh96jmp8tcLSrQE6URblISC3Vx7rQURzl88gdQFFbFPanHxfuASpmdfgg69ZUxnthpOJ1DRdvECq2YklRGSeoqX0ICi4us/Kb9fZ3LvrDd4V/TMTnczyrCOEes4CCcIkr+UivjIotZfRMQmbF3h4At2cb5v+CtK3F5+v7K1KOy0v7HceYKGBDX74tP1xoPShIhGdsQ37IGz7Z5l3SqEXITr3Uuz/8DOPMH4ct3SHH+q1VpLgBlHl"
+    }
   }]
 }
