@@ -1,6 +1,6 @@
 {
   "extends": [
-    "github>p3ol/renovate-presets//presets/base#v1.0.0"
+    "p3ol/renovate-presets//presets/base#v1.0.0"
   ],
   "packageRules": [{
     "matchUpdateTypes": ["patch", "pin"],
