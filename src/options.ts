@@ -77,7 +77,7 @@ export declare interface BuddyOptions extends BuddyGlobalOptions {
 
 export const globalOptions: BuddyGlobalOptions = {
   timeout: 5000,
-  logLevel: 5,
+  logLevel: 1,
   queue: false,
   serializers: [],
 };
