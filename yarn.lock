@@ -937,7 +937,7 @@ __metadata:
     jest: "npm:29.7.0"
     jest-dev-server: "npm:9.0.1"
     nyc: "npm:15.1.0"
-    puppeteer: "npm:21.5.2"
+    puppeteer: "npm:21.11.0"
     puppeteer-to-istanbul: "npm:1.4.0"
     rollup: "npm:4.4.1"
     rollup-plugin-dts: "npm:6.1.0"
@@ -980,9 +980,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@puppeteer/browsers@npm:1.8.0":
-  version: 1.8.0
-  resolution: "@puppeteer/browsers@npm:1.8.0"
+"@puppeteer/browsers@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@puppeteer/browsers@npm:1.9.1"
   dependencies:
     debug: "npm:4.3.4"
     extract-zip: "npm:2.0.1"
@@ -993,7 +993,7 @@ __metadata:
     yargs: "npm:17.7.2"
   bin:
     browsers: lib/cjs/main-cli.js
-  checksum: 8f7ca90e04e859680ec1a8762a87890b6ccd6b6a81fa96da8ed5c121af8854a0d77ff945146e2cb4888a428e9d61e0f4026467eae0ae330defde5cea3445afe6
+  checksum: 804cbc18bcc68796f1abebc2b008346fdcc10952a224bfdb1b81b5618a63e4b685a6f2a71e997a454d5695c8faec58e05e04a7cf83e56a899d6adbe94427de3b
   languageName: node
   linkType: hard
 
@@ -2951,15 +2951,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromium-bidi@npm:0.4.33":
-  version: 0.4.33
-  resolution: "chromium-bidi@npm:0.4.33"
+"chromium-bidi@npm:0.5.8":
+  version: 0.5.8
+  resolution: "chromium-bidi@npm:0.5.8"
   dependencies:
     mitt: "npm:3.0.1"
-    urlpattern-polyfill: "npm:9.0.0"
+    urlpattern-polyfill: "npm:10.0.0"
   peerDependencies:
     devtools-protocol: "*"
-  checksum: 130a438fb7185ed6c988b8be07595b855c5ad16d0c31ede83f82ee8e38c640542dcecbf279c8b0f6eaf255b237698609160dac6ad65576c3c90468f819950681
+  checksum: 2eaa4d07ebee562f2a1ddbefea6b0e935ae78b51d2b6b7c38a9932b6168db56bae3a760c9bc8ddf2cbde6ff629b4402d45895db656e82e638c6a011801950afc
   languageName: node
   linkType: hard
 
@@ -3471,20 +3471,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmiconfig@npm:8.3.6":
-  version: 8.3.6
-  resolution: "cosmiconfig@npm:8.3.6"
+"cosmiconfig@npm:9.0.0":
+  version: 9.0.0
+  resolution: "cosmiconfig@npm:9.0.0"
   dependencies:
+    env-paths: "npm:^2.2.1"
     import-fresh: "npm:^3.3.0"
     js-yaml: "npm:^4.1.0"
     parse-json: "npm:^5.2.0"
-    path-type: "npm:^4.0.0"
   peerDependencies:
     typescript: ">=4.9.5"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 91d082baca0f33b1c085bf010f9ded4af43cbedacba8821da0fb5667184d0a848addc52c31fadd080007f904a555319c238cf5f4c03e6d58ece2e4876b2e73d6
+  checksum: 8bdf1dfbb6fdb3755195b6886dc0649a3c742ec75afa4cb8da7b070936aed22a4f4e5b7359faafe03180358f311dbc300d248fd6586c458203d376a40cc77826
   languageName: node
   linkType: hard
 
@@ -3763,10 +3763,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"devtools-protocol@npm:0.0.1203626":
-  version: 0.0.1203626
-  resolution: "devtools-protocol@npm:0.0.1203626"
-  checksum: 6708544c67c5ad1bdeb2b3cb648b864bfe56dc93398f780056535fb936a8e7b1f6d861d6dd2cbe8598e5d922f57ab59d4a0076f96521cf8aa4fc91e422ff9050
+"devtools-protocol@npm:0.0.1232444":
+  version: 0.0.1232444
+  resolution: "devtools-protocol@npm:0.0.1232444"
+  checksum: c2b56a501ed8cda9220e1dc8b12364732bdc2bbad7d16a00fbbcaae5bf8a07414b0dfec1224fa1c3d9ce5851eb952a21c086938e73891630a7a6c440e4a1f0b0
   languageName: node
   linkType: hard
 
@@ -3987,7 +3987,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"env-paths@npm:^2.2.0":
+"env-paths@npm:^2.2.0, env-paths@npm:^2.2.1":
   version: 2.2.1
   resolution: "env-paths@npm:2.2.1"
   checksum: 65b5df55a8bab92229ab2b40dad3b387fad24613263d103a97f91c9fe43ceb21965cd3392b1ccb5d77088021e525c4e0481adb309625d0cb94ade1d1fb8dc17e
@@ -8228,17 +8228,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:21.5.2":
-  version: 21.5.2
-  resolution: "puppeteer-core@npm:21.5.2"
+"puppeteer-core@npm:21.11.0":
+  version: 21.11.0
+  resolution: "puppeteer-core@npm:21.11.0"
   dependencies:
-    "@puppeteer/browsers": "npm:1.8.0"
-    chromium-bidi: "npm:0.4.33"
+    "@puppeteer/browsers": "npm:1.9.1"
+    chromium-bidi: "npm:0.5.8"
     cross-fetch: "npm:4.0.0"
     debug: "npm:4.3.4"
-    devtools-protocol: "npm:0.0.1203626"
-    ws: "npm:8.14.2"
-  checksum: 54842788f8049251daeef9c15a809c6c6a39fb06f1eb14c96c6a0b1f466aeb464a1d89841d12980b55081bba42b420626318c12912ec341f45494d07899f8535
+    devtools-protocol: "npm:0.0.1232444"
+    ws: "npm:8.16.0"
+  checksum: 44bda6ab4995a224358d6cf8bd877ed2251446fbe9e36c38325bf5e09fd7e783e27ba4a76046140a38bfdd3c47df8ded6597c832e418db3212bebfb193382692
   languageName: node
   linkType: hard
 
@@ -8254,14 +8254,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer@npm:21.5.2":
-  version: 21.5.2
-  resolution: "puppeteer@npm:21.5.2"
+"puppeteer@npm:21.11.0":
+  version: 21.11.0
+  resolution: "puppeteer@npm:21.11.0"
   dependencies:
-    "@puppeteer/browsers": "npm:1.8.0"
-    cosmiconfig: "npm:8.3.6"
-    puppeteer-core: "npm:21.5.2"
-  checksum: 5eeba70ebb87ebb4fad40501f00261da9ed03d6fee94425b5a9ee69b84dddf7f54f73c68b721ede23fffab8ede1a90373e63219af059b693145e050325214aa5
+    "@puppeteer/browsers": "npm:1.9.1"
+    cosmiconfig: "npm:9.0.0"
+    puppeteer-core: "npm:21.11.0"
+  bin:
+    puppeteer: lib/esm/puppeteer/node/cli.js
+  checksum: eab0eed6cdcf2fb5c975e6d8fcb35c40cf4b2c234e58987e752c1d89a66bb1c4286e0fcccab1272e09ee0c5d0ba47f7fbc68642b3ae21b90a7256956f02ea9fe
   languageName: node
   linkType: hard
 
@@ -9882,10 +9884,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"urlpattern-polyfill@npm:9.0.0":
-  version: 9.0.0
-  resolution: "urlpattern-polyfill@npm:9.0.0"
-  checksum: 63d59e08d58189d340e3acb0fb69c11d8f06da5e38c091cdac66cac07e4ca81378ad19cd1a923d5593a899603a0e607fe3ef793ef368fefbc1b2b840b24839b8
+"urlpattern-polyfill@npm:10.0.0":
+  version: 10.0.0
+  resolution: "urlpattern-polyfill@npm:10.0.0"
+  checksum: 346819dbe718e929988298d02a988b8ddfa601d08daaa7e69b1148eab699c86c0f0f933d68d8c8cf913166fe64156ed28904e673200d18ef7e9ed6b58cea3fc7
   languageName: node
   linkType: hard
 
@@ -10320,7 +10322,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:8.14.2, ws@npm:^8.13.0":
+"ws@npm:8.16.0":
+  version: 8.16.0
+  resolution: "ws@npm:8.16.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 7c511c59e979bd37b63c3aea4a8e4d4163204f00bd5633c053b05ed67835481995f61a523b0ad2b603566f9a89b34cb4965cb9fab9649fbfebd8f740cea57f17
+  languageName: node
+  linkType: hard
+
+"ws@npm:^8.13.0":
   version: 8.14.2
   resolution: "ws@npm:8.14.2"
   peerDependencies:
