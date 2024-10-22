@@ -62,15 +62,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/eslint-plugin@npm:7.22.10":
-  version: 7.22.10
-  resolution: "@babel/eslint-plugin@npm:7.22.10"
+"@babel/eslint-plugin@npm:7.25.9":
+  version: 7.25.9
+  resolution: "@babel/eslint-plugin@npm:7.25.9"
   dependencies:
     eslint-rule-composer: "npm:^0.3.0"
   peerDependencies:
     "@babel/eslint-parser": ^7.11.0
-    eslint: ^7.5.0 || ^8.0.0
-  checksum: b97d65ff00afdc93906406eae39526f79f422d518605793e9760f64f697c6fb5c4618e10e8ec6ae079edbcda617036233ae7f13415f6ff5e241d5121b83cd2d9
+    eslint: ^7.5.0 || ^8.0.0 || ^9.0.0
+  checksum: 08ba33f7656bcead5256bdc9b7b26e58c7485f8b7d6d469a6033d7c5aebc577810fb4c946af75ea8610add7f6b71ec13fd3f63a2b63913ab11d31e20b3599604
   languageName: node
   linkType: hard
 
@@ -916,7 +916,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@poool/buddy@workspace:."
   dependencies:
-    "@babel/eslint-plugin": "npm:7.22.10"
+    "@babel/eslint-plugin": "npm:7.25.9"
     "@poool/eslint-config": "npm:3.0.1"
     "@poool/eslint-plugin": "npm:3.0.0"
     "@rollup/plugin-commonjs": "npm:25.0.7"
