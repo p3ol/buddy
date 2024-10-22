@@ -31,7 +31,7 @@
     "release:rc": "standard-version --prerelease rc && git push --follow-tags"
   },
   "devDependencies": {
-    "@babel/eslint-plugin": "7.22.10",
+    "@babel/eslint-plugin": "7.25.9",
     "@poool/eslint-config": "3.0.1",
     "@poool/eslint-plugin": "3.0.0",
     "@rollup/plugin-commonjs": "25.0.7",
