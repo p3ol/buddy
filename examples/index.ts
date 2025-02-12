@@ -183,6 +183,7 @@ const exec = async () => {
   const delayedResult = await send(contentWindow, 'test:delayed', {},
     { queue: true });
   createElement('delayed', delayedResult);
+};
 
   // test:ws
   const sendWsMessage = (): Promise<string> => new Promise(resolve => {
