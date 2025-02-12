@@ -1,3 +1,5 @@
+import type { WebSocket as WebSocketConnection } from 'ws';
+
 import type { BuddySerializer } from './types';
 
 export declare interface BuddyGlobalOptions {
@@ -34,7 +36,7 @@ export declare interface BuddyOptions extends BuddyGlobalOptions {
    * The target window to send messages to.
    * @default window.parent
    */
-  target?: Window;
+  target?: Window | WebSocket | WebSocketConnection;
 
   /**
    * The allowed origin of the target window.
@@ -46,7 +48,7 @@ export declare interface BuddyOptions extends BuddyGlobalOptions {
    * The source window to receive messages from.
    * @default window
    */
-  source?: Window;
+  source?: Window | WebSocket | WebSocketConnection;
 
   /**
    * List of custom serializers to use.
@@ -67,6 +69,8 @@ export declare interface BuddyOptions extends BuddyGlobalOptions {
    * @internal
    */
   pingBack?: boolean;
+
+  mode?: 'iframe' | 'websocket' | 'websocket-server';
 
   /**
    * Callback to be called when a message produces an error

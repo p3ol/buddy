@@ -2,7 +2,7 @@
  * Generate a UUID (way dumber than RFC4122, but good enough for our purposes)
  */
 export const bid = (): string => {
-  let time = window.performance.now() || Date.now();
+  let time = globalThis.performance.now() || Date.now();
 
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
     let rand = Math.random() * 16;

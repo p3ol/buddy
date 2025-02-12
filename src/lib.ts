@@ -1,4 +1,9 @@
 import type {
+  MessageEvent as WebSocketMessageEvent,
+  WebSocket as WebSocketConnection,
+} from 'ws';
+
+import type {
   BuddyError,
   BuddyEvent,
   CustomError,
@@ -83,7 +88,7 @@ export const serialize = (
     return {
       bid: bid(),
       type: 'date',
-      value: (data as Date).toISOString(),
+      value: data.toISOString(),
     } as BuddySerializedDate;
   } else if (isPromise(data)) {
     log(options, 'serialize() -->', 'Serializing promise', data);
@@ -112,7 +117,7 @@ export const serialize = (
 
     return { bid: methodId, type: 'promise' } as BuddySerializedComplex;
   } else if (isFunction(data)) {
-    const fn = data as Function;
+    const fn = data as (...args: any[]) => any;
 
     log(options, 'serialize() -->', 'Serializing function', data);
 
@@ -189,6 +194,7 @@ export const unserialize = (
     if (d.error) {
       log(options, 'unserialize() -->', 'Unserializing error:', d.error);
 
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw d.error;
     } else {
       log(options,
@@ -238,7 +244,7 @@ export const unserialize = (
 
   log(options, 'unserialize() -->', 'Unserializing object-like:', data);
 
-  return (isArray_ ? data as BuddySerializedArray : Object.keys(data)).reduce((
+  return (isArray_ ? data : Object.keys(data)).reduce((
     res: any, item: any, i: number
   ) => {
     const k = isArray_ ? i : item;
@@ -259,7 +265,7 @@ export const unserialize = (
 };
 
 export const send = (
-  target: Window,
+  target: Window | WebSocket | WebSocketConnection,
   name: string,
   data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {}
@@ -273,8 +279,8 @@ export const send = (
     return;
   }
 
-  let sendTimeout: number;
-  let queueHandler: BuddyOffSwitch;
+  let sendTimeout: NodeJS.Timeout | undefined;
+  let queueHandler: BuddyOffSwitch | undefined;
   let didTimeout = false;
 
   return new Promise((resolve, reject) => {
@@ -286,7 +292,7 @@ export const send = (
       warn(options,
         `Input data could not be serialized (event: ${name}) -->`, data, e);
 
-      return reject(e);
+      return reject(e as Error);
     }
 
     const event = {
@@ -298,7 +304,7 @@ export const send = (
     if (pingBack) {
       const timeoutErr = new Error('timeout');
       sendTimeout = setTimeout(() => {
-        queueHandler && queueHandler.off();
+        queueHandler?.off?.();
         didTimeout = true;
         error(options,
           `Target window did not respond in time, aborting (event: ${name})`);
@@ -307,7 +313,7 @@ export const send = (
 
       const handler = on(event.bid, (e: BuddyEvent) => {
         handler.off();
-        queueHandler && queueHandler.off();
+        queueHandler?.off?.();
 
         if (!didTimeout) {
           clearTimeout(sendTimeout);
@@ -347,12 +353,12 @@ export const send = (
     if (options.queue) {
       info(options, 'Queueing message in case target window is not ready');
       queueHandler = on('target:loaded', () => {
-        queueHandler && queueHandler.off();
-        target.postMessage(parsedData, origin);
+        queueHandler?.off?.();
+        sendMessage(target, parsedData, { origin });
       }, { source: target, origin, ...rest, queue: false, pingBack: false });
     }
 
-    target.postMessage(parsedData, origin);
+    sendMessage(target, parsedData, { origin });
   });
 };
 
@@ -367,7 +373,9 @@ export const on = (
   debug(options,
     `Registering message handler from target window (event: ${name})`);
 
-  const handler = (e: MessageEvent) => {
+  const handler = (
+    e: MessageEvent | WebSocketMessageEvent
+  ) => {
     let event: BuddyEvent;
 
     try {
@@ -378,20 +386,39 @@ export const on = (
       warn(options, 'Error parsing event data:', err);
     }
 
-    if (!event || !event.name || event.name !== name || !event.bid) {
+    if (!event?.name || event.name !== name || !event.bid) {
       return;
     }
 
-    if (source && e.source !== source) {
-      send(e.source as Window, event.bid, { error: 'source' },
-        { ...rest, origin: e.origin, pingBack: false, queue: false });
+    if (
+      source &&
+      // frame to frame
+      (e as MessageEvent).source !== source &&
+      // websocket to websocket
+      // nb: websocket events don't have a source property T_T
+      (source !== rest.target || (e as MessageEvent).target !== source)
+    ) {
+      send((e as MessageEvent).source as Window, event.bid, {
+        error: 'source',
+      }, {
+        ...rest,
+        origin: (e as MessageEvent).origin || origin,
+        pingBack: false,
+        queue: false,
+      });
 
       return;
     }
 
-    if (origin && origin !== '*' && e.origin !== origin) {
-      send(e.source as Window, event.bid, { error: 'origin' },
-        { ...rest, origin: e.origin, pingBack: false, queue: false });
+    if (origin && origin !== '*' && (e as MessageEvent).origin !== origin) {
+      send((e as MessageEvent).source as Window, event.bid, {
+        error: 'origin',
+      }, {
+        ...rest,
+        origin: (e as MessageEvent).origin || origin,
+        pingBack: false,
+        queue: false,
+      });
 
       return;
     }
@@ -418,8 +445,8 @@ export const on = (
     Promise.resolve(fn({
       bid: event.bid,
       name: event.name,
-      source: e.source as Window,
-      origin: e.origin,
+      source: (e as MessageEvent).source as Window,
+      origin: (e as MessageEvent).origin,
       data: unserializedData,
     }) as Promise<BuddySerializableData>)
       .then((result: BuddySerializableData) => {
@@ -427,12 +454,17 @@ export const on = (
           debug(options,
             `Sending back message result to source window (event: ${name})`);
 
-          send(source || e.source as Window, event.bid, result, {
-            ...rest,
-            origin: e.origin,
-            pingBack: false,
-            queue: false,
-          });
+          send(
+            source || (e as MessageEvent).source as Window,
+            event.bid,
+            result,
+            {
+              ...rest,
+              origin: (e as MessageEvent).origin || origin,
+              pingBack: false,
+              queue: false,
+            },
+          );
         }
       })
       .catch(er => {
@@ -440,9 +472,9 @@ export const on = (
           error(options,
             `Sending back error to source window (event: ${name})`);
 
-          send(source || e.source as Window, event.bid, er, {
+          send(source || (e as MessageEvent).source as Window, event.bid, er, {
             ...rest,
-            origin: e.origin,
+            origin: (e as MessageEvent).origin || origin,
             pingBack: false,
             queue: false,
           });
@@ -450,7 +482,8 @@ export const on = (
       });
   };
 
-  window.addEventListener('message', handler, false);
+  // @ts-expect-error ws is weird
+  (options.target || window)?.addEventListener('message', handler, false);
 
   if (options.queue) {
     send(source, 'target:loaded', {}, {
@@ -462,7 +495,20 @@ export const on = (
     off: () => {
       info(options,
         `Unregistering message handler from target window (event: ${name})`);
-      window.removeEventListener('message', handler);
+      // @ts-expect-error ws is weird
+      (options.target || window)?.removeEventListener('message', handler);
     },
   };
+};
+
+const sendMessage = (
+  target: Window | WebSocket | WebSocketConnection,
+  data: any,
+  opts: BuddyOptions = {}
+) => {
+  if (typeof (target as Window).postMessage === 'function') {
+    (target as Window).postMessage(data, opts.origin);
+  } else {
+    (target as WebSocket | WebSocketConnection).send(data);
+  }
 };

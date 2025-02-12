@@ -1,3 +1,5 @@
+import type { WebSocket as WebSocketConnection } from 'ws';
+
 export declare interface CustomError extends Error {
   code?: string | number;
 }
@@ -17,12 +19,14 @@ export declare type BuddySerializablePrimitive =
   | string
   | number
   | boolean
+  | bigint
   | null
   | undefined;
 
 export declare type BuddySerializableComplex =
   | Date
-  | Function
+  | ((...args: any[]) => any)
+  | Map<string, BuddySerializableData>
   | Promise<any>
   | Error;
 
@@ -35,7 +39,7 @@ export declare interface BuddySerializableObject {
 }
 
 // eslint-disable-next-line no-use-before-define
-export declare type BuddySerializableArray = Array<BuddySerializableData>;
+export declare type BuddySerializableArray = BuddySerializableData[];
 
 export declare type BuddySerializableData =
   | BuddySerializablePrimitive
@@ -62,7 +66,7 @@ export declare interface BuddySerializedObject {
 }
 
 // eslint-disable-next-line no-use-before-define
-export declare type BuddySerializedArray = Array<BuddySerializedData>;
+export declare type BuddySerializedArray = BuddySerializedData[];
 
 export declare type BuddySerializedData =
   | BuddySerializablePrimitive
@@ -75,12 +79,16 @@ export declare interface BuddyFunctionData {
   args: BuddySerializedData[];
 }
 
-export declare interface BuddyEvent {
+export declare interface BuddyEvent<
+  D extends BuddySerializableData | BuddyFunctionData =
+    | BuddySerializableData
+    | BuddyFunctionData
+> {
   bid: string;
   name: string;
-  source: Window;
+  source: Window | WebSocket | WebSocketConnection;
   origin: string;
-  data: BuddySerializableData | BuddyFunctionData;
+  data: D;
 }
 
 export declare interface BuddyOffSwitch {
@@ -91,11 +99,11 @@ export declare interface BuddyOffSwitch {
 }
 
 export declare type BuddyHandler = (event?: BuddyEvent) =>
-  BuddySerializedData | Promise<BuddySerializedData> | void | Promise<void>;
+  BuddySerializableData | Promise<BuddySerializableData> | void | Promise<void>;
 
 export declare interface BuddySerializer {
-  serializable: (data: any) => boolean;
-  serialize: (data: any) => BuddySerializedData;
-  unserializable: (data: BuddySerializedData) => boolean;
-  unserialize: (data: BuddySerializedData) => any;
+  serializable?: (data: any) => boolean;
+  serialize?: (data: any) => BuddySerializedData;
+  unserializable?: (data: BuddySerializedData) => boolean;
+  unserialize?: (data: BuddySerializedData) => any;
 }
