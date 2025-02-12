@@ -1,14 +1,20 @@
-import { send, isBuddy, bid } from '@poool/buddy';
 import sinon from 'sinon';
 
-const createElement = (id, content) => {
+import { type BuddySerializableObject, send, isBuddy, bid } from '@poool/buddy';
+
+export interface CustomBigInt extends BuddySerializableObject {
+  type: 'bigint';
+  value: string;
+}
+
+const createElement = (id: string, content: string) => {
   const elmt = document.createElement('div');
   elmt.id = id;
   elmt.innerText = content;
   document.body.appendChild(elmt);
 };
 
-const sendExpectingError = async (...args) => {
+const sendExpectingError = async (...args: Parameters<typeof send>) => {
   let error;
 
   try {
@@ -20,7 +26,7 @@ const sendExpectingError = async (...args) => {
   return error;
 };
 
-const frame = document.querySelector('#child');
+const frame = document.querySelector<HTMLIFrameElement>('#child');
 
 const exec = async () => {
   const contentWindow = frame.contentWindow;
@@ -42,7 +48,7 @@ const exec = async () => {
   // test:serializeMethod
   const serializeMethod = sinon.spy();
   await send(contentWindow, 'test:serializeMethod', { serializeMethod });
-  createElement('serialize-method', serializeMethod.called);
+  createElement('serialize-method', '' + serializeMethod.called);
 
   // test:serializePromise
   const serializePromise = new Promise(resolve => resolve('promise result'));
@@ -67,14 +73,15 @@ const exec = async () => {
           bid: bid(), type: 'map', entries: Array.from(d.entries()),
         }),
       }, {
-        unserializable: d => isBuddy(d) && d.type === 'bigint',
-        unserialize: d => BigInt(d.value),
+        unserializable: d => isBuddy(d) &&
+          (d as CustomBigInt).type === 'bigint',
+        unserialize: d => BigInt((d as CustomBigInt).value),
       }],
     });
   createElement('serialize-custom', typeof customResult);
 
   // test:unserializeFunctionsAndObjects
-  const unserializeFunction = x => x + 1;
+  const unserializeFunction = (x: number) => x + 1;
   const unserializeObject = { test: true };
   const unserializedData = await send(
     contentWindow,
@@ -101,12 +108,12 @@ const exec = async () => {
   const parentCallback2 = sinon.spy();
   await send(contentWindow, 'test:parentMethodCalledTwice',
     { callback: parentCallback2 });
-  createElement('parent-method-called-twice', parentCallback2.calledTwice);
+  createElement('parent-method-called-twice', '' + parentCallback2.calledTwice);
 
   // test:noTarget
   const targetCallback = sinon.spy();
   await sendExpectingError(null, 'test:noTarget', { callback: targetCallback });
-  createElement('no-target', targetCallback.called);
+  createElement('no-target', '' + targetCallback.called);
 
   // test:nestedArrayResponseFromChild
   let nestedTest = null;
@@ -135,7 +142,7 @@ const exec = async () => {
   createElement('primitive-type-array', JSON.stringify(primitiveArray));
 
   // test:back-and-forth
-  const backAndForth = sinon.spy(async () => true);
+  const backAndForth = sinon.spy(async () => Promise.resolve(true));
   const backAndForthResult = await send(contentWindow, 'test:back-and-forth', {
     callback: backAndForth,
   });
@@ -143,7 +150,7 @@ const exec = async () => {
 
   // test:throw
   const throws = sinon.spy(async () => {
-    throw new Error('custom_error');
+    return Promise.reject(new Error('custom_error'));
   });
   const throwsResult = await sendExpectingError(contentWindow,
     'test:throw', { promiseThatThrows: throws });
@@ -152,7 +159,9 @@ const exec = async () => {
   // test:throw-deep
   const throwsDeep = sinon.spy(async () => {
     return Promise.all([
-      (async () => { throw new Error('custom_deep_error'); })(),
+      (async () => {
+        return Promise.reject(new Error('custom_deep_error'));
+      })(),
     ]);
   });
   const throwsDeepResult = await send(contentWindow,
@@ -162,7 +171,9 @@ const exec = async () => {
   // test:throw-custom-error
   const throwsCustomError = sinon.spy(async () => {
     const err = { foo: 'custom_error_object' };
-    throw err;
+
+    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+    return Promise.reject(err);
   });
   const throwsCustomErrorResult = await send(contentWindow,
     'test:throw-custom-error', { promiseThatThrows: throwsCustomError });
@@ -172,7 +183,6 @@ const exec = async () => {
   const delayedResult = await send(contentWindow, 'test:delayed', {},
     { queue: true });
   createElement('delayed', delayedResult);
-};
 
 if (frame.contentWindow) {
   exec();

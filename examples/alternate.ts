@@ -1,6 +1,6 @@
 import { send } from '@poool/buddy';
 
-const createElement = (id, content) => {
+const createElement = (id: string, content: string) => {
   const elmt = document.createElement('div');
   elmt.id = id;
   elmt.innerText = content;

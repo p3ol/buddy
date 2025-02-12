@@ -5,10 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: './examples/index.js',
-    child: './examples/child.js',
-    alternate: './examples/alternate.js',
-    alternateChild: './examples/alternate-child.js',
+    index: './examples/index.ts',
+    child: './examples/child.ts',
+    alternate: './examples/alternate.ts',
+    alternateChild: './examples/alternate-child.ts',
   },
   devtool: 'source-map',
   ...(process.env.NODE_ENV === 'tests' ? {
