@@ -145,6 +145,10 @@ describe('buddy', () => {
       .toBe('response:delayed');
   });
 
+  it('should allow to use websockets', async () => {
+    expect(await getResult('#ws')).toBe('test:ws');
+  });
+
   afterAll(async () => {
     await devServer.teardown(server);
     await browser.close();
