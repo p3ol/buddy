@@ -23,6 +23,8 @@ jobs:
         run: yarn install
       - name: Eslint check
         run: yarn lint
+      - name: Types check
+        run: yarn tsc
 
   build:
     name: Building
@@ -44,8 +46,9 @@ jobs:
   test:
     name: Unit tests
     runs-on: ubuntu-latest
-    matrix:
-      browser: [chrome, firefox]
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
     timeout-minutes: 10
     env:
       BROWSER: ${{ matrix.browser }}
