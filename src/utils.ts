@@ -42,7 +42,7 @@ export const isError = (e: any) =>
   e instanceof Error;
 
 export const isBuddy = (b: any) =>
-  b && b.bid && b.type;
+  b?.bid && b.type;
 
 export const isBuddyError = (e: any) =>
   isBuddy(e) && e.type === 'error';
