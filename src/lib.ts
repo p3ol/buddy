@@ -83,7 +83,7 @@ export const serialize = (
     return {
       bid: bid(),
       type: 'date',
-      value: (data as Date).toISOString(),
+      value: data.toISOString(),
     } as BuddySerializedDate;
   } else if (isPromise(data)) {
     log(options, 'serialize() -->', 'Serializing promise', data);
@@ -112,7 +112,7 @@ export const serialize = (
 
     return { bid: methodId, type: 'promise' } as BuddySerializedComplex;
   } else if (isFunction(data)) {
-    const fn = data as Function;
+    const fn = data as (...args: any[]) => any;
 
     log(options, 'serialize() -->', 'Serializing function', data);
 
@@ -189,6 +189,7 @@ export const unserialize = (
     if (d.error) {
       log(options, 'unserialize() -->', 'Unserializing error:', d.error);
 
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw d.error;
     } else {
       log(options,
@@ -238,7 +239,7 @@ export const unserialize = (
 
   log(options, 'unserialize() -->', 'Unserializing object-like:', data);
 
-  return (isArray_ ? data as BuddySerializedArray : Object.keys(data)).reduce((
+  return (isArray_ ? data : Object.keys(data)).reduce((
     res: any, item: any, i: number
   ) => {
     const k = isArray_ ? i : item;
@@ -273,7 +274,7 @@ export const send = (
     return;
   }
 
-  let sendTimeout: number;
+  let sendTimeout: NodeJS.Timeout;
   let queueHandler: BuddyOffSwitch;
   let didTimeout = false;
 
@@ -286,7 +287,7 @@ export const send = (
       warn(options,
         `Input data could not be serialized (event: ${name}) -->`, data, e);
 
-      return reject(e);
+      return reject(e as Error);
     }
 
     const event = {
@@ -298,7 +299,7 @@ export const send = (
     if (pingBack) {
       const timeoutErr = new Error('timeout');
       sendTimeout = setTimeout(() => {
-        queueHandler && queueHandler.off();
+        queueHandler?.off?.();
         didTimeout = true;
         error(options,
           `Target window did not respond in time, aborting (event: ${name})`);
@@ -307,7 +308,7 @@ export const send = (
 
       const handler = on(event.bid, (e: BuddyEvent) => {
         handler.off();
-        queueHandler && queueHandler.off();
+        queueHandler?.off?.();
 
         if (!didTimeout) {
           clearTimeout(sendTimeout);
@@ -347,7 +348,7 @@ export const send = (
     if (options.queue) {
       info(options, 'Queueing message in case target window is not ready');
       queueHandler = on('target:loaded', () => {
-        queueHandler && queueHandler.off();
+        queueHandler?.off?.();
         target.postMessage(parsedData, origin);
       }, { source: target, origin, ...rest, queue: false, pingBack: false });
     }
@@ -378,7 +379,7 @@ export const on = (
       warn(options, 'Error parsing event data:', err);
     }
 
-    if (!event || !event.name || event.name !== name || !event.bid) {
+    if (!event?.name || event.name !== name || !event.bid) {
       return;
     }
 
