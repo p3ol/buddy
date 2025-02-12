@@ -183,6 +183,7 @@ const exec = async () => {
   const delayedResult = await send(contentWindow, 'test:delayed', {},
     { queue: true });
   createElement('delayed', delayedResult);
+};
 
 if (frame.contentWindow) {
   exec();
