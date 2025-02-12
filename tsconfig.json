@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@poool/buddy": ["./src/index.ts"],
+    },
     "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,

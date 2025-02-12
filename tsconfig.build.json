@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/types",
+    "baseUrl": "./src"
+  },
+  "exclude": [
+    "tests", "**/*.test.ts", "rollup.config.ts", "examples", "coverage",
+    "dist", "*.js",
+  ],
+  "include": ["src"]
+}
