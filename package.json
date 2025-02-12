@@ -26,7 +26,7 @@
     "build:dts": "tsc --project ./tsconfig.build.json",
     "test": "jest",
     "prepack": "yarn lint && yarn build && yarn test",
-    "serve": "yarn tsx examples/websocket-server.js & webpack serve --config ./webpack.config.js",
+    "serve": "webpack serve --config ./webpack.config.js",
     "lint": "eslint --max-warnings=0 .",
     "release": "standard-version && git push --follow-tags",
     "release:beta": "standard-version --prerelease beta && git push --follow-tags",
