@@ -1,15 +1,15 @@
-import puppeteer from 'puppeteer';
-import istanbul from 'puppeteer-to-istanbul';
+import type { SpawndChildProcess } from 'spawnd';
+import puppeteer, { type SupportedBrowser, Browser, Page } from 'puppeteer';
 import devServer from 'jest-dev-server';
 
-import { findFreePort, sleep } from './utils.js';
+import { findFreePort, sleep } from './utils';
 
 jest.setTimeout(30000);
 
 describe('buddy', () => {
-  let server, browser, page;
+  let server: SpawndChildProcess[], browser: Browser, page: Page;
 
-  const getResult = async name => {
+  const getResult = async (name: string) => {
     await page.waitForSelector(name);
     const elmt = await page.$(name);
     const result = await elmt.getProperty('textContent');
@@ -19,23 +19,28 @@ describe('buddy', () => {
 
   beforeAll(async () => {
     const port = await findFreePort();
-    process.env.TEST_PORT = port;
+    const wsPort = await findFreePort();
+    process.env.TEST_PORT = '' + port;
+    process.env.WS_PORT = '' + wsPort;
 
     server = await devServer.setup({
-      command: `NODE_ENV=tests; BABEL_ENV=tests; TEST_PORT=${port} yarn serve`,
+      command: `NODE_ENV=tests; TEST_PORT=${port}; WS_PORT=${wsPort} `+
+        `yarn serve`,
       host: 'localhost',
       port,
       protocol: 'http',
+      debug: true,
       launchTimeout: 30000,
     });
 
     await sleep(1000);
 
     browser = await puppeteer.launch({
-      headless: 'new',
+      browser: process.env.BROWSER as SupportedBrowser || 'chrome',
+      headless: true,
+      dumpio: true,
     });
     page = await browser.newPage();
-    await page.coverage.startJSCoverage();
     await page.goto('http://localhost:' + port);
   });
 
@@ -141,13 +146,6 @@ describe('buddy', () => {
   });
 
   afterAll(async () => {
-    try {
-      const coverage = await page.coverage.stopJSCoverage();
-      istanbul.write([...coverage]);
-    } catch (e) {
-      console.error(e);
-    }
-
     await devServer.teardown(server);
     await browser.close();
   });

@@ -39,6 +39,9 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       debug: true,
     }),
+    new webpack.DefinePlugin({
+      'process.env.WS_PORT': JSON.stringify(process.env.WS_PORT || 64001),
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './examples/index.html',
