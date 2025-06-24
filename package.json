@@ -33,7 +33,7 @@
     "release:rc": "standard-version --prerelease rc && git push --follow-tags"
   },
   "devDependencies": {
-    "@poool/eslint-config": "4.0.4",
+    "@poool/eslint-config": "4.1.0",
     "@rollup/plugin-commonjs": "28.0.2",
     "@rollup/plugin-node-resolve": "16.0.0",
     "@rollup/plugin-swc": "0.4.0",
