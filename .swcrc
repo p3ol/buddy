@@ -1,0 +1,10 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript"
+    }
+  },
+  "env": {
+    "targets": ">=0.2% and not dead"
+  }
+}

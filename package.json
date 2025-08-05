@@ -22,7 +22,7 @@
   "scripts": {
     "clean": "rm -rf ./dist || true",
     "build": "yarn clean && yarn build:code && yarn build:dts",
-    "build:code": "rollup --configPlugin @rollup/plugin-swc -c",
+    "build:code": "tsup",
     "build:dts": "tsc --project ./tsconfig.build.json",
     "test": "jest",
     "prepack": "yarn lint && yarn build && yarn test",
@@ -62,7 +62,9 @@
     "sinon": "19.0.2",
     "standard-version": "9.5.0",
     "swc-loader": "0.2.6",
+    "ts-node": "10.9.2",
     "tslib": "2.8.1",
+    "tsup": "8.5.0",
     "tsx": "4.19.2",
     "typescript": "5.7.3",
     "typescript-eslint": "8.24.0",
