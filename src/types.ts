@@ -89,6 +89,16 @@ D extends BuddySerializableData | BuddyFunctionData =
   data: D;
 }
 
+export declare interface BuddySerializedEvent<
+D extends BuddySerializedData | BuddyFunctionData =
+  | BuddySerializedData
+  | BuddyFunctionData
+> {
+  bid: string;
+  name: string;
+  data: D;
+}
+
 export declare interface BuddyOffSwitch {
   /**
    * Allows to stop listening to the event

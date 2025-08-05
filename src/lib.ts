@@ -14,6 +14,7 @@ import type {
   BuddySerializedDate,
   BuddySerializedObject,
   BuddySerializer,
+  BuddySerializedEvent,
 } from './types';
 import type { BuddyOptions } from './options';
 import { extendGlobalOptions } from './options';
@@ -279,7 +280,7 @@ export const send = (
   let didTimeout = false;
 
   return new Promise((resolve, reject) => {
-    let serializedData;
+    let serializedData: BuddySerializedData;
 
     try {
       serializedData = serialize(data, { target, ...options });
@@ -290,7 +291,7 @@ export const send = (
       return reject(e as Error);
     }
 
-    const event = {
+    const event: BuddySerializedEvent = {
       name,
       bid: bid(),
       data: serializedData,
@@ -361,7 +362,7 @@ export const on = (
   name: string,
   fn: BuddyHandler,
   options: BuddyOptions = {}
-) => {
+): BuddyOffSwitch => {
   options = extendGlobalOptions(options);
   const { source, origin = '*', pingBack = true, ...rest } = options;
 
@@ -400,7 +401,7 @@ export const on = (
     info(options,
       `Handling message from source window (event: ${name}) -->`, event);
 
-    let unserializedData;
+    let unserializedData: BuddySerializableData;
 
     try {
       unserializedData = unserialize(event.data as BuddySerializedData,
