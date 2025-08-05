@@ -1,9 +1,10 @@
-const path = require('path');
+import path from 'node:path';
 
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import 'webpack-dev-server';
 
-module.exports = {
+const config: webpack.Configuration = {
   entry: {
     index: './examples/index.ts',
     child: './examples/child.ts',
@@ -83,3 +84,5 @@ module.exports = {
     }],
   },
 };
+
+export default config;
