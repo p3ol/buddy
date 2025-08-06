@@ -78,7 +78,7 @@ export declare interface BuddyFunctionData {
 export declare interface BuddyEvent<
   D extends BuddySerializableData | BuddyFunctionData =
     | BuddySerializableData
-    | BuddyFunctionData
+    | BuddyFunctionData,
 > {
   bid: string;
   name: string;
@@ -88,9 +88,9 @@ export declare interface BuddyEvent<
 }
 
 export declare interface BuddySerializedEvent<
-D extends BuddySerializedData | BuddyFunctionData =
-  | BuddySerializedData
-  | BuddyFunctionData
+  D extends BuddySerializedData | BuddyFunctionData =
+    | BuddySerializedData
+    | BuddyFunctionData,
 > {
   bid: string;
   name: string;

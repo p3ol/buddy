@@ -36,7 +36,7 @@
     "release:rc": "commit-and-tag-version --prerelease rc && git push --follow-tags"
   },
   "devDependencies": {
-    "@poool/eslint-config": "4.1.0",
+    "@poool/eslint-config": "5.0.2",
     "@swc/core": "1.13.3",
     "@swc/jest": "0.2.39",
     "@types/jest": "30.0.0",
@@ -47,7 +47,7 @@
     "eslint": "9.32.0",
     "jest": "30.0.5",
     "jest-dev-server": "11.0.0",
-    "puppeteer": "24.15.0",
+    "puppeteer": "24.16.0",
     "sinon": "21.0.0",
     "ts-node": "10.9.2",
     "tsup": "8.5.0",
