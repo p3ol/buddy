@@ -1,4 +1,4 @@
-import net from 'net';
+import net from 'node:net';
 
 export const sleep = (time: number) =>
   new Promise(resolve => setTimeout(resolve, time));

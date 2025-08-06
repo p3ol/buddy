@@ -1,6 +1,12 @@
 import sinon from 'sinon';
 
-import { type BuddySerializableObject, send, isBuddy, bid } from '@poool/buddy';
+import {
+  type BuddySerializableObject,
+  isBuddy,
+  send,
+  bid,
+  on,
+} from '@poool/buddy';
 
 export interface CustomBigInt extends BuddySerializableObject {
   type: 'bigint';
@@ -200,7 +206,7 @@ const exec = async () => {
 };
 
 if (frame.contentWindow) {
-  exec();
+  on('target:loaded', () => exec(), { source: frame.contentWindow });
 } else {
   frame.onload = exec;
 }

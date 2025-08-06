@@ -1,9 +1,9 @@
 import {
   type BuddyEvent,
   type BuddySerializableObject,
-  on,
   isBuddy,
   bid,
+  on,
 } from '@poool/buddy';
 
 export interface CustomMap extends BuddySerializableObject {
