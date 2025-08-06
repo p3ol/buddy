@@ -2,7 +2,7 @@
   "name": "@poool/buddy",
   "version": "4.0.0",
   "description": "🐕 Dead simple cross-domain iframe messaging",
-  "main": "dist/buddy.cjs.js",
+  "main": "dist/lib/index.js",
   "repository": "https://github.com/p3ol/buddy.git",
   "author": "Ugo Stephant <ugo@poool.fr>",
   "contributors": [
@@ -10,10 +10,10 @@
   ],
   "license": "MIT",
   "sideEffects": false,
-  "unpkg": "dist/buddy.min.js",
-  "cdn": "dist/buddy.min.js",
-  "jsnext:main": "dist/esm/index.js",
-  "module": "dist/esm/index.js",
+  "unpkg": "dist/lib/index.global.js",
+  "cdn": "dist/lib/index.global.js",
+  "jsnext:main": "dist/lib/index.mjs",
+  "module": "dist/lib/index.mjs",
   "esnext": "src",
   "types": "dist/types/index.d.ts",
   "engines": {
