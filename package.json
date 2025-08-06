@@ -47,7 +47,7 @@
     "eslint": "9.32.0",
     "jest": "30.0.5",
     "jest-dev-server": "11.0.0",
-    "puppeteer": "24.15.0",
+    "puppeteer": "24.16.0",
     "sinon": "21.0.0",
     "ts-node": "10.9.2",
     "tsup": "8.5.0",
