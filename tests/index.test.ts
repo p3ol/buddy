@@ -7,7 +7,7 @@ import { findFreePort, sleep } from './utils';
 jest.setTimeout(30000);
 
 describe('buddy', () => {
-  let server: SpawndChildProcess[], browser: Browser, page: Page;
+  let servers: SpawndChildProcess[], browser: Browser, page: Page;
 
   const getResult = async (name: string) => {
     await page.waitForSelector(name);
@@ -18,18 +18,19 @@ describe('buddy', () => {
   };
 
   beforeAll(async () => {
-    const port = await findFreePort();
-    process.env.TEST_PORT = '' + port;
+    process.env.TEST_PORT = '' + await findFreePort();
+    process.env.WS_TEST_PORT = '' + await findFreePort();
 
-    server = await devServer.setup({
-      command: `NODE_ENV=tests; TEST_PORT=${port}; `+
-        `yarn serve`,
+    servers = await devServer.setup([{
+      command: `NODE_ENV=tests; TEST_PORT=${process.env.TEST_PORT}; `+
+        `WS_TEST_PORT=${process.env.WS_TEST_PORT}; `+
+        `yarn dev`,
       host: 'localhost',
-      port,
+      port: Number(process.env.TEST_PORT),
       protocol: 'http',
       debug: true,
       launchTimeout: 30000,
-    });
+    }]);
 
     await sleep(1000);
 
@@ -42,7 +43,7 @@ describe('buddy', () => {
       ],
     });
     page = await browser.newPage();
-    await page.goto('http://localhost:' + port);
+    await page.goto('http://localhost:' + process.env.TEST_PORT);
   });
 
   it('should send data to an iframe and get a response', async () => {
@@ -146,8 +147,12 @@ describe('buddy', () => {
       .toBe('response:delayed');
   });
 
+  it('should allow to use websockets', async () => {
+    expect(await getResult('#ws')).toBe('test:ws');
+  });
+
   afterAll(async () => {
-    await devServer.teardown(server);
+    await devServer.teardown(servers);
     await browser.close();
   });
 });

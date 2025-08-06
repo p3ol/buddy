@@ -189,6 +189,20 @@ const exec = async () => {
   const delayedResult = await send(contentWindow, 'test:delayed', {},
     { queue: true });
   createElement('delayed', delayedResult);
+
+  // test:ws
+  const sendWsMessage = (): Promise<string> => new Promise(resolve => {
+    const ws = new WebSocket(
+      'ws://localhost:' + (process.env.WS_TEST_PORT || 64001)
+    );
+    ws.addEventListener('open', async () => {
+      resolve(await send(ws, 'test:ws', null, {
+        source: ws, target: ws,
+      }));
+    });
+  });
+  const wsResult = await sendWsMessage();
+  createElement('ws', wsResult);
 };
 
 if (frame.contentWindow) {

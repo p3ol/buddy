@@ -12,7 +12,7 @@ yarn add @poool/buddy
 ```
 
 
-## Usage
+## Usage with iFrames
 
 ```javascript
 import { on, send } from '@poool/buddy';
@@ -35,6 +35,44 @@ send(someChildWindow, 'getInfos', { infos: 'some string', someMethod: () => 25 }
 ```
 
 Buddy serializes all the primitive types (using `JSON.parse`) and even __methods__, using custom back & forth `Promise` logic.
+
+## Usage with WebSockets
+
+Buddy can also be used with WebSockets, by using the `WebSocket` object as __both target and source__:
+
+On the server:
+```javascript
+import { createServer } from 'node:http';
+
+import { on } from '@poool/buddy';
+import { WebSocketServer } from 'ws';
+
+const server = createServer();
+const wss = new WebSocketServer({ server });
+
+wss.on('connection', ws => {
+  on('getInfos', async event => {
+    console.log('You have a message from some browser:', event.data);
+
+    return { someOtherMethod: () => 30 };
+  }, { source: ws, target: ws });
+});
+
+server.listen(8080);
+```
+
+On the client:
+```javascript
+import { send } from '@poool/buddy';
+
+const ws = new WebSocket('ws://localhost:8080');
+ws.addEventListener('open', () => {
+  send(ws, 'getInfos', { infos: 'some string', someMethod: () => 25 }, {
+    source: ws, target: ws,
+  });
+});
+```
+
 
 ## Configuration
 
@@ -82,17 +120,17 @@ See [serializers](#serializers) section for more details.
 * `callback` {`Function`}
   * `event` {`Object`}
 * `options` {`Object`}
-  * `source` {`Window`} Source window
-  * `origin` {`String`} Origin expected from source window. `*` (default) or any other origin.
+  * `source` {`Window` | `WebSocket`} Source window or websocket connection
+  * `origin` {`String`} Origin expected from source. `*` (default) or any other origin.
   * `...globalOptions`
 
 ### send(target, name, data, options)
 
-* `target` {`Window`} Target window
+* `target` {`Window` | `WebSocket`} Target window or websocket connection
 * `name` {`String`} Event name
 * `data` {`Object`} Data to be serialized & sent to child
 * `options` {`Object`}
-  * `origin` {`String`} Origin expected from source window. `*` (default) or any other origin.
+  * `origin` {`String`} Origin expected from source. `*` (default) or any other origin.
   * `pingBack` {`Boolean`} Mostly used internally. Whether sender should await a response from receiver or not. `true` (default) or `false`
   * `...globalOptions`
 

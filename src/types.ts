@@ -1,3 +1,5 @@
+import type { WebSocket as WebSocketConnection } from 'ws';
+
 export declare interface CustomError extends Error {
   code?: string | number;
 }
@@ -24,7 +26,7 @@ export declare type BuddySerializablePrimitive =
 export declare type BuddySerializableComplex =
   | Date
   | ((...args: any[]) => any)
-  | Map<any, any>
+  | Map<string, BuddySerializableData>
   | Promise<any>
   | Error;
 
@@ -74,13 +76,13 @@ export declare interface BuddyFunctionData {
 }
 
 export declare interface BuddyEvent<
-D extends BuddySerializableData | BuddyFunctionData =
-  | BuddySerializableData
-  | BuddyFunctionData
+  D extends BuddySerializableData | BuddyFunctionData =
+    | BuddySerializableData
+    | BuddyFunctionData
 > {
   bid: string;
   name: string;
-  source: Window;
+  source: Window | WebSocket | WebSocketConnection;
   origin: string;
   data: D;
 }
@@ -103,7 +105,7 @@ export declare interface BuddyOffSwitch {
 }
 
 export declare type BuddyHandler = (event?: BuddyEvent) =>
-  BuddySerializedData | Promise<BuddySerializedData> | void | Promise<void>;
+  BuddySerializableData | Promise<BuddySerializableData> | void | Promise<void>;
 
 export declare interface BuddySerializer {
   serializable?: (data: any) => boolean;
