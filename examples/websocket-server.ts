@@ -10,7 +10,7 @@ const server = createServer((_, res) => {
 });
 
 const wss = new WebSocketServer({ server });
-const port = Number(process.env.WS_PORT || 64001);
+const port = Number(process.env.WS_TEST_PORT || 64001);
 
 wss.on('connection', ws => {
   on('test:ws', () => 'test:ws', {

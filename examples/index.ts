@@ -193,7 +193,7 @@ const exec = async () => {
   // test:ws
   const sendWsMessage = (): Promise<string> => new Promise(resolve => {
     const ws = new WebSocket(
-      'ws://localhost:' + (process.env.WS_PORT || 64001)
+      'ws://localhost:' + (process.env.WS_TEST_PORT || 64001)
     );
     ws.addEventListener('open', async () => {
       resolve(await send(ws, 'test:ws', null, {
