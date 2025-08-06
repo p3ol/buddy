@@ -1,6 +1,6 @@
 {
   "name": "@poool/buddy",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "🐕 Dead simple cross-domain iframe messaging",
   "main": "dist/lib/index.js",
   "repository": "https://github.com/p3ol/buddy.git",

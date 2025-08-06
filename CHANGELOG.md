@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [4.0.1](https://github.com/p3ol/buddy/compare/v4.0.0...v4.0.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* bad exports paths ([4275079](https://github.com/p3ol/buddy/commit/4275079963fe91819809e3e7ae5e9992e538737b))
+
 ## [4.0.0](https://github.com/p3ol/buddy/compare/v3.0.1...v4.0.0) (2025-08-06)
 
 
