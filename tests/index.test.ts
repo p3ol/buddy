@@ -23,18 +23,11 @@ describe('buddy', () => {
 
     servers = await devServer.setup([{
       command: `NODE_ENV=tests; TEST_PORT=${process.env.TEST_PORT}; `+
-        `yarn dev:web`,
+        `WS_TEST_PORT=${process.env.WS_TEST_PORT}; `+
+        `yarn dev`,
       host: 'localhost',
       port: Number(process.env.TEST_PORT),
       protocol: 'http',
-      debug: true,
-      launchTimeout: 30000,
-    }, {
-      command: `NODE_ENV=tests; WS_TEST_PORT=${process.env.WS_TEST_PORT}; `+
-        `yarn dev:ws`,
-      host: 'localhost',
-      port: Number(process.env.WS_TEST_PORT),
-      protocol: 'socket',
       debug: true,
       launchTimeout: 30000,
     }]);
