@@ -32,11 +32,9 @@ export declare type BuddySerializableCustom =
   | CustomError;
 
 export declare interface BuddySerializableObject {
-  // eslint-disable-next-line no-use-before-define
   [key: string]: BuddySerializableData;
 }
 
-// eslint-disable-next-line no-use-before-define
 export declare type BuddySerializableArray = BuddySerializableData[];
 
 export declare type BuddySerializableData =
@@ -59,11 +57,9 @@ export declare interface BuddySerializedDate extends BuddySerializedComplex {
 }
 
 export declare interface BuddySerializedObject {
-  // eslint-disable-next-line no-use-before-define
   [key: string]: BuddySerializedData;
 }
 
-// eslint-disable-next-line no-use-before-define
 export declare type BuddySerializedArray = BuddySerializedData[];
 
 export declare type BuddySerializedData =

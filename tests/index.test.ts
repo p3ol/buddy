@@ -19,12 +19,10 @@ describe('buddy', () => {
 
   beforeAll(async () => {
     const port = await findFreePort();
-    const wsPort = await findFreePort();
     process.env.TEST_PORT = '' + port;
-    process.env.WS_PORT = '' + wsPort;
 
     server = await devServer.setup({
-      command: `NODE_ENV=tests; TEST_PORT=${port}; WS_PORT=${wsPort} `+
+      command: `NODE_ENV=tests; TEST_PORT=${port}; `+
         `yarn serve`,
       host: 'localhost',
       port,
