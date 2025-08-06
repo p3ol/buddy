@@ -29,16 +29,19 @@
     "serve": "vite",
     "dev": "vite",
     "lint": "eslint --max-warnings=0 --cache .",
-    "release": "standard-version && git push --follow-tags",
-    "release:beta": "standard-version --prerelease beta && git push --follow-tags",
-    "release:rc": "standard-version --prerelease rc && git push --follow-tags"
+    "release": "commit-and-tag-version && git push --follow-tags",
+    "release:dry": "commit-and-tag-version --dry-run",
+    "release:beta": "commit-and-tag-version --prerelease beta && git push --follow-tags",
+    "release:rc": "commit-and-tag-version --prerelease rc && git push --follow-tags"
   },
   "devDependencies": {
     "@poool/eslint-config": "4.1.0",
     "@swc/core": "1.13.3",
     "@swc/jest": "0.2.39",
     "@types/jest": "30.0.0",
+    "@types/node": "24.2.0",
     "@types/sinon": "17.0.4",
+    "commit-and-tag-version": "12.5.2",
     "eslint": "9.32.0",
     "jest": "30.0.5",
     "jest-dev-server": "11.0.0",
