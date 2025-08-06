@@ -1,6 +1,28 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [4.0.0](https://github.com/p3ol/buddy/compare/v3.0.1...v4.0.0) (2025-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* require node 20 minimum
+
+### Features
+
+* allow to use buddy with websockets ([532553f](https://github.com/p3ol/buddy/commit/532553f67c5620455c6237abebef66556b27a537))
+* require node 20 minimum ([4d9ae48](https://github.com/p3ol/buddy/commit/4d9ae4850160e220c53898beec44ddf8c6049fd0))
+
+
+### Bug Fixes
+
+* better typings ([3072f40](https://github.com/p3ol/buddy/commit/3072f409e698c2e06f47412d74303e0671ab99bf))
+* missing ws port ([6d53ade](https://github.com/p3ol/buddy/commit/6d53ade260cda82107c1c358256fef46534975b1))
+* **renovate:** extend new p3ol custom presets ([c16e12c](https://github.com/p3ol/buddy/commit/c16e12ce9fa7f6b51df89ecf4e1d155e3361dcb9))
+* **renovate:** remove useless encrypted credential ([832406a](https://github.com/p3ol/buddy/commit/832406a5da18f5c363abdcddb2bfd992f2870bf1))
+* **renovate:** test custom preset 'local' extension ([d9266f5](https://github.com/p3ol/buddy/commit/d9266f5491d8692f0d1ea94316256bd3812fe706))
+* upgrade various deps ([343c27e](https://github.com/p3ol/buddy/commit/343c27e8983403e11d11da45a1bc1105bbc50d28))
 
 ### [3.0.1](https://github.com/p3ol/buddy/compare/v3.0.0...v3.0.1) (2023-11-17)
 
