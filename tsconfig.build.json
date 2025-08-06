@@ -9,8 +9,15 @@
     "baseUrl": "./src"
   },
   "exclude": [
-    "tests", "**/*.test.ts", "rollup.config.ts", "examples", "coverage",
-    "dist", "*.js",
+    "tests",
+    "**/*.test.ts",
+    "tsup.config.ts",
+    "vite.config.ts",
+    "jest.config.ts",
+    "examples",
+    "coverage",
+    "dist",
+    "*.js",
   ],
   "include": ["src"]
 }

@@ -26,7 +26,8 @@
     "build:dts": "tsc --project ./tsconfig.build.json",
     "test": "jest",
     "prepack": "yarn lint && yarn build && yarn test",
-    "serve": "webpack serve --config ./webpack.config.ts",
+    "serve": "vite",
+    "dev": "vite",
     "lint": "eslint --max-warnings=0 --cache .",
     "release": "standard-version && git push --follow-tags",
     "release:beta": "standard-version --prerelease beta && git push --follow-tags",
@@ -37,20 +38,18 @@
     "@swc/core": "1.13.3",
     "@swc/jest": "0.2.39",
     "@types/jest": "30.0.0",
+    "@types/sinon": "17.0.4",
     "eslint": "9.32.0",
-    "html-webpack-plugin": "5.6.3",
     "jest": "30.0.5",
     "jest-dev-server": "11.0.0",
     "puppeteer": "24.15.0",
-    "swc-loader": "0.2.6",
+    "sinon": "21.0.0",
     "ts-node": "10.9.2",
     "tsup": "8.5.0",
     "tsx": "4.20.3",
     "typescript": "5.9.2",
     "typescript-eslint": "8.39.0",
-    "webpack": "5.101.0",
-    "webpack-cli": "6.0.1",
-    "webpack-dev-server": "5.2.2"
+    "vite": "7.0.6"
   },
   "packageManager": "yarn@4.9.2"
 }
