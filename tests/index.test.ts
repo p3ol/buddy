@@ -38,6 +38,9 @@ describe('buddy', () => {
       browser: process.env.BROWSER as SupportedBrowser || 'chrome',
       headless: true,
       dumpio: true,
+      args: [
+        '--no-sandbox',
+      ],
     });
     page = await browser.newPage();
     await page.goto('http://localhost:' + process.env.TEST_PORT);
