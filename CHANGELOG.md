@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [4.0.2](https://github.com/p3ol/buddy/compare/v4.0.1...v4.0.2) (2025-09-04)
+
+
+### Bug Fixes
+
+* update various dev deps ([dee116a](https://github.com/p3ol/buddy/commit/dee116a4110e86036d32205362702de65f1f12ad))
+
 ## [4.0.1](https://github.com/p3ol/buddy/compare/v4.0.0...v4.0.1) (2025-08-06)
 
 
