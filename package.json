@@ -36,7 +36,7 @@
     "release:rc": "commit-and-tag-version --prerelease rc && git push --follow-tags"
   },
   "devDependencies": {
-    "@poool/eslint-config": "5.0.5",
+    "@poool/eslint-config": "5.0.6",
     "@swc/core": "1.13.5",
     "@swc/jest": "0.2.39",
     "@types/jest": "30.0.0",

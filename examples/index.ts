@@ -178,7 +178,6 @@ const exec = async () => {
   const throwsCustomError = sinon.spy(async () => {
     const err = { foo: 'custom_error_object' };
 
-    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
     return Promise.reject(err);
   });
   const throwsCustomErrorResult = await send(contentWindow,

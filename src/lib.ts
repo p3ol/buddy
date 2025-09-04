@@ -195,7 +195,6 @@ export const unserialize = (
     if (d.error) {
       log(options, 'unserialize() -->', 'Unserializing error:', d.error);
 
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw d.error;
     } else {
       log(options,
