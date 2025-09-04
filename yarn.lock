@@ -1245,7 +1245,7 @@ __metadata:
     "@swc/core": "npm:1.13.3"
     "@swc/jest": "npm:0.2.39"
     "@types/jest": "npm:30.0.0"
-    "@types/node": "npm:24.2.0"
+    "@types/node": "npm:24.3.1"
     "@types/sinon": "npm:17.0.4"
     "@types/ws": "npm:8.18.1"
     commit-and-tag-version: "npm:12.5.2"
@@ -1817,12 +1817,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:24.2.0":
+"@types/node@npm:*":
   version: 24.2.0
   resolution: "@types/node@npm:24.2.0"
   dependencies:
     undici-types: "npm:~7.10.0"
   checksum: 10/b81501e05f15df28102baac60afbc82d30009ee0bf4dee41b7fa326ec5789d0d83dd28c418e04dc30a9513ab6afb9813edc75042aef751336d8dcfefe099709c
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:24.3.1":
+  version: 24.3.1
+  resolution: "@types/node@npm:24.3.1"
+  dependencies:
+    undici-types: "npm:~7.10.0"
+  checksum: 10/b9a52ed8f2fb1fa764ce988828b8d579761f944f1bb0492adbdeaa676a161086bad1a807b590799681ad93b3d272468b5c5ddccf5678735d487d1b65e481bc07
   languageName: node
   linkType: hard
 
