@@ -1,7 +1,11 @@
+import { defineConfig } from 'eslint/config';
+import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pooolint from '@poool/eslint-config';
 
-export default tseslint.config(
+export default defineConfig(
+  eslint.configs.recommended,
+  tseslint.configs.recommended,
   {
     ignores: [
       'node_modules', 'dist', '.yarn', '.dev', 'coverage', '.nyc_output',
@@ -15,5 +19,5 @@ export default tseslint.config(
       },
     },
   },
-  ...pooolint.configs.recommended,
+  pooolint.configs.recommended,
 );
