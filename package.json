@@ -57,5 +57,5 @@
     "vite": "7.1.4",
     "ws": "8.18.3"
   },
-  "packageManager": "yarn@4.9.4"
+  "packageManager": "yarn@4.11.0"
 }
