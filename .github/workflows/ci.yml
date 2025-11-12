@@ -16,7 +16,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           check-latest: true
           cache: yarn
       - name: Install deps
@@ -35,7 +35,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           check-latest: true
           cache: yarn
       - name: Install deps
@@ -59,7 +59,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           check-latest: true
           cache: yarn
       - name: Install deps
