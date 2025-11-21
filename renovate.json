@@ -1,10 +1,5 @@
 {
   "extends": [
-    "p3ol/renovate-presets//presets/base#v1.1.0"
-  ],
-  "packageRules": [{
-    "matchUpdateTypes": ["patch", "pin"],
-    "matchDepTypes": ["devDependencies", "dependencies"],
-    "automerge": true
-  }]
+    "p3ol/renovate-presets//presets/ci-cd-only/base"
+  ]
 }
