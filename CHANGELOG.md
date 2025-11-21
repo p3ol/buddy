@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.0](https://github.com/p3ol/buddy/compare/v2.0.5...v3.0.0) (2025-11-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* require node 20 minimum
+* require node 16
+* rewrite everything with typescript
+* replace babel with swc
+* remove IE compat
+* require node 14
+
+### Features
+
+* add custom serializers ([6935ae6](https://github.com/p3ol/buddy/commit/6935ae60cd73f90eb94f866c413cb775c41a508c))
+* add types definitions ([79fe4ec](https://github.com/p3ol/buddy/commit/79fe4ece65023fb24c085d7679941ed5e88be1cd))
+* allow to queue messages when target is allegedly not ready ([41fd12e](https://github.com/p3ol/buddy/commit/41fd12edabf36b64a05b76c3796ced513c57f417))
+* allow to throw custom objects instead of error instances ([3141736](https://github.com/p3ol/buddy/commit/3141736de3137ad10379ea82504b09c6436bb238))
+* allow to use buddy with websockets ([532553f](https://github.com/p3ol/buddy/commit/532553f67c5620455c6237abebef66556b27a537))
+* better recursive serialized typings ([44eab60](https://github.com/p3ol/buddy/commit/44eab6096fe2dde9ac7a368791146ad9fe1a869f))
+* **deps:** update dependency core-js to v3.31.0 ([538d7ac](https://github.com/p3ol/buddy/commit/538d7ac3a4021341b14fb81f184af14f2f48fe68))
+* **deps:** update dependency core-js to v3.31.0 ([34032fd](https://github.com/p3ol/buddy/commit/34032fd6ef41bb2df7d44b57715aef621c650902))
+* **deps:** update dependency core-js to v3.32.0 ([3b6a208](https://github.com/p3ol/buddy/commit/3b6a20812ed0d58285e46df408086a7eafa6d496))
+* **deps:** update dependency core-js to v3.32.0 ([7d9fe76](https://github.com/p3ol/buddy/commit/7d9fe760a432b0ade5108ae8548a8e182950e2a0))
+* **deps:** update dependency core-js to v3.33.0 ([411d220](https://github.com/p3ol/buddy/commit/411d22064d17a23a8b4920f77a5040bfde12924a))
+* **deps:** update dependency core-js to v3.33.0 ([751a432](https://github.com/p3ol/buddy/commit/751a4324d7db8430f3fd3d5d935283c7e27c6603))
+* remove IE compat ([72c8d52](https://github.com/p3ol/buddy/commit/72c8d525e0603e0265a83042e2c387f78220cbcb))
+* replace babel with swc ([2d16934](https://github.com/p3ol/buddy/commit/2d16934e68ec23f1ae5ea2cd93341f58354b4137))
+* require node 14 ([70a55ec](https://github.com/p3ol/buddy/commit/70a55ec780eb007b6fc5bf6c884331eed650a571))
+* require node 16 ([4c5e76d](https://github.com/p3ol/buddy/commit/4c5e76d72891f2f3d9baa098996590d08f9fd0a6))
+* require node 20 minimum ([4d9ae48](https://github.com/p3ol/buddy/commit/4d9ae4850160e220c53898beec44ddf8c6049fd0))
+* rewrite everything with typescript ([b45c3dd](https://github.com/p3ol/buddy/commit/b45c3dd9c5dc642b552aa335f78503c8f61f71a5))
+
+
+### Bug Fixes
+
+* bad exports paths ([4275079](https://github.com/p3ol/buddy/commit/4275079963fe91819809e3e7ae5e9992e538737b))
+* better timeout error stack ([fa887db](https://github.com/p3ol/buddy/commit/fa887dbc9c7124fb9afb6d649d86592487d08781))
+* better typings ([3072f40](https://github.com/p3ol/buddy/commit/3072f409e698c2e06f47412d74303e0671ab99bf))
+* **ci:** use yarn cache for node libraries ([ea33323](https://github.com/p3ol/buddy/commit/ea333235d5f6dbe6db8f7c104d4e3c3e3e9fd4b4))
+* **deps:** update dependency core-js to v3.25.3 ([2c99627](https://github.com/p3ol/buddy/commit/2c99627f6dc9ddbaf6040352b10733d327687498))
+* **deps:** update dependency core-js to v3.25.4 ([29b2f0a](https://github.com/p3ol/buddy/commit/29b2f0ab4e09b07881b9a05e0a24df0271bfda35))
+* **deps:** update dependency core-js to v3.25.5 ([d0b21c7](https://github.com/p3ol/buddy/commit/d0b21c720ddf12f12a1b49e10df671b7c9cbcc00))
+* **deps:** update dependency core-js to v3.26.0 ([ef6c242](https://github.com/p3ol/buddy/commit/ef6c242a5e32cfb548b2c2b194974ce1ad1ce194))
+* **deps:** update dependency core-js to v3.26.0 ([cc93c05](https://github.com/p3ol/buddy/commit/cc93c051912c2fde531cd65cd29c019ebd395285))
+* **deps:** update dependency core-js to v3.26.1 ([115203a](https://github.com/p3ol/buddy/commit/115203a2ef2a8f1d3e8c75c1efeca519a0d57075))
+* **deps:** update dependency core-js to v3.27.2 ([280a8b7](https://github.com/p3ol/buddy/commit/280a8b7bc55470331807089ef89d70195d227c65))
+* **deps:** update dependency core-js to v3.27.2 ([e601ac2](https://github.com/p3ol/buddy/commit/e601ac2c1773d72f56313b01fffc4f960a611a62))
+* **deps:** update dependency core-js to v3.28.0 ([b7dd85d](https://github.com/p3ol/buddy/commit/b7dd85d88602673a30db17dd6311ffeeff737ab8))
+* **deps:** update dependency core-js to v3.28.0 ([29ad5d9](https://github.com/p3ol/buddy/commit/29ad5d951da2ba8f54fdf06e55e5dd5b307d1ad6))
+* **deps:** update dependency core-js to v3.30.1 ([9259593](https://github.com/p3ol/buddy/commit/92595933ac34e1199514ea23cb03dc248df93a8e))
+* **deps:** update dependency core-js to v3.30.1 ([975b3c7](https://github.com/p3ol/buddy/commit/975b3c7f5b99f414334d48de5825632625400385))
+* **deps:** update dependency core-js to v3.30.2 ([62ae52b](https://github.com/p3ol/buddy/commit/62ae52bebbf59d4610ab350479e8638dcd53ee11))
+* **deps:** update dependency core-js to v3.32.1 ([36d84e7](https://github.com/p3ol/buddy/commit/36d84e7677d3a464e1a80e912901d14fd5da01e7))
+* **deps:** update dependency core-js to v3.32.2 ([bbad7f5](https://github.com/p3ol/buddy/commit/bbad7f564e5b1ccd7a57302f06c76314485a04ff))
+* missing ws port ([6d53ade](https://github.com/p3ol/buddy/commit/6d53ade260cda82107c1c358256fef46534975b1))
+* **renovate:** extend new p3ol custom presets ([c16e12c](https://github.com/p3ol/buddy/commit/c16e12ce9fa7f6b51df89ecf4e1d155e3361dcb9))
+* **renovate:** improve config for PRs and commits ([6a3fd46](https://github.com/p3ol/buddy/commit/6a3fd4669661b0e69aa25c1a0d64ada5caa9edfe))
+* **renovate:** remove useless encrypted credential ([832406a](https://github.com/p3ol/buddy/commit/832406a5da18f5c363abdcddb2bfd992f2870bf1))
+* **renovate:** test custom preset 'local' extension ([d9266f5](https://github.com/p3ol/buddy/commit/d9266f5491d8692f0d1ea94316256bd3812fe706))
+* rollup 3 compat ([9227900](https://github.com/p3ol/buddy/commit/9227900450e44c9706d5ad4dce05c7fbcae13505))
+* update various dev deps ([dee116a](https://github.com/p3ol/buddy/commit/dee116a4110e86036d32205362702de65f1f12ad))
+* upgrade various deps ([343c27e](https://github.com/p3ol/buddy/commit/343c27e8983403e11d11da45a1bc1105bbc50d28))
+* wrong logLevel default value ([775396d](https://github.com/p3ol/buddy/commit/775396d4446578669b5ae31ef7d1d2fc7352e2b8))
+
 ## [4.0.2](https://github.com/p3ol/buddy/compare/v4.0.1...v4.0.2) (2025-09-04)
 
 
