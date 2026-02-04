@@ -46,7 +46,7 @@ export const serialize = (
   options: BuddyOptions = {},
 ): BuddySerializedData => {
   options = extendGlobalOptions(options);
-  const { target, origin, serializers, ...rest } = options;
+  const { handlers, target, origin, serializers, ...rest } = options;
 
   const serializer: BuddySerializer = serializers
     .find(s => s.serializable?.(data));
@@ -114,7 +114,13 @@ export const serialize = (
         ...rest,
         pingBack: false,
       });
-    }, { source: target, ...rest, pingBack: false, queue: false });
+    }, {
+      source: target,
+      ...rest,
+      pingBack: false,
+      queue: false,
+      handlers,
+    });
 
     return { bid: methodId, type: 'promise' } as BuddySerializedComplex;
   } else if (isFunction(data)) {
@@ -142,7 +148,15 @@ export const serialize = (
         ...rest,
         pingBack: false,
       });
-    }, { source: target, ...rest, pingBack: false, queue: false });
+
+    }, {
+      source: target,
+      ...rest,
+      pingBack: false,
+      queue: false,
+      key: options.key,
+      handlers,
+    });
 
     return { bid: methodId, type: 'function' } as BuddySerializedComplex;
   } else if (isObject(data)) {
@@ -168,7 +182,7 @@ export const unserialize = (
   options: BuddyOptions = {},
 ): BuddySerializableData => {
   options = extendGlobalOptions(options);
-  const { source, origin, serializers, ...rest } = options;
+  const { source, origin, serializers, handlers, ...rest } = options;
 
   const serializer: BuddySerializer = serializers
     .find(s => s.unserializable?.(data));
@@ -227,7 +241,13 @@ export const unserialize = (
             e.data);
 
           resolve(e.data);
-        }, { ...options, onError: reject, pingBack: false, queue: false });
+        }, {
+          ...options,
+          onError: reject,
+          pingBack: false,
+          queue: false,
+          handlers,
+        });
 
         debug(options,
           'Sending serialized method params to parent',
@@ -271,7 +291,13 @@ export const send = (
   options: BuddyOptions = {}
 ): Promise<BuddySerializableData> => {
   options = extendGlobalOptions(options);
-  const { origin = '*', timeout = 5000, pingBack = true, ...rest } = options;
+  const {
+    origin = '*',
+    timeout = 5000,
+    pingBack = true,
+    handlers,
+    ...rest
+  } = options;
 
   if (!target) {
     error(options, `Target window is not defined, aborting (event: ${name})`);
@@ -329,7 +355,14 @@ export const send = (
 
           resolve(e.data as BuddySerializableData);
         }
-      }, { source: target, origin, ...rest, onError: reject, pingBack: false });
+      }, {
+        source: target,
+        origin,
+        ...rest,
+        onError: reject,
+        pingBack: false,
+        handlers,
+      });
     }
 
     let parsedData: string;
@@ -355,7 +388,14 @@ export const send = (
       queueHandler = on('target:loaded', () => {
         queueHandler?.off?.();
         sendMessage(target, parsedData, { origin });
-      }, { source: target, origin, ...rest, queue: false, pingBack: false });
+      }, {
+        source: target,
+        origin,
+        ...rest,
+        queue: false,
+        pingBack: false,
+        handlers,
+      });
     }
 
     sendMessage(target, parsedData, { origin });
