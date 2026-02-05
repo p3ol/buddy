@@ -46,7 +46,7 @@ export const serialize = (
   options: BuddyOptions = {},
 ): BuddySerializedData => {
   options = extendGlobalOptions(options);
-  const { handlers, target, origin, serializers, ...rest } = options;
+  const { target, origin, serializers, ...rest } = options;
 
   const serializer: BuddySerializer = serializers
     .find(s => s.serializable?.(data));
@@ -119,7 +119,7 @@ export const serialize = (
       ...rest,
       pingBack: false,
       queue: false,
-      handlers,
+      handlers: options.handlers,
     });
 
     return { bid: methodId, type: 'promise' } as BuddySerializedComplex;
@@ -155,7 +155,7 @@ export const serialize = (
       pingBack: false,
       queue: false,
       key: options.key,
-      handlers,
+      handlers: options.handlers,
     });
 
     return { bid: methodId, type: 'function' } as BuddySerializedComplex;
@@ -182,7 +182,7 @@ export const unserialize = (
   options: BuddyOptions = {},
 ): BuddySerializableData => {
   options = extendGlobalOptions(options);
-  const { source, origin, serializers, handlers, ...rest } = options;
+  const { source, origin, serializers, ...rest } = options;
 
   const serializer: BuddySerializer = serializers
     .find(s => s.unserializable?.(data));
@@ -246,7 +246,7 @@ export const unserialize = (
           onError: reject,
           pingBack: false,
           queue: false,
-          handlers,
+          handlers: options.handlers,
         });
 
         debug(options,
@@ -291,13 +291,7 @@ export const send = (
   options: BuddyOptions = {}
 ): Promise<BuddySerializableData> => {
   options = extendGlobalOptions(options);
-  const {
-    origin = '*',
-    timeout = 5000,
-    pingBack = true,
-    handlers,
-    ...rest
-  } = options;
+  const { origin = '*', timeout = 5000, pingBack = true, ...rest } = options;
 
   if (!target) {
     error(options, `Target window is not defined, aborting (event: ${name})`);
@@ -361,7 +355,7 @@ export const send = (
         ...rest,
         onError: reject,
         pingBack: false,
-        handlers,
+        handlers: options.handlers,
       });
     }
 
@@ -394,7 +388,7 @@ export const send = (
         ...rest,
         queue: false,
         pingBack: false,
-        handlers,
+        handlers: options.handlers,
       });
     }
 
@@ -531,13 +525,17 @@ export const on = (
     });
   }
 
-  return {
-    off: () => {
-      info(options,
+  const off = () => {
+    info(options,
         `Unregistering message handler from target window (event: ${name})`);
-      // @ts-expect-error ws is weird
-      (options.target || window)?.removeEventListener('message', handler);
-    },
+    // @ts-expect-error ws is weird
+    (options.target || window)?.removeEventListener('message', handler);
+  };
+
+  options.handlers?.push(off);
+
+  return {
+    off,
   };
 };
 

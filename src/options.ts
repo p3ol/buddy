@@ -1,6 +1,6 @@
 import type { WebSocket as WebSocketConnection } from 'ws';
 
-import type { BuddyHandler, BuddySerializer } from './types';
+import type { BuddySerializer, BuddyOffSwitch } from './types';
 
 export declare interface BuddyGlobalOptions {
   /**
@@ -33,7 +33,7 @@ export declare interface BuddyGlobalOptions {
   /**
    * Array of global message event handlers
    */
-  handlers?: BuddyHandler[];
+  handlers?: BuddyOffSwitch['off'][];
 }
 
 export declare interface BuddyOptions extends BuddyGlobalOptions {
