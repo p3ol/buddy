@@ -119,7 +119,7 @@ export const serialize = (
       ...rest,
       pingBack: false,
       queue: false,
-      offSwitchs: options.offSwitchs,
+      offSwitches: options.offSwitches,
     });
 
     return { bid: methodId, type: 'promise' } as BuddySerializedComplex;
@@ -155,7 +155,7 @@ export const serialize = (
       pingBack: false,
       queue: false,
       key: options.key,
-      offSwitchs: options.offSwitchs,
+      offSwitches: options.offSwitches,
     });
 
     return { bid: methodId, type: 'function' } as BuddySerializedComplex;
@@ -246,7 +246,7 @@ export const unserialize = (
           onError: reject,
           pingBack: false,
           queue: false,
-          offSwitchs: options.offSwitchs,
+          offSwitches: options.offSwitches,
         });
 
         debug(options,
@@ -355,7 +355,7 @@ export const send = (
         ...rest,
         onError: reject,
         pingBack: false,
-        offSwitchs: options.offSwitchs,
+        offSwitches: options.offSwitches,
       });
     }
 
@@ -388,7 +388,7 @@ export const send = (
         ...rest,
         queue: false,
         pingBack: false,
-        offSwitchs: options.offSwitchs,
+        offSwitches: options.offSwitches,
       });
     }
 
@@ -525,18 +525,18 @@ export const on = (
     });
   }
 
-  const off = () => {
-    info(options,
+  const offSwitch: BuddyOffSwitch = {
+    off: () => {
+      info(options,
         `Unregistering message handler from target window (event: ${name})`);
-    // @ts-expect-error ws is weird
-    (options.target || window)?.removeEventListener('message', handler);
+      // @ts-expect-error ws is weird
+      (options.target || window)?.removeEventListener('message', handler);
+    },
   };
 
-  options.offSwitchs?.push(off);
+  options.offSwitches?.push(offSwitch);
 
-  return {
-    off,
-  };
+  return offSwitch;
 };
 
 const sendMessage = (
