@@ -119,7 +119,7 @@ export const serialize = (
       ...rest,
       pingBack: false,
       queue: false,
-      handlers: options.handlers,
+      offSwitchs: options.offSwitchs,
     });
 
     return { bid: methodId, type: 'promise' } as BuddySerializedComplex;
@@ -155,7 +155,7 @@ export const serialize = (
       pingBack: false,
       queue: false,
       key: options.key,
-      handlers: options.handlers,
+      offSwitchs: options.offSwitchs,
     });
 
     return { bid: methodId, type: 'function' } as BuddySerializedComplex;
@@ -246,7 +246,7 @@ export const unserialize = (
           onError: reject,
           pingBack: false,
           queue: false,
-          handlers: options.handlers,
+          offSwitchs: options.offSwitchs,
         });
 
         debug(options,
@@ -355,7 +355,7 @@ export const send = (
         ...rest,
         onError: reject,
         pingBack: false,
-        handlers: options.handlers,
+        offSwitchs: options.offSwitchs,
       });
     }
 
@@ -388,7 +388,7 @@ export const send = (
         ...rest,
         queue: false,
         pingBack: false,
-        handlers: options.handlers,
+        offSwitchs: options.offSwitchs,
       });
     }
 
@@ -532,7 +532,7 @@ export const on = (
     (options.target || window)?.removeEventListener('message', handler);
   };
 
-  options.handlers?.push(off);
+  options.offSwitchs?.push(off);
 
   return {
     off,

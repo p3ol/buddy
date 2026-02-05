@@ -33,7 +33,7 @@ export declare interface BuddyGlobalOptions {
   /**
    * Array of global message event handlers
    */
-  handlers?: BuddyOffSwitch['off'][];
+  offSwitchs?: BuddyOffSwitch['off'][];
 }
 
 export declare interface BuddyOptions extends BuddyGlobalOptions {
@@ -89,7 +89,7 @@ export const globalOptions: BuddyGlobalOptions = {
   logLevel: 1,
   queue: false,
   serializers: [],
-  handlers: [],
+  offSwitchs: [],
 };
 
 export const setGlobalOptions = (options: BuddyGlobalOptions) => {
