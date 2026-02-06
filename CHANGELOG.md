@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [4.0.3](https://github.com/p3ol/buddy/compare/v4.0.2...v4.0.3) (2026-02-06)
+
+
+### Bug Fixes
+
+* **events:** collect every events to `off` them when iframe is destroyed ([8e633fd](https://github.com/p3ol/buddy/commit/8e633fd2c0477138f23f134bd3caf210bb9d8988))
+* **events:** Im lost ([d0b35a5](https://github.com/p3ol/buddy/commit/d0b35a507303e339dff2dc14241443a0a9717d97))
+* **events:** rename handlers into offswitchs ([5b60bba](https://github.com/p3ol/buddy/commit/5b60bbad02b9b6cda34ce0678f80b6a4bb74668c))
+* **events:** return all BuddyOffSwitch and rename again offSwitches ([e7f2452](https://github.com/p3ol/buddy/commit/e7f24525d3d0bf26f823349b204374a7bfb891e8))
+
 ## [4.0.2](https://github.com/p3ol/buddy/compare/v4.0.1...v4.0.2) (2025-09-04)
 
 
