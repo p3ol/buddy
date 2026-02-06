@@ -1,6 +1,6 @@
 import type { WebSocket as WebSocketConnection } from 'ws';
 
-import type { BuddySerializer } from './types';
+import type { BuddySerializer, BuddyOffSwitch } from './types';
 
 export declare interface BuddyGlobalOptions {
   /**
@@ -29,6 +29,11 @@ export declare interface BuddyGlobalOptions {
    * @default []
    */
   serializers?: BuddySerializer[];
+
+  /**
+   * Array of global message event handlers
+   */
+  offSwitches?: BuddyOffSwitch[];
 }
 
 export declare interface BuddyOptions extends BuddyGlobalOptions {
@@ -84,6 +89,7 @@ export const globalOptions: BuddyGlobalOptions = {
   logLevel: 1,
   queue: false,
   serializers: [],
+  offSwitches: [],
 };
 
 export const setGlobalOptions = (options: BuddyGlobalOptions) => {

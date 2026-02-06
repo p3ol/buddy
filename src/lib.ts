@@ -114,7 +114,13 @@ export const serialize = (
         ...rest,
         pingBack: false,
       });
-    }, { source: target, ...rest, pingBack: false, queue: false });
+    }, {
+      source: target,
+      ...rest,
+      pingBack: false,
+      queue: false,
+      offSwitches: options.offSwitches,
+    });
 
     return { bid: methodId, type: 'promise' } as BuddySerializedComplex;
   } else if (isFunction(data)) {
@@ -142,7 +148,15 @@ export const serialize = (
         ...rest,
         pingBack: false,
       });
-    }, { source: target, ...rest, pingBack: false, queue: false });
+
+    }, {
+      source: target,
+      ...rest,
+      pingBack: false,
+      queue: false,
+      key: options.key,
+      offSwitches: options.offSwitches,
+    });
 
     return { bid: methodId, type: 'function' } as BuddySerializedComplex;
   } else if (isObject(data)) {
@@ -227,7 +241,13 @@ export const unserialize = (
             e.data);
 
           resolve(e.data);
-        }, { ...options, onError: reject, pingBack: false, queue: false });
+        }, {
+          ...options,
+          onError: reject,
+          pingBack: false,
+          queue: false,
+          offSwitches: options.offSwitches,
+        });
 
         debug(options,
           'Sending serialized method params to parent',
@@ -329,7 +349,14 @@ export const send = (
 
           resolve(e.data as BuddySerializableData);
         }
-      }, { source: target, origin, ...rest, onError: reject, pingBack: false });
+      }, {
+        source: target,
+        origin,
+        ...rest,
+        onError: reject,
+        pingBack: false,
+        offSwitches: options.offSwitches,
+      });
     }
 
     let parsedData: string;
@@ -355,7 +382,14 @@ export const send = (
       queueHandler = on('target:loaded', () => {
         queueHandler?.off?.();
         sendMessage(target, parsedData, { origin });
-      }, { source: target, origin, ...rest, queue: false, pingBack: false });
+      }, {
+        source: target,
+        origin,
+        ...rest,
+        queue: false,
+        pingBack: false,
+        offSwitches: options.offSwitches,
+      });
     }
 
     sendMessage(target, parsedData, { origin });
@@ -491,7 +525,7 @@ export const on = (
     });
   }
 
-  return {
+  const offSwitch: BuddyOffSwitch = {
     off: () => {
       info(options,
         `Unregistering message handler from target window (event: ${name})`);
@@ -499,6 +533,10 @@ export const on = (
       (options.target || window)?.removeEventListener('message', handler);
     },
   };
+
+  options.offSwitches?.push(offSwitch);
+
+  return offSwitch;
 };
 
 const sendMessage = (
