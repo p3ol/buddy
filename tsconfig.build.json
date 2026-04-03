@@ -11,7 +11,7 @@
   "exclude": [
     "tests",
     "**/*.test.ts",
-    "tsup.config.ts",
+    "tsdown.config.ts",
     "vite.config.ts",
     "jest.config.ts",
     "examples",

@@ -2,7 +2,6 @@
   "name": "@poool/buddy",
   "version": "4.0.3",
   "description": "🐕 Dead simple cross-domain iframe messaging",
-  "main": "dist/lib/index.js",
   "repository": "https://github.com/p3ol/buddy.git",
   "author": "Ugo Stephant <ugo@poool.fr>",
   "contributors": [
@@ -10,19 +9,16 @@
   ],
   "license": "MIT",
   "sideEffects": false,
-  "unpkg": "dist/lib/index.global.js",
-  "cdn": "dist/lib/index.global.js",
-  "jsnext:main": "dist/lib/index.mjs",
-  "module": "dist/lib/index.mjs",
-  "esnext": "src",
-  "types": "dist/types/index.d.ts",
+  "main": "./dist/lib/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/types/index.d.ts",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "clean": "rm -rf ./dist || true",
     "build": "yarn clean && yarn build:code && yarn build:dts",
-    "build:code": "tsup",
+    "build:code": "tsdown",
     "build:dts": "tsc --project ./tsconfig.build.json",
     "test": "jest",
     "dev": "yarn dev:web & yarn dev:ws",
@@ -50,6 +46,7 @@
     "puppeteer": "24.40.0",
     "sinon": "21.0.3",
     "ts-node": "10.9.2",
+    "tsdown": "0.21.7",
     "tsup": "8.5.1",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
@@ -57,5 +54,13 @@
     "vite": "8.0.3",
     "ws": "8.20.0"
   },
+  "targets": [
+    "chrome109",
+    "edge138",
+    "firefox140",
+    "safari18",
+    "opera80",
+    "node20"
+  ],
   "packageManager": "yarn@4.13.0"
 }

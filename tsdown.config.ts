@@ -1,0 +1,20 @@
+import { defineConfig } from 'tsdown';
+
+import pkg from './package.json' with { type: 'json' };
+
+export default defineConfig([
+  {
+    entry: ['./src/index.ts'],
+    platform: 'neutral',
+    outDir: 'dist',
+    format: ['cjs', 'esm'],
+    target: pkg.targets,
+    sourcemap: true,
+    dts: false,
+    deps: {
+      alwaysBundle: [
+        '@junipero/core',
+      ],
+    },
+  },
+]);
