@@ -2,7 +2,7 @@
   "name": "@poool/buddy",
   "version": "4.0.3",
   "description": "🐕 Dead simple cross-domain iframe messaging",
-  "main": "dist/lib/index.js",
+  "type": "module",
   "repository": "https://github.com/p3ol/buddy.git",
   "author": "Ugo Stephant <ugo@poool.fr>",
   "contributors": [
@@ -10,21 +10,18 @@
   ],
   "license": "MIT",
   "sideEffects": false,
-  "unpkg": "dist/lib/index.global.js",
-  "cdn": "dist/lib/index.global.js",
-  "jsnext:main": "dist/lib/index.mjs",
-  "module": "dist/lib/index.mjs",
-  "esnext": "src",
-  "types": "dist/types/index.d.ts",
+  "main": "./dist/lib/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "clean": "rm -rf ./dist || true",
     "build": "yarn clean && yarn build:code && yarn build:dts",
-    "build:code": "tsup",
+    "build:code": "tsdown",
     "build:dts": "tsc --project ./tsconfig.build.json",
-    "test": "jest",
+    "test": "vitest run",
     "dev": "yarn dev:web & yarn dev:ws",
     "dev:web": "vite",
     "dev:ws": "yarn tsx --watch examples/websocket-server.ts",
@@ -37,25 +34,34 @@
   },
   "devDependencies": {
     "@poool/eslint-config": "5.0.10",
-    "@swc/core": "1.15.11",
-    "@swc/jest": "0.2.39",
-    "@types/jest": "30.0.0",
-    "@types/node": "25.2.1",
-    "@types/sinon": "21.0.0",
+    "@types/node": "25.5.0",
     "@types/ws": "8.18.1",
-    "commit-and-tag-version": "12.6.1",
-    "eslint": "9.39.2",
-    "jest": "30.2.0",
+    "commit-and-tag-version": "12.7.1",
+    "eslint": "9.39.4",
     "jest-dev-server": "11.0.0",
-    "puppeteer": "24.37.1",
-    "sinon": "21.0.1",
-    "ts-node": "10.9.2",
-    "tsup": "8.5.1",
+    "puppeteer": "24.40.0",
+    "tsdown": "0.21.7",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.54.0",
-    "vite": "7.3.1",
-    "ws": "8.19.0"
+    "typescript-eslint": "8.58.0",
+    "vite": "8.0.3",
+    "vitest": "4.1.2",
+    "ws": "8.20.0"
   },
-  "packageManager": "yarn@4.12.0"
+  "targets": [
+    "chrome109",
+    "edge138",
+    "firefox140",
+    "safari18",
+    "opera80",
+    "node20"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "packageManager": "yarn@4.13.0"
 }

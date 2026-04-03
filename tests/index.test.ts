@@ -1,10 +1,9 @@
 import type { SpawndChildProcess } from 'spawnd';
 import puppeteer, { type SupportedBrowser, Browser, Page } from 'puppeteer';
 import devServer from 'jest-dev-server';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 
 import { findFreePort, sleep } from './utils';
-
-jest.setTimeout(30000);
 
 describe('buddy', () => {
   let servers: SpawndChildProcess[], browser: Browser, page: Page;
