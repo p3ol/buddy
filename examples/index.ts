@@ -1,4 +1,4 @@
-import sinon from 'sinon';
+import { type Mock, vi } from 'vitest';
 
 import {
   type BuddySerializableObject,
@@ -32,6 +32,8 @@ const sendExpectingError = async (...args: Parameters<typeof send>) => {
   return error;
 };
 
+const hasBeenCalled = (spy: Mock, times = 1) => spy.mock.calls.length >= times;
+
 const frame = document.querySelector<HTMLIFrameElement>('#child');
 
 const exec = async () => {
@@ -52,9 +54,9 @@ const exec = async () => {
   createElement('serialize-array', JSON.stringify(serializeArray));
 
   // test:serializeMethod
-  const serializeMethod = sinon.spy();
+  const serializeMethod = vi.fn();
   await send(contentWindow, 'test:serializeMethod', { serializeMethod });
-  createElement('serialize-method', '' + serializeMethod.called);
+  createElement('serialize-method', '' + hasBeenCalled(serializeMethod));
 
   // test:serializePromise
   const serializePromise = new Promise(resolve => resolve('promise result'));
@@ -100,7 +102,7 @@ const exec = async () => {
   }));
 
   // test:parentMethodReturnValue
-  const parentCallback = sinon.spy(() => 'result from parent');
+  const parentCallback = vi.fn(() => 'result from parent');
   const parentResult = await send(contentWindow,
     'test:parentMethodReturnValue', { parentCallback });
   createElement('parent-method-return-value', parentResult);
@@ -111,19 +113,20 @@ const exec = async () => {
   createElement('this-does-not-exist-in-child', noHandler);
 
   // test:parentMethodCalledTwice
-  const parentCallback2 = sinon.spy();
+  const parentCallback2 = vi.fn();
   await send(contentWindow, 'test:parentMethodCalledTwice',
     { callback: parentCallback2 });
-  createElement('parent-method-called-twice', '' + parentCallback2.calledTwice);
+  createElement('parent-method-called-twice', '' +
+    hasBeenCalled(parentCallback2, 2));
 
   // test:noTarget
-  const targetCallback = sinon.spy();
+  const targetCallback = vi.fn();
   await sendExpectingError(null, 'test:noTarget', { callback: targetCallback });
-  createElement('no-target', '' + targetCallback.called);
+  createElement('no-target', '' + hasBeenCalled(targetCallback));
 
   // test:nestedArrayResponseFromChild
   let nestedTest = null;
-  const doAction = sinon.spy(async (_, obj) => {
+  const doAction = vi.fn(async (_, obj) => {
     nestedTest = await obj.callback();
   });
   await send(contentWindow, 'test:nestedArrayResponseFromChild',
@@ -148,14 +151,14 @@ const exec = async () => {
   createElement('primitive-type-array', JSON.stringify(primitiveArray));
 
   // test:back-and-forth
-  const backAndForth = sinon.spy(async () => Promise.resolve(true));
+  const backAndForth = vi.fn(async () => Promise.resolve(true));
   const backAndForthResult = await send(contentWindow, 'test:back-and-forth', {
     callback: backAndForth,
   });
   createElement('back-and-forth', backAndForthResult);
 
   // test:throw
-  const throws = sinon.spy(async () => {
+  const throws = vi.fn(async () => {
     return Promise.reject(new Error('custom_error'));
   });
   const throwsResult = await sendExpectingError(contentWindow,
@@ -163,7 +166,7 @@ const exec = async () => {
   createElement('throw', throwsResult);
 
   // test:throw-deep
-  const throwsDeep = sinon.spy(async () => {
+  const throwsDeep = vi.fn(async () => {
     return Promise.all([
       (async () => {
         return Promise.reject(new Error('custom_deep_error'));
@@ -175,7 +178,7 @@ const exec = async () => {
   createElement('throw-deep', throwsDeepResult);
 
   // test:throw-custom-error
-  const throwsCustomError = sinon.spy(async () => {
+  const throwsCustomError = vi.fn(async () => {
     const err = { foo: 'custom_error_object' };
 
     return Promise.reject(err);
