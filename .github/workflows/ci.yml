@@ -69,7 +69,3 @@ jobs:
         run: npx puppeteer browsers install firefox
       - name: Test
         run: yarn test
-      - name: Codecov upload
-        uses: codecov/codecov-action@v5.5.2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
