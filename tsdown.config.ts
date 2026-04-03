@@ -11,10 +11,5 @@ export default defineConfig([
     target: pkg.targets,
     sourcemap: true,
     dts: false,
-    deps: {
-      alwaysBundle: [
-        '@junipero/core',
-      ],
-    },
   },
 ]);
