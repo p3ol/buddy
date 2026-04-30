@@ -45,6 +45,7 @@ export const serialize = (
   data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {},
 ): BuddySerializedData => {
+
   options = extendGlobalOptions(options);
   const { target, origin, serializers, ...rest } = options;
 
@@ -290,6 +291,7 @@ export const send = (
   data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {}
 ): Promise<BuddySerializableData> => {
+
   options = extendGlobalOptions(options);
   const { origin = '*', timeout = 5000, pingBack = true, ...rest } = options;
 
@@ -376,12 +378,14 @@ export const send = (
 
     info(options,
       `Sending message to target window (event: ${name}) -->`, parsedData);
+    const abort = new AbortController();
 
     if (options.queue) {
       info(options, 'Queueing message in case target window is not ready');
       queueHandler = on('target:loaded', () => {
         queueHandler?.off?.();
-        sendMessage(target, parsedData, { origin });
+        sendMessage(target, parsedData, { origin, signal: abort.signal });
+        abort.abort();
       }, {
         source: target,
         origin,
@@ -392,7 +396,8 @@ export const send = (
       });
     }
 
-    sendMessage(target, parsedData, { origin });
+    sendMessage(target, parsedData, { origin, signal: abort.signal });
+    abort.abort();
   });
 };
 
@@ -545,6 +550,10 @@ const sendMessage = (
   opts: BuddyOptions = {}
 ) => {
   if (typeof (target as Window).postMessage === 'function') {
+    if(opts.signal.aborted) {
+      return;
+    }
+
     (target as Window).postMessage(data, opts.origin);
   } else {
     (target as WebSocket | WebSocketConnection).send(data);
