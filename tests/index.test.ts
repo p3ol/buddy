@@ -151,7 +151,7 @@ describe('buddy', () => {
   });
 
   it('should abort message sending if it has already been sent', async () => {
-    expect(await getResult('#queue-abort')).toBe('true');
+    expect(await getResult('#queue-abort')).toBe('response:aborted-event1');
   });
 
   afterAll(async () => {
