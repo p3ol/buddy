@@ -357,7 +357,6 @@ export const send = (
         ...rest,
         source: target,
         origin,
-        queue: false,
         onError: reject,
         pingBack: false,
         offSwitches: options.offSwitches,
