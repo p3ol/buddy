@@ -292,7 +292,7 @@ export const send = (
   options: BuddyOptions = {}
 ): Promise<BuddySerializableData> => {
 
-  const abort = new AbortController();
+  const controller = new AbortController();
 
   options = extendGlobalOptions(options);
   const { origin = '*', timeout = 5000, pingBack = true, ...rest } = options;
@@ -385,8 +385,8 @@ export const send = (
       info(options, 'Queueing message in case target window is not ready');
       queueHandler = on('target:loaded', () => {
         queueHandler?.off?.();
-        sendMessage(target, parsedData, { origin, signal: abort.signal });
-        abort.abort();
+        sendMessage(target, parsedData, { origin, signal: controller.signal });
+        controller.abort();
       }, {
         source: target,
         origin,
@@ -397,10 +397,10 @@ export const send = (
       });
     }
 
-    sendMessage(target, parsedData, { origin, signal: abort.signal });
+    sendMessage(target, parsedData, { origin, signal: controller.signal });
 
     if(options.queue) {
-      abort.abort();
+      controller.abort();
     }
   });
 };
@@ -555,7 +555,7 @@ const sendMessage = (
 ) => {
   if (typeof (target as Window).postMessage === 'function') {
     if(opts.signal.aborted) {
-      info(
+      debug(
         opts,
         'Message in queue was aborted, not sending, because already sent.'
       );
