@@ -354,9 +354,10 @@ export const send = (
           resolve(e.data as BuddySerializableData);
         }
       }, {
+        ...rest,
         source: target,
         origin,
-        ...rest,
+        queue: false,
         onError: reject,
         pingBack: false,
         offSwitches: options.offSwitches,
@@ -388,9 +389,9 @@ export const send = (
         sendMessage(target, parsedData, { origin, signal: controller.signal });
         controller.abort();
       }, {
+        ...rest,
         source: target,
         origin,
-        ...rest,
         queue: false,
         pingBack: false,
         offSwitches: options.offSwitches,

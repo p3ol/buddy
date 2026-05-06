@@ -131,3 +131,10 @@ setTimeout(() => {
     return 'response:delayed';
   }, { queue: true, source: window.parent });
 }, 100);
+
+let counter = 0;
+on('test:aborted-event', () => {
+  counter++;
+
+  return 'response:aborted-event' + counter;
+}, { source: window.parent, origin: '*' });
