@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+### [4.0.5](https://github.com/p3ol/buddy/compare/v4.0.4...v4.0.5) (2026-05-07)
+
+
+### Bug Fixes
+
+* **abort-controller:** add abort controller to prevent second sendMessage to be done ([446cf2b](https://github.com/p3ol/buddy/commit/446cf2b))
+* **abort-controller:** rename abort into controller and change log level ([3ae0e94](https://github.com/p3ol/buddy/commit/3ae0e94))
+* **abort-controller:** reorganize and add log ([f1a3233](https://github.com/p3ol/buddy/commit/f1a3233))
+* finish write test ([4982ef3](https://github.com/p3ol/buddy/commit/4982ef3))
+* remove queue: false from pingback handler ([c416ff2](https://github.com/p3ol/buddy/commit/c416ff2))
+* set spread props at the top of options to override it with custom props ([7124b3f](https://github.com/p3ol/buddy/commit/7124b3f))
+* upgrade various deps ([80cbfd6](https://github.com/p3ol/buddy/commit/80cbfd6))
+* various fixes ([26ec2bf](https://github.com/p3ol/buddy/commit/26ec2bf))
+
+
 ## [4.0.4](https://github.com/p3ol/buddy/compare/v4.0.3...v4.0.4) (2026-04-03)
 
 
