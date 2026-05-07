@@ -207,7 +207,7 @@ const exec = async () => {
   createElement('ws', wsResult);
 
   const abortedSend = await send(contentWindow, 'test:aborted-event', {}, {
-    queue: true, timeout: 700, origin: '*', source: window.parent,
+    queue: true,
   });
   createElement('queue-abort', abortedSend);
 };

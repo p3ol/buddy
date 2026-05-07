@@ -291,7 +291,6 @@ export const send = (
   data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {}
 ): Promise<BuddySerializableData> => {
-
   const controller = new AbortController();
 
   options = extendGlobalOptions(options);
@@ -399,7 +398,7 @@ export const send = (
 
     sendMessage(target, parsedData, { origin, signal: controller.signal });
 
-    if(options.queue) {
+    if (options.queue) {
       controller.abort();
     }
   });
@@ -554,10 +553,10 @@ const sendMessage = (
   opts: BuddyOptions = {}
 ) => {
   if (typeof (target as Window).postMessage === 'function') {
-    if(opts.signal.aborted) {
+    if (opts.signal.aborted) {
       debug(
         opts,
-        'Message in queue was aborted, not sending, because already sent.'
+        'Message already sent, ignoring'
       );
 
       return;
