@@ -45,6 +45,7 @@ export const serialize = (
   data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {},
 ): BuddySerializedData => {
+
   options = extendGlobalOptions(options);
   const { target, origin, serializers, ...rest } = options;
 
@@ -290,6 +291,8 @@ export const send = (
   data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {}
 ): Promise<BuddySerializableData> => {
+  const controller = new AbortController();
+
   options = extendGlobalOptions(options);
   const { origin = '*', timeout = 5000, pingBack = true, ...rest } = options;
 
@@ -350,9 +353,9 @@ export const send = (
           resolve(e.data as BuddySerializableData);
         }
       }, {
+        ...rest,
         source: target,
         origin,
-        ...rest,
         onError: reject,
         pingBack: false,
         offSwitches: options.offSwitches,
@@ -381,18 +384,23 @@ export const send = (
       info(options, 'Queueing message in case target window is not ready');
       queueHandler = on('target:loaded', () => {
         queueHandler?.off?.();
-        sendMessage(target, parsedData, { origin });
+        sendMessage(target, parsedData, { origin, signal: controller.signal });
+        controller.abort();
       }, {
+        ...rest,
         source: target,
         origin,
-        ...rest,
         queue: false,
         pingBack: false,
         offSwitches: options.offSwitches,
       });
     }
 
-    sendMessage(target, parsedData, { origin });
+    sendMessage(target, parsedData, { origin, signal: controller.signal });
+
+    if (options.queue) {
+      controller.abort();
+    }
   });
 };
 
@@ -545,6 +553,15 @@ const sendMessage = (
   opts: BuddyOptions = {}
 ) => {
   if (typeof (target as Window).postMessage === 'function') {
+    if (opts.signal.aborted) {
+      debug(
+        opts,
+        'Message already sent, ignoring'
+      );
+
+      return;
+    }
+
     (target as Window).postMessage(data, opts.origin);
   } else {
     (target as WebSocket | WebSocketConnection).send(data);

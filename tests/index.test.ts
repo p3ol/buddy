@@ -150,6 +150,10 @@ describe('buddy', () => {
     expect(await getResult('#ws')).toBe('test:ws');
   });
 
+  it('should abort message sending if it has already been sent', async () => {
+    expect(await getResult('#queue-abort')).toBe('response:aborted-event1');
+  });
+
   afterAll(async () => {
     await devServer.teardown(servers);
     await browser.close();

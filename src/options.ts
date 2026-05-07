@@ -77,6 +77,8 @@ export declare interface BuddyOptions extends BuddyGlobalOptions {
 
   mode?: 'iframe' | 'websocket' | 'websocket-server';
 
+  signal?: AbortSignal;
+
   /**
    * Callback to be called when a message produces an error
    * (even when unserializing data)

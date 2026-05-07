@@ -205,6 +205,11 @@ const exec = async () => {
   });
   const wsResult = await sendWsMessage();
   createElement('ws', wsResult);
+
+  const abortedSend = await send(contentWindow, 'test:aborted-event', {}, {
+    queue: true,
+  });
+  createElement('queue-abort', abortedSend);
 };
 
 if (frame.contentWindow) {
