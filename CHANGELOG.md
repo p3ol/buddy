@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+### [4.0.7](https://github.com/p3ol/buddy/compare/v4.0.6...v4.0.7) (2026-08-06)
+
+
+### Bug Fixes
+
+* event can also not have any data ([23fb7fb](https://github.com/p3ol/buddy/commit/23fb7fb))
+
+
 ### [4.0.6](https://github.com/p3ol/buddy/compare/v4.0.5...v4.0.6) (2026-08-06)
 
 
