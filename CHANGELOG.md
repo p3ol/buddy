@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+### [4.0.6](https://github.com/p3ol/buddy/compare/v4.0.5...v4.0.6) (2026-08-06)
+
+
+### Bug Fixes
+
+* allow serialized functions to not have args ([2e664a2](https://github.com/p3ol/buddy/commit/2e664a2))
+* upgrade various deps ([c7868cf](https://github.com/p3ol/buddy/commit/c7868cf))
+
+
 ### [4.0.5](https://github.com/p3ol/buddy/compare/v4.0.4...v4.0.5) (2026-05-07)
 
 
