@@ -134,7 +134,7 @@ export const serialize = (
       let res;
 
       try {
-        res = await fn(...(event.data as BuddyFunctionData).args);
+        res = await fn(...(event.data as BuddyFunctionData).args || []);
       } catch (error) {
         res = isError(error) || isBuddyError(error) ? error : {
           bid: methodId,
