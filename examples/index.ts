@@ -1,5 +1,4 @@
 import { type Mock, vi } from 'vitest';
-
 import {
   type BuddySerializableObject,
   isBuddy,
