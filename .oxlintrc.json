@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "./node_modules/@poool/oxlint-config/lib/recommended.json",
+  ]
+}

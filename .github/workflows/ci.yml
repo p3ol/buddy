@@ -21,7 +21,7 @@ jobs:
           cache: yarn
       - name: Install deps
         run: yarn install
-      - name: Eslint check
+      - name: Oxlint check
         run: yarn lint
       - name: Types check
         run: yarn tsc

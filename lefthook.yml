@@ -1,0 +1,17 @@
+commit-msg:
+  commands:
+    commitlint:
+      run: yarn commitlint --edit {1}
+
+pre-push:
+  commands:
+    lint:
+      glob: "*.{js,ts,tsx}"
+      run: yarn lint {staged_files}
+    tsc:
+      glob: "*.{ts,tsx}"
+      run: yarn tsc {staged_files}
+    renovate:
+      glob: "renovate.json"
+      # Run `renovate-config-validator` if it is installed, otherwise return 'true'
+      run: "( ! command -v renovate-config-validator > /dev/null && true ) || renovate-config-validator"

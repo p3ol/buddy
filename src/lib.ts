@@ -45,7 +45,6 @@ export const serialize = (
   data: BuddySerializableData | BuddySerializedData,
   options: BuddyOptions = {},
 ): BuddySerializedData => {
-
   options = extendGlobalOptions(options);
   const { target, origin, serializers, ...rest } = options;
 
@@ -149,7 +148,6 @@ export const serialize = (
         ...rest,
         pingBack: false,
       });
-
     }, {
       source: target,
       ...rest,
