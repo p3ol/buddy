@@ -15,7 +15,7 @@ export default defineConfig({
   },
   server: {
     open: process.env.NODE_ENV === 'development',
-    port: Number(process.env.TEST_PORT),
+    port: Number(process.env.TEST_PORT || 0),
   },
   define: {
     'process.env.WS_TEST_PORT':
