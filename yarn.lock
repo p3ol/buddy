@@ -808,10 +808,10 @@ __metadata:
     "@types/node": "npm:26.2.0"
     "@types/ws": "npm:8.18.1"
     commit-and-tag-version: "npm:13.1.2"
-    commitlint: "npm:^21.2.1"
+    commitlint: "npm:21.2.1"
     eslint: "npm:10.8.1"
     jest-dev-server: "npm:11.0.0"
-    lefthook: "npm:^2.1.10"
+    lefthook: "npm:2.1.10"
     oxlint: "npm:1.78.0"
     puppeteer: "npm:25.6.0"
     tsdown: "npm:0.22.14"
@@ -2131,7 +2131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commitlint@npm:^21.2.1":
+"commitlint@npm:21.2.1":
   version: 21.2.1
   resolution: "commitlint@npm:21.2.1"
   dependencies:
@@ -3676,7 +3676,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lefthook@npm:^2.1.10":
+"lefthook@npm:2.1.10":
   version: 2.1.10
   resolution: "lefthook@npm:2.1.10"
   dependencies:
